@@ -25,6 +25,9 @@ This fork is specifically configured to:
 - 📊 **Live Data**: https://sikora-pawel.github.io/pvpoke/
 - 📝 **Deployment Guide**: [DEPLOYMENT.md](DEPLOYMENT.md)
 - 🎯 **Full Matchups Guide**: [FULL_MATCHUPS.md](FULL_MATCHUPS.md) - Complete matchup matrices
+- 🗄️ **SQLite Workflow**: [SQLITE_WORKFLOW.md](SQLITE_WORKFLOW.md) - Generate & use in iOS ⭐
+- 🚀 **Batch Generation**: [BATCH_GENERATION_GUIDE.md](BATCH_GENERATION_GUIDE.md) - One click, all cups!
+- 📱 **iOS Integration**: [IOS_SQLITE_GUIDE.md](IOS_SQLITE_GUIDE.md) - Swift code examples
 - 🍴 **Original Repo**: https://github.com/pvpoke/pvpoke
 - 📱 **iOS App**: [pogo_teambuilder](https://github.com/sikora-pawel/pogo_teambuilder)
 

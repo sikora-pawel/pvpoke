@@ -53,17 +53,14 @@ var RankerMasterFull = (function () {
 					scenarios = GameMaster.getInstance().data.rankingScenarios;
 				}
 
-				for(currentScenarioIndex = 0; currentScenarioIndex < scenarios.length; currentScenarioIndex++){
-					var r = self.rank(leagues[currentLeagueIndex], scenarios[currentScenarioIndex]);
-
-					if(! callback){
-						delete r;
-					} else{
-						allResults.push(r);
-					}
-				}
+				// MODIFIED FOR FULL MATCHUPS: Only use FIRST scenario (typically "leads" with 1v1 shields)
+				// Full matchups don't need separate scenarios - a matchup is a matchup!
+				console.log("🎯 Using scenario: " + scenarios[0].slug + " (1v1, shields: " + scenarios[0].shields + ")");
+				
+				var r = self.rank(leagues[currentLeagueIndex], scenarios[0]);
 
 				if(callback){
+					allResults.push(r);
 					callback(allResults);
 				}
 			}
@@ -122,6 +119,8 @@ var RankerMasterFull = (function () {
 			this.rankLoop = function(cp, cup, callback, data){
 
 				startTime = Date.now();
+				
+				console.log("🔍 RankLoop called with CP:", cp, "Cup:", cup.name);
 
 				if(isNaN(cp)){
 					var levelCap = parseInt(cp.split("-")[1]);
@@ -145,10 +144,15 @@ var RankerMasterFull = (function () {
 
 				leagues = [cp];
 				allResults = [];
+				
+				console.log("🔍 Battle CP set to:", battle.getCP(), "| leagues array:", leagues);
 
 				if(! scenarios){
 					scenarios = GameMaster.getInstance().data.rankingScenarios;
 				}
+
+				// MODIFIED FOR FULL MATCHUPS: Only use FIRST scenario
+				console.log("🎯 Full Matchups mode - using only first scenario: " + scenarios[0].slug);
 
 				for(var currentLeagueIndex = 0; currentLeagueIndex < leagues.length; currentLeagueIndex++){
 
@@ -167,6 +171,7 @@ var RankerMasterFull = (function () {
 						// Load existing ranking data first
 
 						if(! data){
+							console.log("🔍 Loading ranking data - CP:", leagues[currentLeagueIndex], "Cup:", cup.name);
 							gm.loadRankingData(self, "overall", leagues[currentLeagueIndex], cup.name);
 						} else{
 							self.displayRankingData(data, callback);
@@ -599,39 +604,58 @@ var RankerMasterFull = (function () {
 					rankings[i].score = Math.floor((rankings[i].score / highest) * 1000) / 10;
 				}
 
-			// Write rankings to file - MODIFIED: Save to /full/ directory
+			// Write rankings to file - MODIFIED: Save to /full/ directory via PHP
 			if(cup.name != "custom"){
 
 				var category = "full"; // Always save to "full" category for complete matchup data
-
-				var json = JSON.stringify(rankings);
 				var league = battle.getCP();
+				var json = JSON.stringify(rankings);
+				var jsonSize = (json.length / 1024 / 1024).toFixed(2);
+				
+				console.log("💾 Saving to: /" + cup.name + "/full/rankings-" + league + ".json (" + jsonSize + " MB)");
 
-				console.log("/"+cup.name+"/"+category+"/rankings-"+league+".json (FULL MATCHUPS)");
-
-					$.ajax({
-
-						url : 'data/write.php',
-						type : 'POST',
-						data : {
-							'data' : json,
-							'league' : league,
-							'category' : category,
-							'cup': cup.name
-						},
-						dataType:'json',
-						success : function(data) {
-							console.log(data);
-
-							delete rankings;
-						},
-						error : function(request,error)
-						{
-							console.log("Request: "+JSON.stringify(request));
-							console.log(error);
-						}
-					});
-				}
+				$.ajax({
+					url : 'data/write.php',
+					type : 'POST',
+					data : {
+						'data' : json,
+						'league' : league,
+						'category' : category,
+						'cup': cup.name
+					},
+					dataType:'json',
+					success : function(data) {
+						console.log("✅ File saved successfully!");
+						console.log(data);
+						
+						// Now convert to SQLite automatically
+						console.log("🗄️  Converting to SQLite...");
+						convertToSQLite(cup.name, league, function(success) {
+							// Trigger custom event for batch processor
+							$(document).trigger('rankingComplete', {cup: cup.name, league: league, success: success});
+						});
+						
+						delete rankings;
+					},
+					error : function(request, error) {
+						console.error("❌ Failed to save file!");
+						console.error("Request: " + JSON.stringify(request));
+						console.error("Error: " + error);
+						
+						// Fallback: Download to browser
+						console.log("📥 Fallback: Downloading to browser...");
+						var blob = new Blob([json], {type: 'application/json'});
+						var url = URL.createObjectURL(blob);
+						var a = document.createElement('a');
+						a.href = url;
+						a.download = cup.name + "-full-rankings-" + league + ".json";
+						document.body.appendChild(a);
+						a.click();
+						document.body.removeChild(a);
+						URL.revokeObjectURL(url);
+					}
+				});
+			}
 
 				return rankings;
 			}
