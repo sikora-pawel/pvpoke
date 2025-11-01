@@ -124,11 +124,61 @@ https://sikora-pawel.github.io/pvpoke/rankings/{cup}/{category}/rankings-{cp}.js
 3. Wyczyść cache przeglądarki lub dodaj query parameter: `?v=timestamp`
 4. GitHub Pages może cache'ować dane przez kilka minut
 
+## Generowanie Pełnych Matchupów (Full Rankings)
+
+### Czym są Full Rankings?
+
+Standardowe rankingi zawierają tylko top 5 wygranych i top 5 przegranych matchupów.  
+**Full rankings** zawierają WSZYSTKIE matchupy każdego Pokemona vs wszystkich innych!
+
+### Jak wygenerować?
+
+1. **Uruchom lokalny serwer PHP**:
+   ```bash
+   cd /Users/pawelsikora/pvpoke/src
+   php -S localhost:8000
+   ```
+
+2. **Otwórz rankerfull.php**:
+   ```bash
+   open http://localhost:8000/rankerfull.php
+   ```
+
+3. **Wybierz format**:
+   - Wybierz cup (np. "Ascension Cup", "Great League")
+   - Wybierz CP limit (1500, 2500, etc.)
+
+4. **Kliknij "Simulate Full Rankings"**:
+   - Otwórz Developer Console (F12)
+   - Obserwuj postęp (zajmie 2-5 min dla Great League)
+
+5. **Sprawdź wynik**:
+   ```bash
+   ls -lh /Users/pawelsikora/pvpoke/src/data/rankings/all/full/rankings-1500.json
+   ```
+
+6. **Commit i push**:
+   ```bash
+   cd /Users/pawelsikora/pvpoke
+   git add src/data/rankings/*/full/
+   git commit -m "Add full matchup rankings for Great League"
+   git push origin master
+   ```
+
+### Dostępne po deployment:
+
+```
+https://sikora-pawel.github.io/pvpoke/rankings/{cup}/full/rankings-{cp}.json
+```
+
+Więcej informacji: [FULL_MATCHUPS.md](FULL_MATCHUPS.md)
+
 ## Następne kroki
 
 1. **Test w aplikacji**: Uruchom `pogo_teambuilder` i sprawdź czy dane się ładują
 2. **Monitor deployment**: Obserwuj https://github.com/sikora-pawel/pvpoke/deployments
-3. **Update danych**: Gdy pvpoke.com zaktualizuje dane, możesz:
+3. **Generuj full rankings**: Dla cupów których potrzebujesz w aplikacji
+4. **Update danych**: Gdy pvpoke.com zaktualizuje dane, możesz:
    - Pull z upstream: `git pull https://github.com/pvpoke/pvpoke.git master`
    - Lub wygenerować rankingi lokalnie (patrz DEPLOYMENT.md)
 

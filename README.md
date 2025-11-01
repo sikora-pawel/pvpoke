@@ -24,6 +24,7 @@ This fork is specifically configured to:
 
 - 📊 **Live Data**: https://sikora-pawel.github.io/pvpoke/
 - 📝 **Deployment Guide**: [DEPLOYMENT.md](DEPLOYMENT.md)
+- 🎯 **Full Matchups Guide**: [FULL_MATCHUPS.md](FULL_MATCHUPS.md) - Complete matchup matrices
 - 🍴 **Original Repo**: https://github.com/pvpoke/pvpoke
 - 📱 **iOS App**: [pogo_teambuilder](https://github.com/sikora-pawel/pogo_teambuilder)
 

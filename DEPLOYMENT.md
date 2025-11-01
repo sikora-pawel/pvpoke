@@ -13,12 +13,15 @@ Dane są automatycznie deployowane na GitHub Pages przez workflow `.github/workf
 Po deployment na GitHub Pages, dane są dostępne pod adresem:
 
 - **Base URL**: `https://sikora-pawel.github.io/pvpoke/`
-- **Rankingi**: `https://sikora-pawel.github.io/pvpoke/rankings/{cup}/{category}/rankings-{cp}.json`
+- **Rankingi (standard)**: `https://sikora-pawel.github.io/pvpoke/rankings/{cup}/{category}/rankings-{cp}.json`
+- **Rankingi (full matchups)**: `https://sikora-pawel.github.io/pvpoke/rankings/{cup}/full/rankings-{cp}.json` ⭐ NEW
 - **Gamemaster**: `https://raw.githubusercontent.com/sikora-pawel/pvpoke/master/src/data/gamemaster.json`
 - **Cups Archive**: `https://raw.githubusercontent.com/sikora-pawel/pvpoke/master/src/data/gamemaster/cups/archive/cups.json`
 - **Formats**: `https://raw.githubusercontent.com/sikora-pawel/pvpoke/master/src/data/gamemaster/formats.json`
 
 ### Przykłady
+
+#### Standard Rankings (Top 5 matchups only)
 
 - Ascension Cup (Great League, Overall): 
   ```
@@ -34,6 +37,25 @@ Po deployment na GitHub Pages, dane są dostępne pod adresem:
   ```
   https://sikora-pawel.github.io/pvpoke/rankings/all/leads/rankings-2500.json
   ```
+
+#### Full Matchup Rankings (ALL matchups) ⭐ NEW
+
+- Ascension Cup (Full matchups):
+  ```
+  https://sikora-pawel.github.io/pvpoke/rankings/ascension/full/rankings-1500.json
+  ```
+
+- Great League (Full matchups):
+  ```
+  https://sikora-pawel.github.io/pvpoke/rankings/all/full/rankings-1500.json
+  ```
+
+- Ultra League (Full matchups):
+  ```
+  https://sikora-pawel.github.io/pvpoke/rankings/all/full/rankings-2500.json
+  ```
+
+For detailed information about full matchup rankings, see [FULL_MATCHUPS.md](FULL_MATCHUPS.md).
 
 ## Deployment Process
 
