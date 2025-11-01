@@ -1,8 +1,31 @@
 # PvPoke
 
-[PvPoke.com](https://pvpoke.com) is a resource for Pokemon GO PvP that includes a battle simulator, rankings, and team building. The project’s goal is to provide tools and insights to help players build their teams, and foster the game’s community spirit by making all of the underlying code public. I hope this project can inspire new tools or benefit the existing ones that continue to enhance our enjoyment of the game.
+> **Note**: This is a fork of [pvpoke/pvpoke](https://github.com/pvpoke/pvpoke) used for hosting Pokemon GO PvP data for the **pogo_teambuilder** iOS app.
+> 
+> **Data Endpoint**: https://sikora-pawel.github.io/pvpoke/
+> 
+> For deployment and integration documentation, see [DEPLOYMENT.md](DEPLOYMENT.md)
 
-This started as a passion project that went from “I wonder what this would look like quick” to “uh oh, people are going to actually see this.” Just so you know what you’re getting into.
+---
+
+[PvPoke.com](https://pvpoke.com) is a resource for Pokemon GO PvP that includes a battle simulator, rankings, and team building. The project's goal is to provide tools and insights to help players build their teams, and foster the game's community spirit by making all of the underlying code public. I hope this project can inspire new tools or benefit the existing ones that continue to enhance our enjoyment of the game.
+
+This started as a passion project that went from "I wonder what this would look like quick" to "uh oh, people are going to actually see this." Just so you know what you're getting into.
+
+## About This Fork
+
+This fork is specifically configured to:
+
+- **Host PvP ranking data** via GitHub Pages for consumption by iOS/mobile apps
+- **Provide a stable data API** at `https://sikora-pawel.github.io/pvpoke/`
+- **Automate deployment** using GitHub Actions on every push to `master`
+
+### Quick Links
+
+- 📊 **Live Data**: https://sikora-pawel.github.io/pvpoke/
+- 📝 **Deployment Guide**: [DEPLOYMENT.md](DEPLOYMENT.md)
+- 🍴 **Original Repo**: https://github.com/pvpoke/pvpoke
+- 📱 **iOS App**: [pogo_teambuilder](https://github.com/sikora-pawel/pogo_teambuilder)
 
 ## Running PvPoke
 
