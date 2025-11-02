@@ -15,6 +15,7 @@ Po deployment na GitHub Pages, dane są dostępne pod adresem:
 - **Base URL**: `https://sikora-pawel.github.io/pvpoke/`
 - **Rankingi (standard)**: `https://sikora-pawel.github.io/pvpoke/rankings/{cup}/{category}/rankings-{cp}.json`
 - **Rankingi (full matchups)**: `https://sikora-pawel.github.io/pvpoke/rankings/{cup}/full/rankings-{cp}.json` ⭐ NEW
+- **MetaGroup (liga)**: `https://sikora-pawel.github.io/pvpoke/groups/{league}.json` ⭐ NEW
 - **Gamemaster**: `https://raw.githubusercontent.com/sikora-pawel/pvpoke/master/src/data/gamemaster.json`
 - **Cups Archive**: `https://raw.githubusercontent.com/sikora-pawel/pvpoke/master/src/data/gamemaster/cups/archive/cups.json`
 - **Formats**: `https://raw.githubusercontent.com/sikora-pawel/pvpoke/master/src/data/gamemaster/formats.json`
@@ -56,6 +57,45 @@ Po deployment na GitHub Pages, dane są dostępne pod adresem:
   ```
 
 For detailed information about full matchup rankings, see [FULL_MATCHUPS.md](FULL_MATCHUPS.md).
+
+#### MetaGroup JSONs (Pokemon lists per league) ⭐ NEW
+
+- Great League MetaGroup:
+  ```
+  https://sikora-pawel.github.io/pvpoke/groups/great.json
+  ```
+
+- Ultra League MetaGroup:
+  ```
+  https://sikora-pawel.github.io/pvpoke/groups/ultra.json
+  ```
+
+- Master League MetaGroup:
+  ```
+  https://sikora-pawel.github.io/pvpoke/groups/master.json
+  ```
+
+MetaGroup pliki zawierają listę najważniejszych Pokemonów w danej lidze wraz z ich najlepszymi movesetami. Są używane do:
+- Sugerowania teammates (teammate suggestions)
+- Analizy counter teams
+- Określania meta threats
+
+Format MetaGroup JSON:
+```json
+[
+  {
+    "speciesId": "azumarill",
+    "fastMove": "BUBBLE",
+    "chargedMoves": ["ICE_BEAM", "PLAY_ROUGH"]
+  },
+  {
+    "speciesId": "annihilape_shadow",
+    "fastMove": "COUNTER",
+    "chargedMoves": ["RAGE_FIST", "ICE_PUNCH"],
+    "shadowType": "shadow"
+  }
+]
+```
 
 ## Deployment Process
 
