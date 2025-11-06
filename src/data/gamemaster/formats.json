@@ -117,7 +117,7 @@
 		"cup": "little",
 		"cp": 500,
 		"meta": "little",
-		"showCup": false,
+		"showCup": true,
 		"showFormat": false,
 		"showMeta": false
 	},
