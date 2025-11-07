@@ -54,7 +54,7 @@
 		"cup": "laic2025",
 		"cp": 1500,
 		"meta": "laic2025",
-		"showCup": false,
+		"showCup": true,
 		"showFormat": true,
 		"showMeta": true
 	},
