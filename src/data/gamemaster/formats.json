@@ -63,7 +63,7 @@
 		"cup": "calamity",
 		"cp": 1500,
 		"meta": "calamity",
-		"showCup": false,
+		"showCup": true,
 		"showFormat": true,
 		"showMeta": true
 	},
@@ -72,7 +72,7 @@
 		"cup": "battlefrontierultra",
 		"cp": 2500,
 		"meta": "ultra",
-		"showCup": false,
+		"showCup": true,
 		"showFormat": true,
 		"showMeta": true
 	},
@@ -81,7 +81,7 @@
 		"cup": "battlefrontiermaster",
 		"cp": 10000,
 		"meta": "battlefrontiermaster",
-		"showCup": false,
+		"showCup": true,
 		"showFormat": true,
 		"showMeta": true
 	},
@@ -90,7 +90,7 @@
 		"cup": "metamorphosis",
 		"cp": 1500,
 		"meta": "metamorphosis",
-		"showCup": false,
+		"showCup": true,
 		"showFormat": true,
 		"showMeta": true
 	},
@@ -108,7 +108,7 @@
 		"cup": "chrono",
 		"cp": 1500,
 		"meta": "chrono",
-		"showCup": false,
+		"showCup": true,
 		"showFormat": true,
 		"showMeta": true
 	},
