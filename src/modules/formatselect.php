@@ -1,7 +1,7 @@
 <select class="format-select">
-	<option value="1500" cup="all" meta-group="great">Great League</option>
-	<option value="2500" cup="all" meta-group="ultra">Ultra League</option>
-	<option value="10000" cup="all" meta-group="master">Master League</option>
+	<option value="1500" cup="all" meta-group="great" data-league-id="great">Great League</option>
+	<option value="2500" cup="all" meta-group="ultra" data-league-id="ultra">Ultra League</option>
+	<option value="10000" cup="all" meta-group="master" data-league-id="master">Master League</option>
 </select>
 
 <script>

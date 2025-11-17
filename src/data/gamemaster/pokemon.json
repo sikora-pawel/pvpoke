@@ -39195,7 +39195,7 @@
         },
         "buddyDistance": 5,
         "thirdMoveCost": 50000,
-        "released": false,
+        "released": true,
         "family": {
             "id": "FAMILY_IMPIDIMP",
             "parent": "impidimp",
@@ -39221,7 +39221,7 @@
         },
         "buddyDistance": 5,
         "thirdMoveCost": 50000,
-        "released": false,
+        "released": true,
         "family": {
             "id": "FAMILY_IMPIDIMP",
             "parent": "morgrem"

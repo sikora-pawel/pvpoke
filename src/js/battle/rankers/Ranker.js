@@ -64,6 +64,11 @@ var RankerMaster = (function () {
 
 				if(callback){
 					callback(allResults);
+				} else {
+					// If no callback, still emit completion event for batch processing
+					var cup = battle.getCup();
+					var league = battle.getCP();
+					$(document).trigger('rankingComplete', {cup: cup.name, league: league, success: true});
 				}
 			}
 
@@ -190,7 +195,16 @@ var RankerMaster = (function () {
 						rankingCombinations.splice(0, 1);
 
 						if(rankingCombinations.length == 0){
-							callback(allResults);
+							clearInterval(rankingInterval);
+							
+							// Trigger completion event for batch processing
+							var cup = battle.getCup();
+							var league = battle.getCP();
+							$(document).trigger('rankingComplete', {cup: cup.name, league: league, success: true});
+							
+							if(callback){
+								callback(allResults);
+							}
 						}
 					}
 				}, 1000);
