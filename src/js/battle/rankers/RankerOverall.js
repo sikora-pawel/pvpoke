@@ -343,6 +343,11 @@ var RankerMaster = (function () {
 					}
 				});
 
+				// Trigger completion event for batch processing
+				var cup = battle.getCup();
+				var league = battle.getCP();
+				$(document).trigger('overallRankingComplete', {cup: cup.name, league: league, success: true});
+				
 				return rankings;
 			}
 

@@ -1292,8 +1292,10 @@ var GameMaster = (function () {
 						if((rankingData)&&(overrides)){
 
 							// Find Pokemon in existing rankings
+							var foundInRankings = false;
 							for(var n = 0; n < rankingData.length; n++){
 								if(pokemon.speciesId == rankingData[n].speciesId){
+									foundInRankings = true;
 
 									// Sort by uses
 									var fastMoves = rankingData[n].moves.fastMoves;
@@ -1314,6 +1316,14 @@ var GameMaster = (function () {
 									object.overrideMoveset(pokemon, battle.getCP(), battle.getCup().name, overrides);
 								}
 							}
+							
+							// Apply overrides even if Pokemon is not in existing rankings
+							if(!foundInRankings && overrides){
+								object.overrideMoveset(pokemon, battle.getCP(), battle.getCup().name, overrides);
+							}
+						} else if(overrides){
+							// Apply overrides even if no rankingData exists
+							object.overrideMoveset(pokemon, battle.getCP(), battle.getCup().name, overrides);
 						}
 
 						pokemonList.push(pokemon);
