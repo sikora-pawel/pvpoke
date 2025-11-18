@@ -1148,6 +1148,11 @@ var GameMaster = (function () {
 				var pokemon = new Pokemon(object.data.pokemon[i].speciesId, 0, battle);
 				pokemon.initialize(battle.getCP());
 
+				// First check if Pokemon is released - skip unreleased Pokemon early
+				if(pokemon.released === false || pokemon.released === undefined){
+					continue;
+				}
+
 				var stats = (pokemon.stats.hp * pokemon.stats.atk * pokemon.stats.def) / 1000;
 
 				if(stats >= minStats || battle.getCup().includeLowStatProduct ||
@@ -1155,9 +1160,6 @@ var GameMaster = (function () {
 				 pokemon.hasTag("include1500")) || ( battle.getCP() == 2500 &&
 				 pokemon.hasTag("include2500")) || pokemon.hasTag("mega") ){
 					// Today is the day
-					if(! pokemon.released){
-						continue;
-					}
 
 					if((battle.getCP() < 2500)&&(bannedList.indexOf(pokemon.speciesId) > -1)){
 						continue;
