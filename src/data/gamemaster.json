@@ -1,5 +1,5 @@
 {
-    "timestamp": "2025-11-20 04:06:02",
+    "timestamp": "2025-11-29 20:17:44",
     "id": "gamemaster",
     "title": "Default",
     "settings": {
@@ -20370,6 +20370,7 @@
             "types": ["dark", "none"],
             "fastMoves": ["PSYCHO_CUT", "SNARL"],
             "chargedMoves": ["DARK_PULSE", "MEGAHORN", "THUNDER", "PAYBACK", "BRUTAL_SWING"],
+            "eliteMoves": ["BRUTAL_SWING"],
             "defaultIVs": {
                 "cp500": [7.5, 4, 13, 11],
                 "cp1500": [22, 4, 14, 11],
@@ -33374,8 +33375,8 @@
             },
             "types": ["water", "fighting"],
             "fastMoves": ["POISON_JAB", "LOW_KICK"],
-            "chargedMoves": ["AQUA_JET", "CLOSE_COMBAT", "HYDRO_PUMP", "X_SCISSOR", "SACRED_SWORD"],
-            "eliteMoves": ["SACRED_SWORD"],
+            "chargedMoves": ["AQUA_JET", "CLOSE_COMBAT", "HYDRO_PUMP", "X_SCISSOR", "SECRET_SWORD"],
+            "legacyMoves": ["SECRET_SWORD"],
             "defaultIVs": {
                 "cp500": [5, 14, 11, 15],
                 "cp1500": [14.5, 12, 12, 13],
@@ -33384,7 +33385,8 @@
             "tags": ["mythical", "untradeable"],
             "buddyDistance": 20,
             "thirdMoveCost": 100000,
-            "released": false
+            "released": true,
+            "searchPriority": 2
         },
         {
             "dex": 648,
@@ -36503,7 +36505,8 @@
             },
             "types": ["normal", "flying"],
             "fastMoves": ["PECK", "ROCK_SMASH", "BULLET_SEED"],
-            "chargedMoves": ["DRILL_PECK", "ROCK_BLAST", "FLASH_CANNON"],
+            "chargedMoves": ["DRILL_PECK", "ROCK_BLAST", "FLASH_CANNON", "BEAK_BLAST"],
+            "eliteMoves": ["BEAK_BLAST"],
             "defaultIVs": {
                 "cp500": [7, 4, 15, 14],
                 "cp1500": [20.5, 5, 14, 14],
@@ -36530,7 +36533,8 @@
             },
             "types": ["normal", "flying"],
             "fastMoves": ["PECK", "ROCK_SMASH", "BULLET_SEED"],
-            "chargedMoves": ["DRILL_PECK", "ROCK_BLAST", "FLASH_CANNON"],
+            "chargedMoves": ["DRILL_PECK", "ROCK_BLAST", "FLASH_CANNON", "BEAK_BLAST"],
+            "eliteMoves": ["BEAK_BLAST"],
             "defaultIVs": {
                 "cp500": [7, 4, 15, 14],
                 "cp1500": [20.5, 5, 14, 14],
@@ -45390,6 +45394,21 @@
             "turns": 1
         },
         {
+            "moveId": "BEAK_BLAST",
+            "name": "Beak Blast",
+            "type": "flying",
+            "power": 110,
+            "energy": 55,
+            "energyGain": 0,
+            "turns": 1,
+            "cooldown": 500,
+            "archetype": "Debuff Nuke",
+            "abbreviation": "BBl",
+            "buffTarget": "opponent",
+            "buffs": [-1, 0],
+            "buffApplyChance": "1"
+        },
+        {
             "moveId": "BEHEMOTH_BASH",
             "name": "Behemoth Bash",
             "type": "steel",
@@ -48139,6 +48158,18 @@
             "energyGain": 2,
             "cooldown": 500,
             "archetype": "Heavy Damage",
+            "turns": 1
+        },
+        {
+            "moveId": "SECRET_SWORD",
+            "name": "Secret Sword",
+            "abbreviation": "SeS",
+            "type": "fighting",
+            "power": 70,
+            "energy": 35,
+            "energyGain": 0,
+            "cooldown": 500,
+            "archetype": "Spam/Bait",
             "turns": 1
         },
         {
