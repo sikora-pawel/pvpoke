@@ -240,6 +240,7 @@ var RankerMaster = (function () {
 
 						var score = 500;
 						var alternativeScore = 500;
+						var scoreBeforeMeta = 500;
 
 						if(avgPokeRating > 500){
 							alternativeScore = 500 + Math.pow(avgPokeRating - 500, .75);
@@ -250,6 +251,8 @@ var RankerMaster = (function () {
 							alternativeScore = avgPokeRating / 2;
 						}
 
+						scoreBeforeMeta = score;
+
 						
 						// Factor in meta relevance
 
@@ -257,7 +260,8 @@ var RankerMaster = (function () {
 							let isMetaFactor = 0.85;
 
 							if(score > 500 && prioritizeMeta){
-								if(metaGroup.some(poke => poke.speciesId == pokemon.speciesId)){
+								var isMeta = metaGroup.some(poke => poke.speciesId == pokemon.speciesId);
+								if(isMeta){
 									score += (1000 - score) * isMetaFactor;
 									alternativeScore += (1000 - alternativeScore) * isMetaFactor;
 								} else{
@@ -283,7 +287,8 @@ var RankerMaster = (function () {
 							rating: avgPokeRating,
 							score: score,
 							alternativeScore: score,
-							time: battle.getDuration()
+							time: battle.getDuration(),
+							shieldRatings: shieldRatings.length > 0 ? shieldRatings.slice() : [] // Copy of shield ratings array
 						};
 
 						// Calculate breakpoint and bulkpoint
@@ -336,7 +341,6 @@ var RankerMaster = (function () {
 					matchupScore = matchupScore / team.length;
 					matchupAltScore = matchupAltScore / team.length;
 
-
 					rankObj.rating = avg;
 					rankObj.opRating = opponentRating;
 					rankObj.score = matchupScore;
@@ -359,6 +363,37 @@ var RankerMaster = (function () {
 
 				for(var i = 0; i < teamRatings.length; i++){
 					 teamRatings[i].sort((a,b) => (a > b) ? -1 : ((b > a) ? 1 : 0));
+				}
+
+				// Debug: Print detailed matchup info for top 10 threats
+				if(self.context == "team-counters"){
+					console.log("\n=== TOP THREATS DEBUG ===");
+					console.log("Total rankings: " + rankings.length);
+					console.log("Top 20 rankings by score:");
+					for(var i = 0; i < Math.min(20, rankings.length); i++){
+						console.log("  [" + (i+1) + "] " + rankings[i].speciesName + " (" + rankings[i].speciesId + "): score=" + rankings[i].score + ", rating=" + rankings[i].rating);
+					}
+
+					console.log("\n=== DETAILED MATCHUP INFO FOR TOP 10 THREATS ===");
+					for(var i = 0; i < Math.min(10, rankings.length); i++){
+						var entry = rankings[i];
+						console.log("\n[" + (i+1) + "] " + entry.speciesName + " (" + entry.speciesId + ")");
+						console.log("  Final score: " + entry.score);
+						console.log("  Matchups:");
+						for(var j = 0; j < entry.matchups.length; j++){
+							var matchup = entry.matchups[j];
+							console.log("    Matchup[" + j + "]: vs " + matchup.opponent.speciesName);
+							console.log("      rating: " + matchup.rating + ", score: " + matchup.score);
+							if(matchup.shieldRatings && matchup.shieldRatings.length > 0){
+								console.log("      shield ratings: [" + matchup.shieldRatings.join(", ") + "]");
+							}
+						}
+						if(entry.matchups.length > 0){
+							var avgScore = entry.matchups.reduce((sum, m) => sum + m.score, 0) / entry.matchups.length;
+							console.log("  Average matchup score: " + avgScore);
+						}
+					}
+					console.log("=== END DETAILED MATCHUP INFO ===\n");
 				}
 
 				battle.clearPokemon(); // Prevents associated Pokemon objects from being altered by future battles
