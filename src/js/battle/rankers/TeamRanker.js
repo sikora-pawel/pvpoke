@@ -365,7 +365,7 @@ var RankerMaster = (function () {
 					 teamRatings[i].sort((a,b) => (a > b) ? -1 : ((b > a) ? 1 : 0));
 				}
 
-				// Debug: Print detailed matchup info for top 10 threats
+				// Debug: Print detailed matchup info for top 20 threats
 				if(self.context == "team-counters"){
 					console.log("\n=== TOP THREATS DEBUG ===");
 					console.log("Total rankings: " + rankings.length);
@@ -374,8 +374,8 @@ var RankerMaster = (function () {
 						console.log("  [" + (i+1) + "] " + rankings[i].speciesName + " (" + rankings[i].speciesId + "): score=" + rankings[i].score + ", rating=" + rankings[i].rating);
 					}
 
-					console.log("\n=== DETAILED MATCHUP INFO FOR TOP 10 THREATS ===");
-					for(var i = 0; i < Math.min(10, rankings.length); i++){
+					console.log("\n=== DETAILED MATCHUP INFO FOR TOP 20 THREATS ===");
+					for(var i = 0; i < Math.min(20, rankings.length); i++){
 						var entry = rankings[i];
 						console.log("\n[" + (i+1) + "] " + entry.speciesName + " (" + entry.speciesId + ")");
 						console.log("  Final score: " + entry.score);
