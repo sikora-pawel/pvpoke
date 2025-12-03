@@ -1170,8 +1170,6 @@ function Battle(){
 					useShield = false;
 				}
 
-				self.logDecision(defender, " SHIELD_LOGIC: FINAL DECISION: useShield=" + useShield);
-
 				if(useShield){
 					var damageBlocked = damage-1;
 

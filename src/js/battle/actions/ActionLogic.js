@@ -410,7 +410,6 @@ class ActionLogic {
 		for (var i = 0; i < poke.activeChargedMoves.length; i++) {
 			movesOrderArray.push(i + ":" + poke.activeChargedMoves[i].name);
 		}
-		battle.logDecision(poke, " DP activeChargedMoves order at start: [" + movesOrderArray.join(", ") + "]");
 		
 		while (DPQueue.length != 0) {
 
@@ -438,14 +437,9 @@ class ActionLogic {
 			// Found fastest way to defeat enemy, fastest = optimal in this case since damage taken is strictly dependent on time
 			// Set finalState to currState and do more evaluation later
 			if (currState.oppHealth <= 0) {
-				var movesList = currState.moves.map(function(m) { return m.name; }).join(", ");
-				battle.logDecision(poke, " DP found solution: turn=" + currState.turn + ", moves=[" + movesList + "], oppHealth=" + currState.oppHealth + ", energy=" + currState.energy + ", chance=" + currState.chance);
-
 				stateList.push(currState);
-				battle.logDecision(poke, " DP adding to stateList: index=" + (stateList.length - 1) + ", moves=[" + movesList + "], stateList size now=" + stateList.length);
 
 				if (currState.chance == 1) {
-					battle.logDecision(poke, " DP stopping search (found guaranteed solution)");
 					break;
 				} else {
 					continue;
@@ -621,18 +615,13 @@ class ActionLogic {
 								}
 							}
 							if (insert) {
-								var newMovesList = currState.moves.concat([poke.activeChargedMoves[n]]).map(function(m) { return m.name; }).join(", ");
-								battle.logDecision(poke, " DP adding state: turn=" + (currState.turn + 1) + ", moves=[" + newMovesList + "], oppHealth=" + newOppHealth + ", energy=" + (currState.energy - poke.activeChargedMoves[n].energy) + ", shields=" + newShields + ", insertIndex=" + i);
-								battle.logDecision(poke, " DP adding state: move was processed in iteration " + n + " (" + poke.activeChargedMoves[n].name + "), queue size before insert=" + DPQueue.length);
 								DPQueue.splice(i, 0, new BattleState(currState.energy - poke.activeChargedMoves[n].energy, newOppHealth, currState.turn + 1, newShields, currState.moves.concat([poke.activeChargedMoves[n]]), attackMult, currState.chance));
 								// Log queue state after insert
 								var queueMovesArray = [];
-								for (var q = 0; q < Math.min(5, DPQueue.length); q++) {
-									queueMovesArray.push(DPQueue[q].moves.map(function(m) { return m.name; }).join(", "));
-								}
-							} else {
-								battle.logDecision(poke, " DP skipping state (better state exists)");
+							for (var q = 0; q < Math.min(5, DPQueue.length); q++) {
+								queueMovesArray.push(DPQueue[q].moves.map(function(m) { return m.name; }).join(", "));
 							}
+						}
 							// If move has chance of changing TTK, add that result
 							if (changeTTKChance != 0) {
 								DPQueue.splice(i, 0, new BattleState(newEnergy, newOppHealth, currState.turn + 1, newShields, currState.moves.concat([poke.activeChargedMoves[n]]), possibleAttackMult, currState.chance * changeTTKChance));
@@ -867,17 +856,10 @@ class ActionLogic {
 
 		// Don't bait if the opponent won't shield
 		if (poke.baitShields && opponent.shields > 0 && poke.activeChargedMoves.length > 1) {
-			// Log move properties for debugging
-			battle.logDecision(poke, " Checking bait change: finalState.moves[0].name=" + finalState.moves[0].name + ", damage=" + finalState.moves[0].damage + ", energy=" + finalState.moves[0].energy);
-			battle.logDecision(poke, " Checking bait change: activeChargedMoves[1].name=" + poke.activeChargedMoves[1].name + ", damage=" + poke.activeChargedMoves[1].damage + ", energy=" + poke.activeChargedMoves[1].energy);
-			
 			// Calculate DPE ratio - match JavaScript exactly
 			var secondDpe = poke.activeChargedMoves[1].damage / poke.activeChargedMoves[1].energy;
 			var firstDpe = finalState.moves[0].damage / finalState.moves[0].energy;
 			var dpeRatio = secondDpe / firstDpe;
-			battle.logDecision(poke, " DPE calculation: secondDpe=" + secondDpe + ", firstDpe=" + firstDpe + ", dpeRatio=" + dpeRatio);
-			var movesBefore = finalState.moves.map(function(m) { return m.name; }).join(", ");
-			battle.logDecision(poke, " Checking if should change bait: dpeRatio=" + dpeRatio + ", energy=" + poke.energy + " >= " + poke.activeChargedMoves[1].energy + ", plan before=[" + movesBefore + "]");
 
 			if ((poke.energy >= poke.activeChargedMoves[1].energy)&&(dpeRatio > 1.5)) {
 				var shieldDecision = ActionLogic.wouldShield(battle, poke, opponent, poke.activeChargedMoves[1]);
@@ -891,10 +873,6 @@ class ActionLogic {
 			}
 		}
 
-		// Log finalState.moves right after selecting it from stateList
-		var movesAfterSelection = finalState.moves.map(function(m) { return m.name; }).join(", ");
-		battle.logDecision(poke, " finalState.moves immediately after selection: [" + movesAfterSelection + "]");
-		
 		// If pokemon needs boost, we cannot reorder and no moves both buff and debuff
 		if (!needsBoost) {
 			// If not baiting shields or shields are down and no moves debuff, throw most damaging move first
