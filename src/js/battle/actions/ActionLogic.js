@@ -406,10 +406,6 @@ class ActionLogic {
 		var DPQueue = [new BattleState(poke.energy, opponent.hp, 0, opponent.shields, [], 0, 1)];
 		var stateList = [];
 		var finalState;
-
-		battle.logDecision(poke, " DP starting search from initial state: energy=" + poke.energy + ", oppHealth=" + opponent.hp + ", opponentShields=" + opponent.shields);
-		
-		// Log order of moves in activeChargedMoves at start
 		var movesOrderArray = [];
 		for (var i = 0; i < poke.activeChargedMoves.length; i++) {
 			movesOrderArray.push(i + ":" + poke.activeChargedMoves[i].name);
@@ -431,9 +427,7 @@ class ActionLogic {
 				queueMovesBeforeArray.push(DPQueue[q].moves.map(function(m) { return m.name; }).join(", "));
 			}
 
-			var currState = DPQueue.shift();
-			var currentMovesList = currState.moves.map(function(m) { return m.name; }).join(", ");
-			battle.logDecision(poke, " DP processing state " + stateCount + ": turn=" + currState.turn + ", moves=[" + currentMovesList + "], oppHealth=" + currState.oppHealth + ", energy=" + currState.energy + ", shields=" + currState.oppShields);
+			var 			currState = DPQueue.shift();
 			
 			var DPchargedMoveReady = [];
 
@@ -468,10 +462,8 @@ class ActionLogic {
 			}
 
 			// Push states onto queue in order of TURN
-			for(var n = 0; n < poke.activeChargedMoves.length; n++) {
-				battle.logDecision(poke, " DP loop iteration: processing move " + n + " (" + poke.activeChargedMoves[n].name + ") from activeChargedMoves");
-
-				// Apply stat changes to pokemon attack
+		for(var n = 0; n < poke.activeChargedMoves.length; n++) {
+			// Apply stat changes to pokemon attack
 				var currentStatBuffs = [poke.statBuffs[0], poke.statBuffs[1]];
 				poke.applyStatBuffs([currState.buffs, 0]);
 
@@ -543,19 +535,13 @@ class ActionLogic {
 				// DISABLE THE NON-GUARANTEED BUFF EVALUATION SYSTEM
 				changeTTKChance = 0;
 
-				// If move is ready, use it and add results to queue
-				if (DPchargedMoveReady[n] == 0) {
-					var currentMovesList = currState.moves.map(function(m) { return m.name; }).join(", ");
-					battle.logDecision(poke, " DP evaluating move " + poke.activeChargedMoves[n].name + " at state: turn=" + currState.turn + ", moves=[" + currentMovesList + "], oppHealth=" + currState.oppHealth + ", energy=" + currState.energy);
-
-					// If shielded, apply 1 damage, otherwise apply move damage
-					var newOppHealth = currState.oppHealth - moveDamage;
-					if (currState.oppShields > 0) {
-						newOppHealth = currState.oppHealth - 1;
-						battle.logDecision(poke, " DP move " + poke.activeChargedMoves[n].name + " is shielded, 1 damage");
-					} else {
-						battle.logDecision(poke, " DP move " + poke.activeChargedMoves[n].name + " deals " + moveDamage + " damage, newOppHealth=" + newOppHealth);
-					}
+			// If move is ready, use it and add results to queue
+			if (DPchargedMoveReady[n] == 0) {
+				// If shielded, apply 1 damage, otherwise apply move damage
+				var newOppHealth = currState.oppHealth - moveDamage;
+				if (currState.oppShields > 0) {
+					newOppHealth = currState.oppHealth - 1;
+				}
 
 					var newShields = currState.oppShields;
 					// Assume pokemon shields
@@ -615,18 +601,11 @@ class ActionLogic {
 					if (insertElement) {
 
 						// Place state at correct spot in priority queue
-						var i = 0;
-						var insert = true;
-						if (DPQueue.length == 0) {
-							var newMovesListEmpty = currState.moves.concat([poke.activeChargedMoves[n]]).map(function(m) { return m.name; }).join(", ");
-							battle.logDecision(poke, " DP adding state (queue empty): turn=" + (currState.turn + 1) + ", moves=[" + newMovesListEmpty + "], move was processed in iteration " + n + " (" + poke.activeChargedMoves[n].name + "), using unshift");
-							DPQueue.unshift(new BattleState(newEnergy, newOppHealth, currState.turn + 1, newShields, currState.moves.concat([poke.activeChargedMoves[n]]), attackMult, currState.chance));
-							// Log queue state after unshift
-							var queueMovesArrayEmpty = [];
-							for (var q = 0; q < Math.min(5, DPQueue.length); q++) {
-								queueMovesArrayEmpty.push(DPQueue[q].moves.map(function(m) { return m.name; }).join(", "));
-							}
-							// If move has chance of changing TTK, add that result
+					var i = 0;
+					var insert = true;
+					if (DPQueue.length == 0) {
+						DPQueue.unshift(new BattleState(newEnergy, newOppHealth, currState.turn + 1, newShields, currState.moves.concat([poke.activeChargedMoves[n]]), attackMult, currState.chance));
+						// If move has chance of changing TTK, add that result
 							if (changeTTKChance != 0) {
 								DPQueue.unshift(new BattleState(newEnergy, newOppHealth, currState.turn + 1, newShields, currState.moves.concat([poke.activeChargedMoves[n]]), possibleAttackMult, currState.chance * changeTTKChance));
 							}
