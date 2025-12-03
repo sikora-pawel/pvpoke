@@ -430,7 +430,6 @@ class ActionLogic {
 			for (var q = 0; q < Math.min(3, DPQueue.length); q++) {
 				queueMovesBeforeArray.push(DPQueue[q].moves.map(function(m) { return m.name; }).join(", "));
 			}
-			battle.logDecision(poke, " DP queue before shift (first 3): [" + queueMovesBeforeArray.join(" | ") + "], queue size=" + DPQueue.length);
 
 			var currState = DPQueue.shift();
 			var currentMovesList = currState.moves.map(function(m) { return m.name; }).join(", ");
@@ -627,7 +626,6 @@ class ActionLogic {
 							for (var q = 0; q < Math.min(5, DPQueue.length); q++) {
 								queueMovesArrayEmpty.push(DPQueue[q].moves.map(function(m) { return m.name; }).join(", "));
 							}
-							battle.logDecision(poke, " DP queue after unshift (first 5 states): [" + queueMovesArrayEmpty.join(" | ") + "]");
 							// If move has chance of changing TTK, add that result
 							if (changeTTKChance != 0) {
 								DPQueue.unshift(new BattleState(newEnergy, newOppHealth, currState.turn + 1, newShields, currState.moves.concat([poke.activeChargedMoves[n]]), possibleAttackMult, currState.chance * changeTTKChance));
@@ -653,7 +651,6 @@ class ActionLogic {
 								for (var q = 0; q < Math.min(5, DPQueue.length); q++) {
 									queueMovesArray.push(DPQueue[q].moves.map(function(m) { return m.name; }).join(", "));
 								}
-								battle.logDecision(poke, " DP queue after insert (first 5 states): [" + queueMovesArray.join(" | ") + "]");
 							} else {
 								battle.logDecision(poke, " DP skipping state (better state exists)");
 							}
@@ -822,16 +819,13 @@ class ActionLogic {
 		// Log DP results
 		battle.logDecision(poke, " DP found " + stateList.length + " solution(s), turnsToKO=" + poke.turnsToKO + ", opponent.turnsToKO=" + opponent.turnsToKO);
 		for (var i = 0; i < stateList.length; i++) {
-			var movesList = stateList[i].moves.map(function(m) { return m.name; }).join(", ");
-			battle.logDecision(poke, " DP solution " + i + ": turn=" + stateList[i].turn + ", moves=[" + movesList + "], chance=" + stateList[i].chance);
-		}
+	}
 
 		// If opponent KOs before our guaranteed KO, go for the least risky plan that still KOs before opponent KOs us.
 		var needsBoost = false;
 		if (stateList.length == 1) {
-			finalState = stateList[0];
-			battle.logDecision(poke, " Using single DP solution");
-		} else if (opponent.turnsToKO != -1 && poke.turnsToKO > opponent.turnsToKO) {
+		finalState = stateList[0];
+	} else if (opponent.turnsToKO != -1 && poke.turnsToKO > opponent.turnsToKO) {
 
 			var bestPlan = stateList[0];
 			for (var i = 1; i < stateList.length; i++) {
@@ -846,9 +840,7 @@ class ActionLogic {
 			// We guaranteed KO before opponent or opponent hasn't evaluated their turnsToKO yet.
 			var selectedIndex = stateList.length - 1;
 			finalState = stateList[selectedIndex];
-			var finalMovesList = finalState.moves.map(function(m) { return m.name; }).join(", ");
-			battle.logDecision(poke, " Using last DP solution " + (opponent.turnsToKO != -1 ? "(guaranteed KO before opponent)" : "(opponent turnsToKO not evaluated)") + ", selected index=" + selectedIndex + ", moves=[" + finalMovesList + "]");
-		}
+	}
 
 
 		// Return if plan is the farm down
