@@ -407,6 +407,15 @@ class ActionLogic {
 		var stateList = [];
 		var finalState;
 
+		battle.logDecision(poke, " DP starting search from initial state: energy=" + poke.energy + ", oppHealth=" + opponent.hp + ", opponentShields=" + opponent.shields);
+		
+		// Log order of moves in activeChargedMoves at start
+		var movesOrderArray = [];
+		for (var i = 0; i < poke.activeChargedMoves.length; i++) {
+			movesOrderArray.push(i + ":" + poke.activeChargedMoves[i].name);
+		}
+		battle.logDecision(poke, " DP activeChargedMoves order at start: [" + movesOrderArray.join(", ") + "]");
+		
 		while (DPQueue.length != 0) {
 
 			// A not very good way to prevent infinite loops
@@ -416,7 +425,17 @@ class ActionLogic {
 			}
 			stateCount++;
 
+			// Log queue state before removing
+			var queueMovesBeforeArray = [];
+			for (var q = 0; q < Math.min(3, DPQueue.length); q++) {
+				queueMovesBeforeArray.push(DPQueue[q].moves.map(function(m) { return m.name; }).join(", "));
+			}
+			battle.logDecision(poke, " DP queue before shift (first 3): [" + queueMovesBeforeArray.join(" | ") + "], queue size=" + DPQueue.length);
+
 			var currState = DPQueue.shift();
+			var currentMovesList = currState.moves.map(function(m) { return m.name; }).join(", ");
+			battle.logDecision(poke, " DP processing state " + stateCount + ": turn=" + currState.turn + ", moves=[" + currentMovesList + "], oppHealth=" + currState.oppHealth + ", energy=" + currState.energy + ", shields=" + currState.oppShields);
+			
 			var DPchargedMoveReady = [];
 
 			// Set cap of 4 for buffs
@@ -426,10 +445,14 @@ class ActionLogic {
 			// Found fastest way to defeat enemy, fastest = optimal in this case since damage taken is strictly dependent on time
 			// Set finalState to currState and do more evaluation later
 			if (currState.oppHealth <= 0) {
+				var movesList = currState.moves.map(function(m) { return m.name; }).join(", ");
+				battle.logDecision(poke, " DP found solution: turn=" + currState.turn + ", moves=[" + movesList + "], oppHealth=" + currState.oppHealth + ", energy=" + currState.energy + ", chance=" + currState.chance);
 
 				stateList.push(currState);
+				battle.logDecision(poke, " DP adding to stateList: index=" + (stateList.length - 1) + ", moves=[" + movesList + "], stateList size now=" + stateList.length);
 
 				if (currState.chance == 1) {
+					battle.logDecision(poke, " DP stopping search (found guaranteed solution)");
 					break;
 				} else {
 					continue;
@@ -447,6 +470,7 @@ class ActionLogic {
 
 			// Push states onto queue in order of TURN
 			for(var n = 0; n < poke.activeChargedMoves.length; n++) {
+				battle.logDecision(poke, " DP loop iteration: processing move " + n + " (" + poke.activeChargedMoves[n].name + ") from activeChargedMoves");
 
 				// Apply stat changes to pokemon attack
 				var currentStatBuffs = [poke.statBuffs[0], poke.statBuffs[1]];
@@ -522,11 +546,16 @@ class ActionLogic {
 
 				// If move is ready, use it and add results to queue
 				if (DPchargedMoveReady[n] == 0) {
+					var currentMovesList = currState.moves.map(function(m) { return m.name; }).join(", ");
+					battle.logDecision(poke, " DP evaluating move " + poke.activeChargedMoves[n].name + " at state: turn=" + currState.turn + ", moves=[" + currentMovesList + "], oppHealth=" + currState.oppHealth + ", energy=" + currState.energy);
 
 					// If shielded, apply 1 damage, otherwise apply move damage
 					var newOppHealth = currState.oppHealth - moveDamage;
 					if (currState.oppShields > 0) {
 						newOppHealth = currState.oppHealth - 1;
+						battle.logDecision(poke, " DP move " + poke.activeChargedMoves[n].name + " is shielded, 1 damage");
+					} else {
+						battle.logDecision(poke, " DP move " + poke.activeChargedMoves[n].name + " deals " + moveDamage + " damage, newOppHealth=" + newOppHealth);
 					}
 
 					var newShields = currState.oppShields;
@@ -590,7 +619,15 @@ class ActionLogic {
 						var i = 0;
 						var insert = true;
 						if (DPQueue.length == 0) {
+							var newMovesListEmpty = currState.moves.concat([poke.activeChargedMoves[n]]).map(function(m) { return m.name; }).join(", ");
+							battle.logDecision(poke, " DP adding state (queue empty): turn=" + (currState.turn + 1) + ", moves=[" + newMovesListEmpty + "], move was processed in iteration " + n + " (" + poke.activeChargedMoves[n].name + "), using unshift");
 							DPQueue.unshift(new BattleState(newEnergy, newOppHealth, currState.turn + 1, newShields, currState.moves.concat([poke.activeChargedMoves[n]]), attackMult, currState.chance));
+							// Log queue state after unshift
+							var queueMovesArrayEmpty = [];
+							for (var q = 0; q < Math.min(5, DPQueue.length); q++) {
+								queueMovesArrayEmpty.push(DPQueue[q].moves.map(function(m) { return m.name; }).join(", "));
+							}
+							battle.logDecision(poke, " DP queue after unshift (first 5 states): [" + queueMovesArrayEmpty.join(" | ") + "]");
 							// If move has chance of changing TTK, add that result
 							if (changeTTKChance != 0) {
 								DPQueue.unshift(new BattleState(newEnergy, newOppHealth, currState.turn + 1, newShields, currState.moves.concat([poke.activeChargedMoves[n]]), possibleAttackMult, currState.chance * changeTTKChance));
@@ -607,7 +644,18 @@ class ActionLogic {
 								}
 							}
 							if (insert) {
+								var newMovesList = currState.moves.concat([poke.activeChargedMoves[n]]).map(function(m) { return m.name; }).join(", ");
+								battle.logDecision(poke, " DP adding state: turn=" + (currState.turn + 1) + ", moves=[" + newMovesList + "], oppHealth=" + newOppHealth + ", energy=" + (currState.energy - poke.activeChargedMoves[n].energy) + ", shields=" + newShields + ", insertIndex=" + i);
+								battle.logDecision(poke, " DP adding state: move was processed in iteration " + n + " (" + poke.activeChargedMoves[n].name + "), queue size before insert=" + DPQueue.length);
 								DPQueue.splice(i, 0, new BattleState(currState.energy - poke.activeChargedMoves[n].energy, newOppHealth, currState.turn + 1, newShields, currState.moves.concat([poke.activeChargedMoves[n]]), attackMult, currState.chance));
+								// Log queue state after insert
+								var queueMovesArray = [];
+								for (var q = 0; q < Math.min(5, DPQueue.length); q++) {
+									queueMovesArray.push(DPQueue[q].moves.map(function(m) { return m.name; }).join(", "));
+								}
+								battle.logDecision(poke, " DP queue after insert (first 5 states): [" + queueMovesArray.join(" | ") + "]");
+							} else {
+								battle.logDecision(poke, " DP skipping state (better state exists)");
 							}
 							// If move has chance of changing TTK, add that result
 							if (changeTTKChance != 0) {
@@ -771,10 +819,18 @@ class ActionLogic {
 			return;
 		}
 
+		// Log DP results
+		battle.logDecision(poke, " DP found " + stateList.length + " solution(s), turnsToKO=" + poke.turnsToKO + ", opponent.turnsToKO=" + opponent.turnsToKO);
+		for (var i = 0; i < stateList.length; i++) {
+			var movesList = stateList[i].moves.map(function(m) { return m.name; }).join(", ");
+			battle.logDecision(poke, " DP solution " + i + ": turn=" + stateList[i].turn + ", moves=[" + movesList + "], chance=" + stateList[i].chance);
+		}
+
 		// If opponent KOs before our guaranteed KO, go for the least risky plan that still KOs before opponent KOs us.
 		var needsBoost = false;
 		if (stateList.length == 1) {
 			finalState = stateList[0];
+			battle.logDecision(poke, " Using single DP solution");
 		} else if (opponent.turnsToKO != -1 && poke.turnsToKO > opponent.turnsToKO) {
 
 			var bestPlan = stateList[0];
@@ -788,7 +844,10 @@ class ActionLogic {
 
 		} else {
 			// We guaranteed KO before opponent or opponent hasn't evaluated their turnsToKO yet.
-			finalState = stateList[stateList.length - 1];
+			var selectedIndex = stateList.length - 1;
+			finalState = stateList[selectedIndex];
+			var finalMovesList = finalState.moves.map(function(m) { return m.name; }).join(", ");
+			battle.logDecision(poke, " Using last DP solution " + (opponent.turnsToKO != -1 ? "(guaranteed KO before opponent)" : "(opponent turnsToKO not evaluated)") + ", selected index=" + selectedIndex + ", moves=[" + finalMovesList + "]");
 		}
 
 
@@ -837,108 +896,184 @@ class ActionLogic {
 
 		// Don't bait if the opponent won't shield
 		if (poke.baitShields && opponent.shields > 0 && poke.activeChargedMoves.length > 1) {
-			var dpeRatio = (poke.activeChargedMoves[1].damage / poke.activeChargedMoves[1].energy) / (finalState.moves[0].damage / finalState.moves[0].energy);
+			// Log move properties for debugging
+			battle.logDecision(poke, " Checking bait change: finalState.moves[0].name=" + finalState.moves[0].name + ", damage=" + finalState.moves[0].damage + ", energy=" + finalState.moves[0].energy);
+			battle.logDecision(poke, " Checking bait change: activeChargedMoves[1].name=" + poke.activeChargedMoves[1].name + ", damage=" + poke.activeChargedMoves[1].damage + ", energy=" + poke.activeChargedMoves[1].energy);
+			
+			// Calculate DPE ratio - match JavaScript exactly
+			var secondDpe = poke.activeChargedMoves[1].damage / poke.activeChargedMoves[1].energy;
+			var firstDpe = finalState.moves[0].damage / finalState.moves[0].energy;
+			var dpeRatio = secondDpe / firstDpe;
+			battle.logDecision(poke, " DPE calculation: secondDpe=" + secondDpe + ", firstDpe=" + firstDpe + ", dpeRatio=" + dpeRatio);
+			var movesBefore = finalState.moves.map(function(m) { return m.name; }).join(", ");
+			battle.logDecision(poke, " Checking if should change bait: dpeRatio=" + dpeRatio + ", energy=" + poke.energy + " >= " + poke.activeChargedMoves[1].energy + ", plan before=[" + movesBefore + "]");
 
 			if ((poke.energy >= poke.activeChargedMoves[1].energy)&&(dpeRatio > 1.5)) {
-				if(! ActionLogic.wouldShield(battle, poke, opponent, poke.activeChargedMoves[1]).value){
+				var shieldDecision = ActionLogic.wouldShield(battle, poke, opponent, poke.activeChargedMoves[1]);
+				battle.logDecision(poke, " Opponent wouldShield(" + poke.activeChargedMoves[1].name + ")=" + shieldDecision.value);
+				if(! shieldDecision.value){
+					battle.logDecision(poke, " Changing finalState.moves[0] from " + finalState.moves[0].name + " to " + poke.activeChargedMoves[1].name + " (opponent won't shield nuke)");
 					finalState.moves[0] = poke.activeChargedMoves[1];
+					var movesAfter = finalState.moves.map(function(m) { return m.name; }).join(", ");
+					battle.logDecision(poke, " Plan after change=[" + movesAfter + "]");
 				}
 			}
 		}
 
+		// Log finalState.moves right after selecting it from stateList
+		var movesAfterSelection = finalState.moves.map(function(m) { return m.name; }).join(", ");
+		battle.logDecision(poke, " finalState.moves immediately after selection: [" + movesAfterSelection + "]");
+		
 		// If pokemon needs boost, we cannot reorder and no moves both buff and debuff
 		if (!needsBoost) {
 			// If not baiting shields or shields are down and no moves debuff, throw most damaging move first
 			if (!poke.baitShields || (opponent.shields == 0 && debuffingMove == false)) {
+				// Log before sorting
+				var movesBeforeSort = finalState.moves.map(function(m) { return m.name; }).join(", ");
+				battle.logDecision(poke, " DP plan before sorting: [" + movesBeforeSort + "]");
+				
 				finalState.moves.sort(function(a, b) {
 					var moveDamage1 = DamageCalculator.damage(poke, opponent, a);
 					var moveDamage2 = DamageCalculator.damage(poke, opponent, b);
+					battle.logDecision(poke, " Comparing " + a.name + "(" + moveDamage1 + " dmg) vs " + b.name + "(" + moveDamage2 + " dmg)");
 					return moveDamage2 - moveDamage1;
-				})
+				});
+				
+				// Log after sorting
+				var movesAfterSort = finalState.moves.map(function(m) { return m.name; }).join(", ");
+				battle.logDecision(poke, " DP plan after sorting by damage: [" + movesAfterSort + "]");
+			} else {
+				var movesList = finalState.moves.map(function(m) { return m.name; }).join(", ");
+				battle.logDecision(poke, " DP plan NOT sorted (baitShields=" + poke.baitShields + ", shields=" + opponent.shields + ", debuffing=" + debuffingMove + "): [" + movesList + "]");
 			}
 		}
 
-		// If shields are up, prefer low energy moves that are more efficient
-		if (opponent.shields > 0 && poke.activeChargedMoves.length > 1 && poke.activeChargedMoves[0].energy <= finalState.moves[0].energy && poke.activeChargedMoves[0].dpe > finalState.moves[0].dpe && (! poke.activeChargedMoves[0].selfDebuffing)) {
-			finalState.moves[0] = poke.activeChargedMoves[0];
-		}
+	// Apply various move selection optimizations (shields, debuffs, etc.)
+	var selectedMove = finalState.moves[0];
+	
+	// Log initial selection from DP plan
+	battle.logDecision(poke, " Initial move from DP plan: " + selectedMove.name);
+	
+	// If shields are up, prefer low energy moves that are more efficient
+	if (opponent.shields > 0 && poke.activeChargedMoves.length > 1 && poke.activeChargedMoves[0].energy <= finalState.moves[0].energy && poke.activeChargedMoves[0].dpe > finalState.moves[0].dpe && (! poke.activeChargedMoves[0].selfDebuffing)) {
+		battle.logDecision(poke, " Changing from " + finalState.moves[0].name + " to " + poke.activeChargedMoves[0].name + " (shields up, lower energy " + poke.activeChargedMoves[0].energy + "<=" + finalState.moves[0].energy + ", better DPE " + poke.activeChargedMoves[0].dpe + ">" + finalState.moves[0].dpe + ")");
+		finalState.moves[0] = poke.activeChargedMoves[0];
+		selectedMove = finalState.moves[0];
+	}
 
-		// If shields are down, prefer non-debuffing moves if both sides have significant HP remaining
-		if (opponent.shields == 0 && poke.activeChargedMoves.length > 1 && finalState.moves[0].selfDebuffing && finalState.moves[0].energy > 50 && (poke.hp / poke.stats.hp) > .5 && (finalState.moves[0].damage / opponent.hp) < .8) {
-			finalState.moves[0] = poke.activeChargedMoves[0];
-		}
+	// If shields are down, prefer non-debuffing moves if both sides have significant HP remaining
+	if (opponent.shields == 0 && poke.activeChargedMoves.length > 1 && finalState.moves[0].selfDebuffing && finalState.moves[0].energy > 50 && (poke.hp / poke.stats.hp) > .5 && (finalState.moves[0].damage / opponent.hp) < .8) {
+		finalState.moves[0] = poke.activeChargedMoves[0];
+	}
 
-		// Bandaid to force more efficient move of the same energy
-		if (poke.activeChargedMoves.length > 1 && poke.activeChargedMoves[0].energy == finalState.moves[0].energy && poke.activeChargedMoves[0].dpe > finalState.moves[0].dpe && (! poke.activeChargedMoves[0].selfDebuffing)) {
-			finalState.moves[0] = poke.activeChargedMoves[0];
-		}
+	// Bandaid to force more efficient move of the same energy
+	if (poke.activeChargedMoves.length > 1 && poke.activeChargedMoves[0].energy == finalState.moves[0].energy && poke.activeChargedMoves[0].dpe > finalState.moves[0].dpe && (! poke.activeChargedMoves[0].selfDebuffing)) {
+		battle.logDecision(poke, " Bandaid: changing from " + finalState.moves[0].name + " to " + poke.activeChargedMoves[0].name + " (same energy " + poke.activeChargedMoves[0].energy + ", better DPE " + poke.activeChargedMoves[0].dpe + ">" + finalState.moves[0].dpe + ")");
+		finalState.moves[0] = poke.activeChargedMoves[0];
+		selectedMove = finalState.moves[0];
+	}
 
-		// Bandaid to force more efficient move of the similar energy if chosen move is self debuffing
-		if (poke.activeChargedMoves.length > 1 && poke.activeChargedMoves[0].energy - 10 <= finalState.moves[0].energy && poke.activeChargedMoves[0].dpe > finalState.moves[0].dpe && finalState.moves[0].selfDebuffing && (! poke.activeChargedMoves[0].selfDebuffing)) {
-			finalState.moves[0] = poke.activeChargedMoves[0];
-		}
+	// Bandaid to force more efficient move of the similar energy if chosen move is self debuffing
+	if (poke.activeChargedMoves.length > 1 && poke.activeChargedMoves[0].energy - 10 <= finalState.moves[0].energy && poke.activeChargedMoves[0].dpe > finalState.moves[0].dpe && finalState.moves[0].selfDebuffing && (! poke.activeChargedMoves[0].selfDebuffing)) {
+		battle.logDecision(poke, " Bandaid: changing from " + finalState.moves[0].name + " to " + poke.activeChargedMoves[0].name + " (similar energy " + poke.activeChargedMoves[0].energy + " vs " + finalState.moves[0].energy + ", better DPE " + poke.activeChargedMoves[0].dpe + ">" + finalState.moves[0].dpe + ", avoiding debuff)");
+		finalState.moves[0] = poke.activeChargedMoves[0];
+		selectedMove = finalState.moves[0];
+	}
 
-		// Bandaid to force more efficient move of the similar energy if one move is self buffing
-		if (poke.activeChargedMoves.length > 1 && poke.activeChargedMoves[0].energy - finalState.moves[0].energy <= 5 && poke.activeChargedMoves[0].dpe > finalState.moves[0].dpe && poke.activeChargedMoves[0].selfBuffing) {
-			finalState.moves[0] = poke.activeChargedMoves[0];
-		}
+	// Bandaid to force more efficient move of the similar energy if one move is self buffing
+	if (poke.activeChargedMoves.length > 1 && poke.activeChargedMoves[0].energy - finalState.moves[0].energy <= 5 && poke.activeChargedMoves[0].dpe > finalState.moves[0].dpe && poke.activeChargedMoves[0].selfBuffing) {
+		battle.logDecision(poke, " Bandaid: changing from " + finalState.moves[0].name + " to " + poke.activeChargedMoves[0].name + " (similar energy " + poke.activeChargedMoves[0].energy + " vs " + finalState.moves[0].energy + ", better DPE " + poke.activeChargedMoves[0].dpe + ">" + finalState.moves[0].dpe + ", self buffing)");
+		finalState.moves[0] = poke.activeChargedMoves[0];
+		selectedMove = finalState.moves[0];
+	}
 
-		// Don't bait with self debuffing moves
-		if (poke.baitShields && opponent.shields > 0 && poke.activeChargedMoves.length > 1) {
-			if ((poke.energy >= poke.activeChargedMoves[1].energy)&&(poke.activeChargedMoves[1].dpe > finalState.moves[0].dpe)) {
-				if((finalState.moves[0].selfDebuffing)&&(! poke.activeChargedMoves[1].selfDebuffing)){
+	// If shields are down, prefer non-debuffing moves if both sides have significant HP remaining
+	if (opponent.shields == 0 && poke.activeChargedMoves.length > 1 && finalState.moves[0].selfDebuffing && finalState.moves[0].energy > 50 && (poke.hp / poke.stats.hp) > .5 && (finalState.moves[0].damage / opponent.hp) < .8) {
+		finalState.moves[0] = poke.activeChargedMoves[0];
+	}
+
+	// Bandaid to force more efficient move of the same energy
+	if (poke.activeChargedMoves.length > 1 && poke.activeChargedMoves[0].energy == finalState.moves[0].energy && poke.activeChargedMoves[0].dpe > finalState.moves[0].dpe && (! poke.activeChargedMoves[0].selfDebuffing)) {
+		battle.logDecision(poke, " Bandaid: changing from " + finalState.moves[0].name + " to " + poke.activeChargedMoves[0].name + " (same energy " + poke.activeChargedMoves[0].energy + ", better DPE " + poke.activeChargedMoves[0].dpe + ">" + finalState.moves[0].dpe + ")");
+		finalState.moves[0] = poke.activeChargedMoves[0];
+		selectedMove = finalState.moves[0];
+	}
+
+	// Bandaid to force more efficient move of the similar energy if chosen move is self debuffing
+	if (poke.activeChargedMoves.length > 1 && poke.activeChargedMoves[0].energy - 10 <= finalState.moves[0].energy && poke.activeChargedMoves[0].dpe > finalState.moves[0].dpe && finalState.moves[0].selfDebuffing && (! poke.activeChargedMoves[0].selfDebuffing)) {
+		battle.logDecision(poke, " Bandaid: changing from " + finalState.moves[0].name + " to " + poke.activeChargedMoves[0].name + " (similar energy " + poke.activeChargedMoves[0].energy + " vs " + finalState.moves[0].energy + ", better DPE " + poke.activeChargedMoves[0].dpe + ">" + finalState.moves[0].dpe + ", avoiding debuff)");
+		finalState.moves[0] = poke.activeChargedMoves[0];
+		selectedMove = finalState.moves[0];
+	}
+
+	// Bandaid to force more efficient move of the similar energy if one move is self buffing
+	if (poke.activeChargedMoves.length > 1 && poke.activeChargedMoves[0].energy - finalState.moves[0].energy <= 5 && poke.activeChargedMoves[0].dpe > finalState.moves[0].dpe && poke.activeChargedMoves[0].selfBuffing) {
+		battle.logDecision(poke, " Bandaid: changing from " + finalState.moves[0].name + " to " + poke.activeChargedMoves[0].name + " (similar energy " + poke.activeChargedMoves[0].energy + " vs " + finalState.moves[0].energy + ", better DPE " + poke.activeChargedMoves[0].dpe + ">" + finalState.moves[0].dpe + ", self buffing)");
+		finalState.moves[0] = poke.activeChargedMoves[0];
+		selectedMove = finalState.moves[0];
+	}
+
+	// Don't bait with self debuffing moves
+	if (poke.baitShields && opponent.shields > 0 && poke.activeChargedMoves.length > 1) {
+		if ((poke.energy >= poke.activeChargedMoves[1].energy)&&(poke.activeChargedMoves[1].dpe > finalState.moves[0].dpe)) {
+			if((finalState.moves[0].selfDebuffing)&&(! poke.activeChargedMoves[1].selfDebuffing)){
+				finalState.moves[0] = poke.activeChargedMoves[1];
+			}
+		}
+	}
+
+	// While shields are up, prefer close non debuffing moves in scenarios where debuffing move won't KO
+
+	if (opponent.shields > 0 && poke.activeChargedMoves.length > 1) {
+		// Is one self debuffing and the other non self debuffing, and will the first Charged Move
+		if((poke.activeChargedMoves[0].selfDebuffing)&&(! poke.activeChargedMoves[1].selfBuffing)){
+			// Is the Pokemon baiting or will the self debuffing move not come close to a KO?
+			if(poke.baitShields || (opponent.hp - poke.activeChargedMoves[0].damage > 10)){
+				// Is the second move close in energy and dpe?
+				if((poke.activeChargedMoves[1].energy - poke.activeChargedMoves[0].energy <= 10) && (poke.activeChargedMoves[1].dpe / poke.activeChargedMoves[0].dpe > 0.7)){
+					battle.logDecision(poke, " Shields up: changing from " + finalState.moves[0].name + " to " + poke.activeChargedMoves[1].name + " (avoiding debuff, similar energy/DPE)");
 					finalState.moves[0] = poke.activeChargedMoves[1];
+					selectedMove = finalState.moves[0];
 				}
 			}
 		}
+	}
 
-		// While shields are up, prefer close non debuffing moves in scenarios where debuffing move won't KO
-
-		if (opponent.shields > 0 && poke.activeChargedMoves.length > 1) {
-			// Is one self debuffing and the other non self debuffing, and will the first Charged Move
-			if((poke.activeChargedMoves[0].selfDebuffing)&&(! poke.activeChargedMoves[1].selfBuffing)){
-				// Is the Pokemon baiting or will the self debuffing move not come close to a KO?
-				if(poke.baitShields || (opponent.hp - poke.activeChargedMoves[0].damage > 10)){
-					// Is the second move close in energy and dpe?
-					if((poke.activeChargedMoves[1].energy - poke.activeChargedMoves[0].energy <= 10) && (poke.activeChargedMoves[1].dpe / poke.activeChargedMoves[0].dpe > 0.7)){
-						finalState.moves[0] = poke.activeChargedMoves[1];
-					}
-				}
-			}
+	// Defer self debuffing moves until after survivable Charged Moves
+	if(finalState.moves[0].selfDebuffing && poke.shields == 0 && poke.energy < 100 && opponent.bestChargedMove){
+		if((opponent.energy >= opponent.bestChargedMove.energy)&&(! ActionLogic.wouldShield(battle, opponent, poke, opponent.bestChargedMove).value)&&(! poke.activeChargedMoves[0].selfBuffing)){
+			battle.logDecision(poke, " is deferring its self debuffing move until after the opponent fires its move");
+			return;
 		}
+	}
 
-		// Defer self debuffing moves until after survivable Charged Moves
-		if(finalState.moves[0].selfDebuffing && poke.shields == 0 && poke.energy < 100 && opponent.bestChargedMove){
-			if((opponent.energy >= opponent.bestChargedMove.energy)&&(! ActionLogic.wouldShield(battle, opponent, poke, opponent.bestChargedMove).value)&&(! poke.activeChargedMoves[0].selfBuffing)){
-				battle.logDecision(poke, " is deferring its self debuffing move until after the opponent fires its move");
+	// If move is self debuffing and doesn't KO, try to stack as much as you can
+	if (finalState.moves[0].selfDebuffing) {
+		//var targetEnergy = poke.energy + (Math.round( (100 - poke.energy) / poke.fastMove.energyGain) * poke.fastMove.energyGain);
+		let targetEnergy = Math.floor(100 / finalState.moves[0].energy) * finalState.moves[0].energy;
+
+		if (poke.energy < targetEnergy) {
+			var moveDamage = DamageCalculator.damage(poke, opponent, finalState.moves[0]);
+			if ((opponent.hp > moveDamage || opponent.shields != 0) && (poke.hp > opponent.fastMove.damage * 2 || opponent.fastMove.cooldown - poke.fastMove.cooldown > 500)){
+				battle.logDecision(poke, " doesn't use " + finalState.moves[0].name + " because it wants to minimize time debuffed and it can stack the move " + Math.floor(100 / finalState.moves[0].energy) + " times");
 				return;
 			}
-		}
-
-		// If move is self debuffing and doesn't KO, try to stack as much as you can
-		if (finalState.moves[0].selfDebuffing) {
-			//var targetEnergy = poke.energy + (Math.round( (100 - poke.energy) / poke.fastMove.energyGain) * poke.fastMove.energyGain);
-			let targetEnergy = Math.floor(100 / finalState.moves[0].energy) * finalState.moves[0].energy;
-
-			if (poke.energy < targetEnergy) {
-				var moveDamage = DamageCalculator.damage(poke, opponent, finalState.moves[0]);
-				if ((opponent.hp > moveDamage || opponent.shields != 0) && (poke.hp > opponent.fastMove.damage * 2 || opponent.fastMove.cooldown - poke.fastMove.cooldown > 500)){
-					battle.logDecision(poke, " doesn't use " + finalState.moves[0].name + " because it wants to minimize time debuffed and it can stack the move " + Math.floor(100 / finalState.moves[0].energy) + " times");
-					return;
-				}
-			} else if(poke.baitShields && opponent.shields > 0 && poke.activeChargedMoves[0].energy - finalState.moves[0].energy <= 10 && ! poke.activeChargedMoves[0].selfDebuffing){
-				// Use the lower energy move if it's a boosting move or if the opponent would shield the bigger move
-				if(poke.activeChargedMoves[0].selfBuffing || ActionLogic.wouldShield(battle, poke, opponent, finalState.moves[0]).value){
-					finalState.moves[0] = poke.activeChargedMoves[0];
-				}
+		} else if(poke.baitShields && opponent.shields > 0 && poke.activeChargedMoves[0].energy - finalState.moves[0].energy <= 10 && ! poke.activeChargedMoves[0].selfDebuffing){
+			// Use the lower energy move if it's a boosting move or if the opponent would shield the bigger move
+			if(poke.activeChargedMoves[0].selfBuffing || ActionLogic.wouldShield(battle, poke, opponent, finalState.moves[0]).value){
+				finalState.moves[0] = poke.activeChargedMoves[0];
 			}
 		}
+	}
 
 
 		// Use the final move, or a Fast Move if not enough energy
-		if (poke.energy >= finalState.moves[0].energy) {
+		// Use selectedMove (which may have been changed by optimizations) or finalState.moves[0]
+		var finalMove = selectedMove || finalState.moves[0];
+		
+		if (poke.energy >= finalMove.energy) {
 			if (finalState.moves.length > 1) {
-				battle.logDecision(poke, " uses " + finalState.moves[0].name + " because it thinks that using " + (finalState.moves.length - 1) + " moves afterwards is the best plan.");
+				battle.logDecision(poke, " uses " + finalMove.name + " because it thinks that using " + (finalState.moves.length - 1) + " moves afterwards is the best plan.");
 
 				// Debugging Log
 				for (var i = 1; i < finalState.moves.length; i++) {
@@ -946,11 +1081,11 @@ class ActionLogic {
 				}
 
 			} else {
-				battle.logDecision(poke, " uses " + finalState.moves[0].name + " at turn " + turns + " because it KO's or it wants to farm down afterwards");
+				battle.logDecision(poke, " uses " + finalMove.name + " at turn " + turns + " because it KO's or it wants to farm down afterwards");
 			}
 
 		} else {
-			battle.logDecision(poke, " uses a fast move because it has no energy for " + finalState.moves[0].name);
+			battle.logDecision(poke, " uses a fast move because it has no energy for " + finalMove.name);
 			return;
 		}
 
@@ -965,11 +1100,14 @@ class ActionLogic {
 			}
 		}
 
+		// Use finalMove (which may have been changed by optimizations) or finalState.moves[0]
+		var moveToUse = finalMove || finalState.moves[0];
+		
 		action = new TimelineAction(
 			"charged",
 			poke.index,
 			turns,
-			poke.chargedMoves.indexOf(finalState.moves[0]),
+			poke.chargedMoves.indexOf(moveToUse),
 			{shielded: false, buffs: false, priority: poke.priority});
 
 		return action;
