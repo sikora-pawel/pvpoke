@@ -37942,7 +37942,8 @@
         },
         "types": ["grass", "none"],
         "fastMoves": ["SCRATCH", "RAZOR_LEAF"],
-        "chargedMoves": ["ENERGY_BALL", "GRASS_KNOT", "EARTH_POWER"],
+        "chargedMoves": ["ENERGY_BALL", "GRASS_KNOT", "EARTH_POWER", "DRUM_BEATING", "FRENZY_PLANT"],
+        "eliteMoves": ["FRENZY_PLANT"],
         "defaultIVs": {
             "cp500": [6, 4, 4, 7],
             "cp1500": [16.5, 5, 15, 13],
@@ -42511,7 +42512,7 @@
         },
         "types": ["rock", "poison"],
         "fastMoves": ["ROCK_THROW", "SMACK_DOWN"],
-        "chargedMoves": ["DAZZLING_GLEAM", "POWER_GEM", "SLUDGE_WAVE"],
+        "chargedMoves": ["DAZZLING_GLEAM", "POWER_GEM", "SLUDGE_WAVE", "METEOR_BEAM"],
         "defaultIVs": {
             "cp500": [6, 4, 6, 11],
             "cp1500": [17, 4, 10, 14],
