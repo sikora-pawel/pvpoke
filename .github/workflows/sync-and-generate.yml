@@ -111,11 +111,31 @@ jobs:
           ini-values: memory_limit=2G
 
       - name: Generate Rankings
+        id: generate
         if: steps.sync.outputs.has_changes == 'true'
         run: |
           cd scripts/cli
           echo "Generating rankings..."
-          node generate-rankings.js
+
+          # Run and capture output
+          node generate-rankings.js 2>&1 | tee /tmp/rankings-output.txt
+
+          # Extract cups list for email
+          CUPS_LIST=$(grep -A 100 "Cups to generate:" /tmp/rankings-output.txt | grep "^  - " | head -20 || echo "")
+          SUMMARY=$(grep -A 5 "^SUMMARY" /tmp/rankings-output.txt || echo "")
+
+          # Save to output (multiline)
+          {
+            echo "cups_list<<EOF"
+            echo "$CUPS_LIST"
+            echo "EOF"
+          } >> $GITHUB_OUTPUT
+
+          {
+            echo "summary<<EOF"
+            echo "$SUMMARY"
+            echo "EOF"
+          } >> $GITHUB_OUTPUT
 
       - name: Commit generated rankings to develop
         if: steps.sync.outputs.has_changes == 'true'
@@ -160,7 +180,12 @@ jobs:
             PvPoke sync check completed.
 
             Status: ${{ steps.sync.outputs.has_changes == 'true' && 'NEW CHANGES - rankings generated' || 'No changes from upstream' }}
-            ${{ steps.sync.outputs.has_changes == 'true' && 'Merged to master: ' || '' }}${{ steps.sync.outputs.has_changes == 'true' && (github.event.inputs.merge_to_master == 'true' && 'Yes' || 'No') || '' }}
+            Merged to master: ${{ steps.sync.outputs.has_changes == 'true' && (github.event.inputs.merge_to_master == 'true' && 'Yes' || 'No') || 'N/A' }}
+
+            ${{ steps.sync.outputs.has_changes == 'true' && '=== Generated Cups ===' || '' }}
+            ${{ steps.generate.outputs.cups_list }}
+
+            ${{ steps.generate.outputs.summary }}
 
             Workflow run:
             ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
