@@ -1,0 +1,193 @@
+name: Sync Upstream & Generate Rankings
+
+on:
+  schedule:
+    # Run daily at 6:00 UTC
+    - cron: '0 6 * * *'
+  workflow_dispatch:
+    inputs:
+      force_generate:
+        description: 'Force regenerate rankings even without upstream changes'
+        required: false
+        default: 'false'
+        type: boolean
+      merge_to_master:
+        description: 'Merge develop to master after successful generation (enables production deploy)'
+        required: false
+        default: 'false'
+        type: boolean
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+jobs:
+  sync-and-generate:
+    runs-on: ubuntu-latest
+    outputs:
+      has_changes: ${{ steps.sync.outputs.has_changes }}
+      should_deploy: ${{ steps.merge.outputs.merged }}
+
+    steps:
+      - name: Checkout develop branch
+        uses: actions/checkout@v4
+        with:
+          ref: develop
+          fetch-depth: 0
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Configure Git
+        run: |
+          git config user.name "GitHub Actions Bot"
+          git config user.email "actions@github.com"
+
+      - name: Add upstream remote
+        run: |
+          git remote add upstream https://github.com/pvpoke/pvpoke.git || true
+          git fetch upstream master
+          git fetch origin master
+
+      - name: Check for upstream changes
+        id: sync
+        run: |
+          # Get current HEAD of upstream
+          UPSTREAM_HEAD=$(git rev-parse upstream/master)
+
+          # Check if we have a marker file with last synced commit
+          LAST_SYNC_FILE=".last-upstream-sync"
+
+          if [ -f "$LAST_SYNC_FILE" ]; then
+            LAST_SYNC=$(cat "$LAST_SYNC_FILE")
+          else
+            LAST_SYNC=""
+          fi
+
+          echo "Upstream HEAD: $UPSTREAM_HEAD"
+          echo "Last sync: $LAST_SYNC"
+
+          if [ "$UPSTREAM_HEAD" != "$LAST_SYNC" ] || [ "${{ github.event.inputs.force_generate }}" == "true" ]; then
+            echo "has_changes=true" >> $GITHUB_OUTPUT
+            echo "Changes detected or force generate requested"
+
+            # Show what changed
+            if [ -n "$LAST_SYNC" ]; then
+              echo ""
+              echo "=== New commits from upstream ==="
+              git log --oneline $LAST_SYNC..$UPSTREAM_HEAD -- src/data/gamemaster || true
+            fi
+          else
+            echo "has_changes=false" >> $GITHUB_OUTPUT
+            echo "No changes from upstream"
+          fi
+
+      - name: Merge upstream changes to develop
+        if: steps.sync.outputs.has_changes == 'true'
+        run: |
+          echo "Merging upstream changes into develop..."
+
+          # Merge upstream, preferring our changes for conflicts in rankings
+          git merge upstream/master -m "Merge upstream pvpoke changes" \
+            --strategy-option=ours \
+            --allow-unrelated-histories || true
+
+          # Save the synced commit hash
+          git rev-parse upstream/master > .last-upstream-sync
+          git add .last-upstream-sync
+          git commit -m "Update last upstream sync marker" || true
+
+      - name: Setup Node.js
+        if: steps.sync.outputs.has_changes == 'true'
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Setup PHP
+        if: steps.sync.outputs.has_changes == 'true'
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.2'
+          extensions: sqlite3, pdo_sqlite
+          ini-values: memory_limit=2G
+
+      - name: Generate Rankings
+        if: steps.sync.outputs.has_changes == 'true'
+        run: |
+          cd scripts/cli
+          echo "Generating rankings..."
+          node generate-rankings.js
+
+      - name: Commit generated rankings to develop
+        if: steps.sync.outputs.has_changes == 'true'
+        run: |
+          git add -A
+          git commit -m "Auto-generate rankings from upstream sync
+
+          Upstream: $(git rev-parse upstream/master)
+          Generated: $(date -u +"%Y-%m-%d %H:%M:%S UTC")
+
+          Co-Authored-By: GitHub Actions <actions@github.com>" || echo "No changes to commit"
+
+      - name: Push to develop
+        if: steps.sync.outputs.has_changes == 'true'
+        run: |
+          git push origin develop
+
+      - name: Merge develop to master (if enabled)
+        id: merge
+        if: steps.sync.outputs.has_changes == 'true' && github.event.inputs.merge_to_master == 'true'
+        run: |
+          echo "Merging develop to master..."
+          git checkout master
+          git merge develop -m "Merge develop: auto-generated rankings
+
+          Co-Authored-By: GitHub Actions <actions@github.com>"
+          git push origin master
+          echo "merged=true" >> $GITHUB_OUTPUT
+
+      # Email notification - always sends status
+      - name: Send email notification
+        uses: dawidd6/action-send-mail@v3
+        with:
+          server_address: smtp.gmail.com
+          server_port: 587
+          username: ${{ secrets.EMAIL_USERNAME }}
+          password: ${{ secrets.EMAIL_PASSWORD }}
+          subject: "${{ steps.sync.outputs.has_changes == 'true' && '✅ PvPoke: New rankings generated' || '📋 PvPoke: No upstream changes' }}"
+          to: ${{ secrets.NOTIFICATION_EMAIL }}
+          from: PvPoke Bot <${{ secrets.EMAIL_USERNAME }}>
+          body: |
+            PvPoke sync check completed.
+
+            Status: ${{ steps.sync.outputs.has_changes == 'true' && 'NEW CHANGES - rankings generated' || 'No changes from upstream' }}
+            ${{ steps.sync.outputs.has_changes == 'true' && 'Merged to master: ' || '' }}${{ steps.sync.outputs.has_changes == 'true' && (github.event.inputs.merge_to_master == 'true' && 'Yes' || 'No') || '' }}
+
+            Workflow run:
+            ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+        continue-on-error: true
+
+  # Deploy to GitHub Pages (only when merged to master)
+  deploy:
+    needs: sync-and-generate
+    if: needs.sync-and-generate.outputs.should_deploy == 'true'
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout master
+        uses: actions/checkout@v4
+        with:
+          ref: master
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: './src/data'
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
