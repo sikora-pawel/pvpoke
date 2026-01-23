@@ -2,8 +2,8 @@ name: Sync Upstream & Generate Rankings
 
 on:
   schedule:
-    # Run daily at 6:00 UTC
-    - cron: '0 6 * * *'
+    # Run daily at 20:00 UTC
+    - cron: '0 20 * * *'
   workflow_dispatch:
     inputs:
       force_generate:
@@ -14,7 +14,7 @@ on:
       merge_to_master:
         description: 'Merge develop to master after successful generation (enables production deploy)'
         required: false
-        default: 'false'
+        default: 'true'
         type: boolean
 
 permissions:
@@ -166,7 +166,7 @@ jobs:
 
       - name: Merge develop to master (if enabled)
         id: merge
-        if: steps.sync.outputs.has_changes == 'true' && github.event.inputs.merge_to_master == 'true'
+        if: steps.sync.outputs.has_changes == 'true' && (github.event_name == 'schedule' || github.event.inputs.merge_to_master == 'true')
         run: |
           echo "Merging develop to master..."
           git checkout master
