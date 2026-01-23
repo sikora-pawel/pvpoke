@@ -70,15 +70,26 @@ jobs:
             echo "has_changes=true" >> $GITHUB_OUTPUT
             echo "Changes detected or force generate requested"
 
-            # Show what changed
+            # Capture upstream commits for email
             if [ -n "$LAST_SYNC" ]; then
               echo ""
               echo "=== New commits from upstream ==="
-              git log --oneline $LAST_SYNC..$UPSTREAM_HEAD -- src/data/gamemaster || true
+              UPSTREAM_COMMITS=$(git log --oneline $LAST_SYNC..$UPSTREAM_HEAD 2>/dev/null || echo "Unable to fetch commit list")
+              echo "$UPSTREAM_COMMITS"
+            else
+              UPSTREAM_COMMITS="First sync - no previous baseline"
             fi
+
+            # Save to output (multiline)
+            {
+              echo "upstream_commits<<EOF"
+              echo "$UPSTREAM_COMMITS"
+              echo "EOF"
+            } >> $GITHUB_OUTPUT
           else
             echo "has_changes=false" >> $GITHUB_OUTPUT
             echo "No changes from upstream"
+            echo "upstream_commits=" >> $GITHUB_OUTPUT
           fi
 
       - name: Merge upstream changes to develop
@@ -181,6 +192,9 @@ jobs:
 
             Status: ${{ steps.sync.outputs.has_changes == 'true' && 'NEW CHANGES - rankings generated' || 'No changes from upstream' }}
             Merged to master: ${{ steps.sync.outputs.has_changes == 'true' && (github.event.inputs.merge_to_master == 'true' && 'Yes' || 'No') || 'N/A' }}
+
+            ${{ steps.sync.outputs.has_changes == 'true' && '=== Upstream Commits ===' || '' }}
+            ${{ steps.sync.outputs.upstream_commits }}
 
             ${{ steps.sync.outputs.has_changes == 'true' && '=== Generated Cups ===' || '' }}
             ${{ steps.generate.outputs.cups_list }}
