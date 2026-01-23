@@ -169,7 +169,7 @@ jobs:
         if: steps.sync.outputs.has_changes == 'true' && (github.event_name == 'schedule' || github.event.inputs.merge_to_master == 'true')
         run: |
           echo "Merging develop to master..."
-          git checkout master
+          git checkout -B master origin/master
           git merge develop -m "Merge develop: auto-generated rankings
 
           Co-Authored-By: GitHub Actions <actions@github.com>"
