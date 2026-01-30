@@ -1,4 +1,5 @@
 name: Sync Upstream & Generate Rankings
+# Trigger resync after fork detach
 
 on:
   schedule:
