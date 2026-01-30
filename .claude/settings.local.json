@@ -1,7 +1,9 @@
 {
   "permissions": {
     "allow": [
-      "Bash(gh repo view:*)"
+      "Bash(gh repo view:*)",
+      "WebSearch",
+      "WebFetch(domain:api.github.com)"
     ]
   }
 }
