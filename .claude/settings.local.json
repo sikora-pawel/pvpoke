@@ -3,7 +3,8 @@
     "allow": [
       "Bash(gh repo view:*)",
       "WebSearch",
-      "WebFetch(domain:api.github.com)"
+      "WebFetch(domain:api.github.com)",
+      "Bash(git fetch:*)"
     ]
   }
 }

@@ -1,10 +1,11 @@
 name: Sync Upstream & Generate Rankings
-# Trigger resync after fork detach
 
 on:
   schedule:
-    # Run daily at 20:00 UTC
-    - cron: '0 20 * * *'
+    # Co godzinę w aktywnym oknie 09:00-19:00 UTC (10:00-20:00 PL zimą)
+    - cron: '0 9-19 * * *'
+    # Raz w nocy (złapać późne commity)
+    - cron: '0 3 * * *'
   workflow_dispatch:
     inputs:
       force_generate:
@@ -16,6 +17,11 @@ on:
         description: 'Merge develop to master after successful generation (enables production deploy)'
         required: false
         default: 'true'
+        type: boolean
+      send_digest:
+        description: 'Force send daily digest email now'
+        required: false
+        default: 'false'
         type: boolean
 
 permissions:
@@ -177,34 +183,113 @@ jobs:
           git push origin master
           echo "merged=true" >> $GITHUB_OUTPUT
 
-      # Email notification - always sends status
-      - name: Send email notification
+      # Log sync result for daily digest
+      - name: Log sync result
+        if: steps.sync.outputs.has_changes == 'true'
+        run: |
+          # Switch to master to update digest log
+          git checkout master
+          git pull origin master
+
+          DIGEST_FILE=".github/sync-digest.log"
+          mkdir -p .github
+
+          # Append today's sync info
+          {
+            echo "---"
+            echo "Time: $(date -u +"%Y-%m-%d %H:%M:%S UTC")"
+            echo "Commits:"
+            echo "${{ steps.sync.outputs.upstream_commits }}" | sed 's/^/  /'
+            echo "Cups: ${{ steps.generate.outputs.cups_list }}"
+            echo ""
+          } >> "$DIGEST_FILE"
+
+          git add "$DIGEST_FILE"
+          git commit -m "Update sync digest log" || true
+          git push origin master || true
+
+      # Determine if this is digest hour (19:00 UTC = last scheduled run of the day)
+      - name: Check if digest hour and read daily log
+        id: digest_check
+        run: |
+          CURRENT_HOUR=$(date -u +"%H")
+          if [ "$CURRENT_HOUR" == "19" ] || [ "${{ github.event.inputs.send_digest }}" == "true" ]; then
+            echo "is_digest_hour=true" >> $GITHUB_OUTPUT
+          else
+            echo "is_digest_hour=false" >> $GITHUB_OUTPUT
+          fi
+
+          # Read digest log to check for changes in last 24h
+          git checkout master
+          git pull origin master
+
+          DIGEST_FILE=".github/sync-digest.log"
+
+          if [ -f "$DIGEST_FILE" ]; then
+            # Check if log has actual sync entries (not just header)
+            SYNC_COUNT=$(grep -c "^---$" "$DIGEST_FILE" 2>/dev/null || echo "0")
+
+            if [ "$SYNC_COUNT" -gt "0" ]; then
+              echo "had_changes_today=true" >> $GITHUB_OUTPUT
+              echo "sync_count=$SYNC_COUNT" >> $GITHUB_OUTPUT
+
+              # Read full log content for email
+              {
+                echo "digest_content<<EOF"
+                cat "$DIGEST_FILE"
+                echo "EOF"
+              } >> $GITHUB_OUTPUT
+            else
+              echo "had_changes_today=false" >> $GITHUB_OUTPUT
+              echo "sync_count=0" >> $GITHUB_OUTPUT
+              echo "digest_content=" >> $GITHUB_OUTPUT
+            fi
+          else
+            echo "had_changes_today=false" >> $GITHUB_OUTPUT
+            echo "sync_count=0" >> $GITHUB_OUTPUT
+            echo "digest_content=" >> $GITHUB_OUTPUT
+          fi
+
+      # Send daily digest email (only at 19:00 UTC or manual trigger)
+      - name: Send daily digest email
+        if: steps.digest_check.outputs.is_digest_hour == 'true'
         uses: dawidd6/action-send-mail@v3
         with:
           server_address: smtp.gmail.com
           server_port: 587
           username: ${{ secrets.EMAIL_USERNAME }}
           password: ${{ secrets.EMAIL_PASSWORD }}
-          subject: "${{ steps.sync.outputs.has_changes == 'true' && '✅ PvPoke: New rankings generated' || '📋 PvPoke: No upstream changes' }}"
+          subject: "📊 PvPoke Daily Digest - ${{ steps.digest_check.outputs.had_changes_today == 'true' && format('{0} sync(s) today!', steps.digest_check.outputs.sync_count) || 'No changes today' }}"
           to: ${{ secrets.NOTIFICATION_EMAIL }}
           from: PvPoke Bot <${{ secrets.EMAIL_USERNAME }}>
           body: |
-            PvPoke sync check completed.
+            PvPoke Daily Sync Digest
+            ========================
 
-            Status: ${{ steps.sync.outputs.has_changes == 'true' && 'NEW CHANGES - rankings generated' || 'No changes from upstream' }}
-            Merged to master: ${{ steps.sync.outputs.has_changes == 'true' && (github.event.inputs.merge_to_master == 'true' && 'Yes' || 'No') || 'N/A' }}
+            Status: ${{ steps.digest_check.outputs.had_changes_today == 'true' && format('✅ {0} sync(s) in the last 24 hours', steps.digest_check.outputs.sync_count) || '📋 No upstream changes in the last 24 hours' }}
 
-            ${{ steps.sync.outputs.has_changes == 'true' && '=== Upstream Commits ===' || '' }}
-            ${{ steps.sync.outputs.upstream_commits }}
+            ${{ steps.digest_check.outputs.had_changes_today == 'true' && '=== Syncs Today ===' || '' }}
+            ${{ steps.digest_check.outputs.digest_content }}
 
-            ${{ steps.sync.outputs.has_changes == 'true' && '=== Generated Cups ===' || '' }}
-            ${{ steps.generate.outputs.cups_list }}
-
-            ${{ steps.generate.outputs.summary }}
-
-            Workflow run:
-            ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+            ---
+            Sync schedule: Every hour 09:00-19:00 UTC + 03:00 UTC
+            Workflow run: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
         continue-on-error: true
+
+      # Clear digest log after sending
+      - name: Clear digest log after sending
+        if: steps.digest_check.outputs.is_digest_hour == 'true'
+        run: |
+          git checkout master
+          git pull origin master
+
+          DIGEST_FILE=".github/sync-digest.log"
+          if [ -f "$DIGEST_FILE" ]; then
+            echo "# Sync Digest Log - cleared $(date -u +"%Y-%m-%d")" > "$DIGEST_FILE"
+            git add "$DIGEST_FILE"
+            git commit -m "Clear digest log after daily email" || true
+            git push origin master || true
+          fi
 
   # Deploy to GitHub Pages (only when merged to master)
   deploy:
