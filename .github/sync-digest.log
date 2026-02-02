@@ -14,3 +14,11 @@ Cups:   - all (1500)
   - laic2025remix (1500)
   - chrono (1500)
 
+---
+Time: 2026-02-02 16:32:53 UTC
+Commits:
+  8b60bb352 Updated BF Great League
+  f1b8fe405 Rewrote moveset override implementation to decouple from ranking data
+  f9ec2f8d6 Shield matrix result fix, gamemaster and csv updates
+Cups: 
+
