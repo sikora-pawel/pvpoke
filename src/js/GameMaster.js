@@ -1132,7 +1132,7 @@ var GameMaster = (function () {
 				minStats = 0;
 			}
 
-			var bannedList = ["mewtwo","mewtwo_armored","giratina_altered","groudon","kyogre","palkia","dialga","cobalion","terrakion","virizion","tornadus_therian","tornadus_therian_xl", "landorus_therian", "reshiram", "zekrom", "kyurem", "genesect_burn", "xerneas", "thundurus_therian", "yveltal", "meloetta_aria", "zacian", "zamazenta", "zacian_hero", "zamazenta_hero", "genesect_douse", "zarude", "hoopa_unbound", "genesect_shock", "tapu_koko", "tapu_lele", "tapu_bulu", "nihilego", "genesect_chill", "solgaleo", "lunala", "keldeo_ordinary", "kyogre_primal", "groudon_primal", "zygarde_complete", "enamorus_therian", "enamorus_incarnate", "dialga_origin", "palkia_origin", "necrozma", "necrozma_dawn_wings", "necrozma_dusk_mane", "marshadow", "kyurem_black", "kyurem_white", "zacian_crowned_sword", "zamazenta_crowned_shield", "eternatus", "sinistcha", "keldeo_resolute"];
+			var bannedList = object.data.greatLeagueIneligible;
 
 			// Aggregate filters
 
@@ -1291,8 +1291,11 @@ var GameMaster = (function () {
 					if(allowed){
 
 						// If data is available, force "best" moveset
+						pokemon.weightModifier = 1;
 
-						if((rankingData)&&(overrides)){
+						// Set Pokemon moveset from existing rankings
+						if(rankingData){
+							let r = rankingData.find(ranking => rankingData.speciesId == pokemon.speciesId);
 
 							// Find Pokemon in existing rankings
 							var foundInRankings = false;
@@ -1300,23 +1303,16 @@ var GameMaster = (function () {
 								if(pokemon.speciesId == rankingData[n].speciesId){
 									foundInRankings = true;
 
-									// Sort by uses
-									var fastMoves = rankingData[n].moves.fastMoves;
-									var chargedMoves = rankingData[n].moves.chargedMoves;
+								fastMoves.sort((a,b) => (a.uses > b.uses) ? -1 : ((b.uses > a.uses) ? 1 : 0));
+								chargedMoves.sort((a,b) => (a.uses > b.uses) ? -1 : ((b.uses > a.uses) ? 1 : 0));
 
-									fastMoves.sort((a,b) => (a.uses > b.uses) ? -1 : ((b.uses > a.uses) ? 1 : 0));
-									chargedMoves.sort((a,b) => (a.uses > b.uses) ? -1 : ((b.uses > a.uses) ? 1 : 0));
+								pokemon.selectMove("fast", fastMoves[0].moveId);
+								pokemon.selectMove("charged", chargedMoves[0].moveId, 0);
 
-									pokemon.selectMove("fast", fastMoves[0].moveId);
-									pokemon.selectMove("charged", chargedMoves[0].moveId, 0);
+								
 
-									pokemon.weightModifier = 1;
-
-									if(chargedMoves.length > 1){
-										pokemon.selectMove("charged", chargedMoves[1].moveId, 1);
-									}
-
-									object.overrideMoveset(pokemon, battle.getCP(), battle.getCup().name, overrides);
+								if(chargedMoves.length > 1){
+									pokemon.selectMove("charged", chargedMoves[1].moveId, 1);
 								}
 							}
 							
@@ -1326,6 +1322,11 @@ var GameMaster = (function () {
 							}
 						} else if(overrides){
 							// Apply overrides even if no rankingData exists
+							object.overrideMoveset(pokemon, battle.getCP(), battle.getCup().name, overrides);
+						}
+
+						// Set Pokemon moveset from overrides
+						if(overrides){
 							object.overrideMoveset(pokemon, battle.getCP(), battle.getCup().name, overrides);
 						}
 
