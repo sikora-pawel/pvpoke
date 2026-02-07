@@ -1295,27 +1295,27 @@ var GameMaster = (function () {
 
 						// Set Pokemon moveset from existing rankings
 						if(rankingData){
-							let r = rankingData.find(ranking => ranking.speciesId == pokemon.speciesId);
-
 							// Find Pokemon in existing rankings
 							var foundInRankings = false;
 							for(var n = 0; n < rankingData.length; n++){
 								if(pokemon.speciesId == rankingData[n].speciesId){
 									foundInRankings = true;
 
-								fastMoves.sort((a,b) => (a.uses > b.uses) ? -1 : ((b.uses > a.uses) ? 1 : 0));
-								chargedMoves.sort((a,b) => (a.uses > b.uses) ? -1 : ((b.uses > a.uses) ? 1 : 0));
-
-								pokemon.selectMove("fast", fastMoves[0].moveId);
-								pokemon.selectMove("charged", chargedMoves[0].moveId, 0);
-
-								
-
-								if(chargedMoves.length > 1){
-									pokemon.selectMove("charged", chargedMoves[1].moveId, 1);
+								// Use the moveset field directly — it reflects the optimal moveset
+								// chosen by the standard Ranker for this specific variant
+								var moveset = rankingData[n].moveset;
+								if(moveset && moveset.length >= 2){
+									pokemon.selectMove("fast", moveset[0]);
+									pokemon.selectMove("charged", moveset[1], 0);
+									if(moveset.length > 2){
+										pokemon.selectMove("charged", moveset[2], 1);
+									}
 								}
+
+								break;
 							}
-							
+							}
+
 							// Apply overrides even if Pokemon is not in existing rankings
 							if(!foundInRankings && overrides){
 								object.overrideMoveset(pokemon, battle.getCP(), battle.getCup().name, overrides);

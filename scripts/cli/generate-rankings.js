@@ -196,10 +196,14 @@ function generateRankings(cup, cp) {
         if (fs.existsSync(existingRankingsPath)) {
             try {
                 rankingData = JSON.parse(fs.readFileSync(existingRankingsPath, 'utf8'));
+                console.log(`  Loaded existing rankings (${rankingData.length} Pokemon) for moveset selection`);
             } catch (e) {
                 console.log('  (No existing rankings data)');
             }
         }
+
+        // Pass ranking data to ranker so it can select correct movesets for _b variants
+        ranker.setRankingData(rankingData);
 
         // Initialize Pokemon list
         ranker.initPokemonList(cp);

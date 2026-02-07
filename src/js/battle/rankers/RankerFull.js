@@ -40,6 +40,11 @@ var RankerMasterFull = (function () {
 
 			var overrides = []; // Moveset override data
 
+			// Allow external callers (e.g. CLI) to set ranking data for moveset selection
+			this.setRankingData = function(data){
+				rankingData = data;
+			}
+
 			// Load existing rankings to get best movesets
 
 			this.displayRankingData = function(data, callback){
