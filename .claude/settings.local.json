@@ -6,7 +6,11 @@
       "WebFetch(domain:api.github.com)",
       "Bash(git fetch:*)",
       "WebFetch(domain:gobattlelog.com)",
-      "WebFetch(domain:github.com)"
+      "WebFetch(domain:github.com)",
+      "Bash(ls:*)",
+      "Bash(find:*)",
+      "Bash(python3:*)",
+      "Bash(node scripts/cli/generate-rankings.js:*)"
     ]
   }
 }
