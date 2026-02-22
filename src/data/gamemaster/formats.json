@@ -24,13 +24,30 @@
 		]
 	},
 	{
-		"title": "EUIC 2026 Championship Series Cup",
-		"cup": "euic2026",
+		"title": "Love Cup",
+		"cup": "love",
 		"cp": 1500,
-		"meta": "euic2026",
+		"meta": "love",
 		"showCup": true,
 		"showFormat": true,
-		"showMeta": true
+		"showMeta": true,
+		"rules": [
+			"Pokémon must be at or below 1,500 CP to enter.",
+			"Only red- or pink-colored Pokémon are eligible."
+		]
+	},
+	{
+		"title": "Mega Master League",
+		"cup": "mega",
+		"cp": 10000,
+		"meta": "mega",
+		"showCup": true,
+		"showFormat": true,
+		"showMeta": true,
+		"rules": [
+			"No CP limit.",
+			"Mega-Evolved Pokémon are allowed."
+		]
 	},
 	{
 		"title": "Battle Frontier (Majestic)",
