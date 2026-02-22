@@ -1,5 +1,29 @@
 [
 	{
+		"title": "TEST Season 22 - Toxic Cup",
+		"cup": "toxic",
+		"cp": 1500,
+		"showCup": true,
+		"showFormat": true,
+		"showMeta": false
+	},
+	{
+		"title": "TEST Season 22 - Retro Ultra",
+		"cup": "retro",
+		"cp": 2500,
+		"showCup": true,
+		"showFormat": true,
+		"showMeta": false
+	},
+	{
+		"title": "TEST Season 22 - Elemental Masters",
+		"cup": "elemental",
+		"cp": 10000,
+		"showCup": true,
+		"showFormat": true,
+		"showMeta": false
+	},
+	{
 		"title": "P!P Championship Series",
 		"cup": "championshipseries",
 		"cp": 1500,

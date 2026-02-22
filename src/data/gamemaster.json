@@ -36,6 +36,40 @@
     ],
     "cups": [
         {
+            "name": "toxic",
+            "title": "TEST Toxic Cup",
+            "include": [
+                {
+                    "filterType": "type",
+                    "name": "Type",
+                    "values": ["poison", "dark", "bug", "ghost"]
+                }
+            ],
+            "exclude": [
+                {
+                    "filterType": "tag",
+                    "values": ["mega"]
+                }
+            ]
+        },
+        {
+            "name": "elemental",
+            "title": "TEST Elemental Masters",
+            "include": [
+                {
+                    "filterType": "type",
+                    "name": "Type",
+                    "values": ["fire", "water", "grass", "electric"]
+                }
+            ],
+            "exclude": [
+                {
+                    "filterType": "tag",
+                    "values": ["mega"]
+                }
+            ]
+        },
+        {
             "name": "all",
             "title": "All Pokemon",
             "include": [],
@@ -46198,8 +46232,8 @@
             "moveId": "BODY_SLAM",
             "name": "Body Slam",
             "type": "normal",
-            "power": 55,
-            "energy": 35,
+            "power": 40,
+            "energy": 30,
             "energyGain": 0,
             "cooldown": 500,
             "archetype": "Spam/Bait",
@@ -46470,9 +46504,9 @@
             "name": "Counter",
             "abbreviation": "C",
             "type": "fighting",
-            "power": 8,
+            "power": 12,
             "energy": 0,
-            "energyGain": 6,
+            "energyGain": 7,
             "cooldown": 1000,
             "archetype": "Multipurpose",
             "turns": 2
@@ -46703,8 +46737,8 @@
             "moveId": "DRAGON_CLAW",
             "name": "Dragon Claw",
             "type": "dragon",
-            "power": 80,
-            "energy": 50,
+            "power": 65,
+            "energy": 40,
             "energyGain": 0,
             "cooldown": 500,
             "archetype": "General",
@@ -47148,8 +47182,8 @@
             "moveId": "FRENZY_PLANT",
             "name": "Frenzy Plant",
             "type": "grass",
-            "power": 100,
-            "energy": 45,
+            "power": 80,
+            "energy": 35,
             "energyGain": 0,
             "cooldown": 500,
             "archetype": "General",
@@ -47616,7 +47650,7 @@
             "moveId": "HYDRO_CANNON",
             "name": "Hydro Cannon",
             "type": "water",
-            "power": 80,
+            "power": 95,
             "energy": 40,
             "energyGain": 0,
             "cooldown": 500,
@@ -48060,8 +48094,8 @@
             "moveId": "METEOR_MASH",
             "name": "Meteor Mash",
             "type": "steel",
-            "power": 100,
-            "energy": 45,
+            "power": 120,
+            "energy": 50,
             "energyGain": 0,
             "cooldown": 500,
             "archetype": "General",
@@ -48179,9 +48213,9 @@
             "moveId": "MUD_SHOT",
             "name": "Mud Shot",
             "type": "ground",
-            "power": 4,
+            "power": 6,
             "energy": 0,
-            "energyGain": 8,
+            "energyGain": 11,
             "cooldown": 1000,
             "archetype": "Fast Charge",
             "turns": 2
@@ -48980,7 +49014,7 @@
             "name": "Shadow Ball",
             "type": "ghost",
             "power": 100,
-            "energy": 50,
+            "energy": 55,
             "energyGain": 0,
             "cooldown": 500,
             "archetype": "General",
@@ -49096,8 +49130,8 @@
             "moveId": "SKY_ATTACK",
             "name": "Sky Attack",
             "type": "flying",
-            "power": 75,
-            "energy": 50,
+            "power": 90,
+            "energy": 45,
             "energyGain": 0,
             "cooldown": 500,
             "archetype": "General",
