@@ -70,7 +70,8 @@ function loadPvPokeScripts() {
                     this.setCP = function(cp){ battle.setCP(cp); };
                     this.setCup = function(cupName){ battle.setCup(cupName); };
                     this.setRankingData = function(data){ rankingData = data; };
-                    this.setLevelCap = function(lc){ battle.setLevelCap(lc); };`
+                    this.setLevelCap = function(lc){ battle.setLevelCap(lc); };
+                    this.getPokemonList = function(){ return pokemonList; };`
                 );
             }
 
@@ -215,8 +216,20 @@ function generateScenarioRankings(cup, cp) {
             }
         }
 
+        // Build stats map from Pokemon objects
+        const statsMap = new Map();
+        const pokemonList = ranker.getPokemonList();
+        for (const pokemon of pokemonList) {
+            statsMap.set(pokemon.speciesId, {
+                product: Math.round(pokemon.stats.atk * pokemon.stats.def * pokemon.stats.hp * (1/1000)),
+                atk: Math.floor(pokemon.stats.atk * 10) / 10,
+                def: Math.floor(pokemon.stats.def * 10) / 10,
+                hp: pokemon.stats.hp
+            });
+        }
+
         // Compute overall and consistency
-        computeOverallAndConsistency(cup, cp, speciesScores);
+        computeOverallAndConsistency(cup, cp, speciesScores, statsMap);
 
         const elapsed = ((Date.now() - startTime) / 1000).toFixed(1);
         console.log(`  Done in ${elapsed}s`);
@@ -231,7 +244,7 @@ function generateScenarioRankings(cup, cp) {
  * Compute overall and consistency rankings from per-scenario scores.
  * Simplified version of RankerOverall.js logic.
  */
-function computeOverallAndConsistency(cup, cp, speciesScores) {
+function computeOverallAndConsistency(cup, cp, speciesScores, statsMap) {
     // --- Overall ---
     const overallRankings = [];
 
@@ -283,11 +296,6 @@ function computeOverallAndConsistency(cup, cp, speciesScores) {
         }
     }
 
-    const overallDir = path.join(OUTPUT_BASE, cup.cup, 'overall');
-    fs.mkdirSync(overallDir, { recursive: true });
-    fs.writeFileSync(path.join(overallDir, `rankings-${cp}.json`), JSON.stringify(overallRankings));
-    console.log(`  overall: ${overallRankings.length} Pokemon`);
-
     // --- Consistency ---
     const consistencyRankings = [];
     for (const [id, data] of speciesScores) {
@@ -319,6 +327,30 @@ function computeOverallAndConsistency(cup, cp, speciesScores) {
             r.rating = Math.floor(r.score * 10);
         }
     }
+
+    // --- Build scores arrays for overall rankings ---
+    // scores = [leads, closers, switches, chargers, attackers, consistency]
+    const consistencyMap = new Map();
+    for (const r of consistencyRankings) {
+        consistencyMap.set(r.speciesId, r.score);
+    }
+    for (const r of overallRankings) {
+        const data = speciesScores.get(r.speciesId);
+        if (data) {
+            const scenarioScores = data.scores.map(s => Math.floor(s * 10) / 10);
+            r.scores = [...scenarioScores, consistencyMap.get(r.speciesId) || 0];
+        }
+        const stats = statsMap.get(r.speciesId);
+        if (stats) {
+            r.stats = stats;
+        }
+    }
+
+    // --- Write files ---
+    const overallDir = path.join(OUTPUT_BASE, cup.cup, 'overall');
+    fs.mkdirSync(overallDir, { recursive: true });
+    fs.writeFileSync(path.join(overallDir, `rankings-${cp}.json`), JSON.stringify(overallRankings));
+    console.log(`  overall: ${overallRankings.length} Pokemon`);
 
     const consistencyDir = path.join(OUTPUT_BASE, cup.cup, 'consistency');
     fs.mkdirSync(consistencyDir, { recursive: true });
