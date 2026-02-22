@@ -45,6 +45,19 @@ var RankerMasterFull = (function () {
 				rankingData = data;
 			}
 
+			// Allow external callers (e.g. CLI) to set the cup on the internal battle
+			this.setCup = function(cupName){
+				battle.setCup(cupName);
+			}
+
+			this.setCP = function(cp){
+				battle.setCP(cp);
+			}
+
+			this.setLevelCap = function(levelCap){
+				battle.setLevelCap(levelCap);
+			}
+
 			// Load existing rankings to get best movesets
 
 			this.displayRankingData = function(data, callback){
