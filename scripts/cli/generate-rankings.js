@@ -178,16 +178,15 @@ function generateRankings(cup, cp) {
     try {
         // Get ranker instance
         const ranker = RankerMasterFull.getInstance();
-        const battle = new Battle();
         const gm = GameMaster.getInstance();
 
-        // Configure battle for this cup
-        battle.setCP(cp);
+        // Configure ranker's internal battle for this cup
+        ranker.setCP(cp);
         if (cup.cup !== 'custom') {
-            battle.setCup(cup.cup);
+            ranker.setCup(cup.cup);
         }
         if (cup.levelCap) {
-            battle.setLevelCap(cup.levelCap);
+            ranker.setLevelCap(cup.levelCap);
         }
 
         // Load existing rankings for moveset data (if available)
