@@ -172,6 +172,19 @@ function generateScenarioRankings(cup, cp) {
         ranker.setCup(cup.cup);
         if (cup.levelCap) ranker.setLevelCap(cup.levelCap);
         ranker.setRankingData(rankingData);
+
+        // Load moveset overrides (if available)
+        const overridePath = path.join(DATA_PATH, `overrides/${cup.cup}/${cp}.json`);
+        if (fs.existsSync(overridePath)) {
+            try {
+                const overrideData = JSON.parse(fs.readFileSync(overridePath, 'utf8'));
+                ranker.setMoveOverrides(cp, cup.cup, overrideData);
+                console.log(`  Loaded overrides (${overrideData.length} Pokemon)`);
+            } catch (e) {
+                console.log(`  (Failed to load overrides: ${e.message})`);
+            }
+        }
+
         ranker.initPokemonList(cp);
 
         const scenarios = gm.data.rankingScenarios;

@@ -204,6 +204,18 @@ function generateRankings(cup, cp) {
         // Pass ranking data to ranker so it can select correct movesets for _b variants
         ranker.setRankingData(rankingData);
 
+        // Load moveset overrides (if available)
+        const overridePath = path.join(DATA_PATH, `overrides/${cup.cup}/${cp}.json`);
+        if (fs.existsSync(overridePath)) {
+            try {
+                const overrideData = JSON.parse(fs.readFileSync(overridePath, 'utf8'));
+                ranker.setMoveOverrides(cp, cup.cup, overrideData);
+                console.log(`  Loaded overrides (${overrideData.length} Pokemon)`);
+            } catch (e) {
+                console.log(`  (Failed to load overrides: ${e.message})`);
+            }
+        }
+
         // Initialize Pokemon list
         ranker.initPokemonList(cp);
 

@@ -12,7 +12,9 @@
       "WebFetch(domain:github.com)",
       "Bash(wc:*)",
       "WebFetch(domain:pvpoke.com)",
-      "Bash(node:*)"
+      "Bash(node:*)",
+      "WebFetch(domain:pokemongohub.net)",
+      "WebFetch(domain:pokemongo.fandom.com)"
     ]
   }
 }
