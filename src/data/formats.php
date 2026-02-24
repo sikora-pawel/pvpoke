@@ -7,9 +7,9 @@ $formats = array (
     'cup' => 'championshipseries',
     'cp' => 1500,
     'meta' => 'championshipseries',
-    'showCup' => false,
-    'showFormat' => false,
-    'showMeta' => false,
+    'showCup' => true,
+    'showFormat' => true,
+    'showMeta' => true,
     'hideRankings' => true,
   ),
   1 => 
@@ -18,9 +18,9 @@ $formats = array (
     'cup' => 'premier',
     'cp' => 10000,
     'meta' => 'premiermaster',
-    'showCup' => false,
+    'showCup' => true,
     'showFormat' => false,
-    'showMeta' => false,
+    'showMeta' => true,
     'hideRankings' => true,
     'rules' => 
     array (
@@ -30,218 +30,6 @@ $formats = array (
   ),
   2 => 
   array (
-    'title' => 'Love Cup',
-    'cup' => 'love',
-    'cp' => 1500,
-    'meta' => 'love',
-    'showCup' => false,
-    'showFormat' => false,
-    'showMeta' => false,
-    'rules' => 
-    array (
-      0 => 'Pokémon must be at or below 1,500 CP to enter.',
-      1 => 'Only red- or pink-colored Pokémon are eligible.',
-    ),
-  ),
-  3 => 
-  array (
-    'title' => 'Mega Master League',
-    'cup' => 'mega',
-    'cp' => 10000,
-    'meta' => 'mega',
-    'showCup' => false,
-    'showFormat' => false,
-    'showMeta' => false,
-    'rules' => 
-    array (
-      0 => 'No CP limit.',
-      1 => 'Mega-Evolved Pokémon are allowed.',
-    ),
-  ),
-  4 => 
-  array (
-    'title' => 'EUIC 2026 Championship Series Cup',
-    'cup' => 'euic2026',
-    'cp' => 1500,
-    'meta' => 'euic2026',
-    'showCup' => false,
-    'showFormat' => false,
-    'showMeta' => false,
-    'rules' => 
-    array (
-      0 => 'Pokémon must be at or below 1,500 CP to enter.',
-      1 => 'Only Bug-, Dark-, Normal-, and Dragon-type Pokémon are eligible.',
-      2 => 'Fighting-, Flying-, and Steel-type Pokémon are not eligible.',
-      3 => 'Legendary Pokémon, Mythical Pokémon, Mega Pokémon, and Ultra Beasts are not eligible.',
-      4 => 'The following Pokémon will be allowed: Seaking, Politoed, Milotic, and Froslass.',
-      5 => 'The following Pokémon will not be allowed: Wigglytuff, CHansey, Crustle, Diggersby, Ribombee, Araquanid, Turtonator, Morgrem, Morpeko',
-    ),
-  ),
-  5 => 
-  array (
-    'title' => 'Battle Frontier (Majestic)',
-    'cup' => 'majestic',
-    'cp' => 1500,
-    'meta' => 'majestic',
-    'showCup' => false,
-    'showFormat' => false,
-    'showMeta' => false,
-  ),
-  6 => 
-  array (
-    'title' => 'Battle Frontier (Crucible)',
-    'cup' => 'crucible',
-    'cp' => 2500,
-    'meta' => 'crucible',
-    'showCup' => false,
-    'showFormat' => false,
-    'showMeta' => false,
-  ),
-  7 => 
-  array (
-    'title' => 'Battle Frontier (Great)',
-    'cup' => 'battlefrontiergreat',
-    'cp' => 1500,
-    'meta' => 'great',
-    'showCup' => false,
-    'showFormat' => false,
-    'showMeta' => false,
-    'hideRankings' => true,
-  ),
-  8 => 
-  array (
-    'title' => 'Battle Frontier (Master)',
-    'cup' => 'battlefrontiermaster',
-    'cp' => 10000,
-    'meta' => 'battlefrontiermaster',
-    'showCup' => false,
-    'showFormat' => false,
-    'showMeta' => false,
-  ),
-  9 => 
-  array (
-    'title' => 'Devon Amor Cup',
-    'cup' => 'amor',
-    'cp' => 1500,
-    'meta' => 'amor',
-    'showCup' => false,
-    'showFormat' => false,
-    'showMeta' => false,
-  ),
-  10 => 
-  array (
-    'title' => 'Gymbreakers LAIC 2025 Remix',
-    'cup' => 'laic2025remix',
-    'cp' => 1500,
-    'meta' => 'laic2025remix',
-    'showCup' => false,
-    'showFormat' => false,
-    'showMeta' => false,
-  ),
-  11 => 
-  array (
-    'title' => 'Zygarden Chrono Meta',
-    'cup' => 'chrono',
-    'cp' => 1500,
-    'meta' => 'chrono',
-    'showCup' => false,
-    'showFormat' => false,
-    'showMeta' => false,
-  ),
-  12 => 
-  array (
-    'title' => 'Kanto Cup',
-    'cup' => 'kanto',
-    'cp' => 1500,
-    'meta' => 'great',
-    'showCup' => true,
-    'showFormat' => true,
-    'showMeta' => true,
-    'rules' => 
-    array (
-      0 => 'Pokémon must be at or below 1,500 CP to enter.',
-      1 => 'Only Pokémon with a Pokédex number from #001 to #151 are eligible.',
-    ),
-  ),
-  13 => 
-  array (
-    'title' => 'Spring Cup',
-    'cup' => 'spring',
-    'cp' => 1500,
-    'meta' => 'spring',
-    'showCup' => true,
-    'showFormat' => true,
-    'showMeta' => true,
-    'rules' => 
-    array (
-      0 => 'Pokémon must be at or below 1,500 CP to enter.',
-      1 => 'Only Water-, Grass-, and Fairy-type Pokémon are eligible.',
-      2 => 'Jumpluff, Roserade, and Toxapex are not eligible.',
-    ),
-  ),
-  14 => 
-  array (
-    'title' => 'Jungle Cup',
-    'cup' => 'jungle',
-    'cp' => 1500,
-    'meta' => 'jungle',
-    'showCup' => true,
-    'showFormat' => true,
-    'showMeta' => true,
-    'rules' => 
-    array (
-      0 => 'Pokémon must be at or below 1,500 CP to enter.',
-      1 => 'Only Normal-, Grass-, Electric-, Poison-, Ground-, Flying-, Bug-, and Dark-type Pokémon are eligible.',
-    ),
-  ),
-  15 => 
-  array (
-    'title' => 'Electric Cup',
-    'cup' => 'electric',
-    'cp' => 1500,
-    'meta' => 'great',
-    'showCup' => true,
-    'showFormat' => true,
-    'showMeta' => true,
-    'rules' => 
-    array (
-      0 => 'Pokémon must be at or below 1,500 CP to enter.',
-      1 => 'Only Electric-type Pokémon are eligible.',
-      2 => 'Stunfisk, Heliolisk, Charjabug, and Vikavolt are not eligible.',
-    ),
-  ),
-  16 => 
-  array (
-    'title' => 'Fantasy Cup',
-    'cup' => 'fantasy',
-    'cp' => 1500,
-    'meta' => 'fantasy',
-    'showCup' => true,
-    'showFormat' => true,
-    'showMeta' => true,
-    'rules' => 
-    array (
-      0 => 'Pokémon must be at or below 1,500 CP to enter.',
-      1 => 'Only Dragon-, Steel-, and Fairy-type Pokémon are eligible.',
-    ),
-  ),
-  17 => 
-  array (
-    'title' => 'Catch Cup: Memories in Motion',
-    'cup' => 'catch',
-    'cp' => 1500,
-    'meta' => 'great',
-    'showCup' => true,
-    'showFormat' => true,
-    'showMeta' => false,
-    'rules' => 
-    array (
-      0 => 'Pokémon must be at or below 1,500 CP to enter.',
-      1 => 'Only Pokémon caught from March 3 to June 2, 2026, are eligible.',
-    ),
-  ),
-  18 => 
-  array (
     'title' => 'Little Cup',
     'cup' => 'little',
     'cp' => 500,
@@ -250,7 +38,67 @@ $formats = array (
     'showFormat' => false,
     'showMeta' => false,
   ),
-  19 => 
+  3 => 
+  array (
+    'title' => 'Catch Cup: Memories in Motion',
+    'cup' => 'catch',
+    'cp' => 1500,
+    'meta' => 'great',
+    'showCup' => true,
+    'showFormat' => true,
+    'showMeta' => true,
+  ),
+  4 => 
+  array (
+    'title' => 'Kanto Cup',
+    'cup' => 'kanto',
+    'cp' => 1500,
+    'meta' => 'kanto',
+    'showCup' => true,
+    'showFormat' => true,
+    'showMeta' => true,
+  ),
+  5 => 
+  array (
+    'title' => 'Spring Cup',
+    'cup' => 'spring',
+    'cp' => 1500,
+    'meta' => 'spring',
+    'showCup' => true,
+    'showFormat' => true,
+    'showMeta' => true,
+  ),
+  6 => 
+  array (
+    'title' => 'Jungle Cup',
+    'cup' => 'jungle',
+    'cp' => 1500,
+    'meta' => 'jungle',
+    'showCup' => true,
+    'showFormat' => true,
+    'showMeta' => true,
+  ),
+  7 => 
+  array (
+    'title' => 'Electric Cup',
+    'cup' => 'electric',
+    'cp' => 1500,
+    'meta' => 'electric',
+    'showCup' => true,
+    'showFormat' => true,
+    'showMeta' => true,
+  ),
+  8 => 
+  array (
+    'title' => 'Fantasy Cup',
+    'cup' => 'fantasy',
+    'cp' => 1500,
+    'meta' => 'fantasy',
+    'showCup' => true,
+    'showFormat' => true,
+    'showMeta' => true,
+  ),
+  9 => 
   array (
     'title' => 'Custom',
     'cup' => 'custom',
