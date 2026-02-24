@@ -5,7 +5,14 @@
       "Bash(python3:*)",
       "Bash(cd /Users/pawelsikora/pvpoke/src/data && php compile.php 2>&1)",
       "Bash(grep:*)",
-      "Bash(cd /Users/pawelsikora/pvpoke && node scripts/cli/generate-scenario-rankings.js 2>&1)"
+      "Bash(cd /Users/pawelsikora/pvpoke && node scripts/cli/generate-scenario-rankings.js 2>&1)",
+      "Bash(cd /Users/pawelsikora/pvpoke && node scripts/cli/generate-rankings.js 2>&1)",
+      "WebSearch",
+      "Bash(git:*)",
+      "WebFetch(domain:github.com)",
+      "Bash(wc:*)",
+      "WebFetch(domain:pvpoke.com)",
+      "Bash(node:*)"
     ]
   }
 }
