@@ -1,0 +1,11 @@
+{
+  "permissions": {
+    "allow": [
+      "WebFetch(domain:pokemongo.com)",
+      "Bash(python3:*)",
+      "Bash(cd /Users/pawelsikora/pvpoke/src/data && php compile.php 2>&1)",
+      "Bash(grep:*)",
+      "Bash(cd /Users/pawelsikora/pvpoke && node scripts/cli/generate-scenario-rankings.js 2>&1)"
+    ]
+  }
+}
