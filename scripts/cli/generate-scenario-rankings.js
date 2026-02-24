@@ -242,7 +242,7 @@ function generateScenarioRankings(cup, cp) {
         }
 
         // Compute overall and consistency
-        computeOverallAndConsistency(cup, cp, speciesScores, statsMap);
+        computeOverallAndConsistency(cup, cp, speciesScores, pokemonList, statsMap);
 
         const elapsed = ((Date.now() - startTime) / 1000).toFixed(1);
         console.log(`  Done in ${elapsed}s`);
@@ -255,38 +255,103 @@ function generateScenarioRankings(cup, cp) {
 
 /**
  * Compute overall and consistency rankings from per-scenario scores.
- * Simplified version of RankerOverall.js logic.
+ * Matches the real RankerOverall.js algorithm including:
+ * - Correct weighted geometric mean with max(switches, chargers)
+ * - Consistency via Pokemon.calculateConsistency()
+ * - Editor score blending (75% editor / 25% algorithmic)
+ * - Penalty for low attacker + consistency scores
  */
-function computeOverallAndConsistency(cup, cp, speciesScores, statsMap) {
+function computeOverallAndConsistency(cup, cp, speciesScores, pokemonList, statsMap) {
+    const battle = new Battle();
+    battle.setCP(cp);
+    battle.setCup(cup.cup);
+
+    // Load overrides for editor scores
+    let overrideData = null;
+    const overridePath = path.join(DATA_PATH, `overrides/${cup.cup}/${cp}.json`);
+    if (fs.existsSync(overridePath)) {
+        try {
+            overrideData = JSON.parse(fs.readFileSync(overridePath, 'utf8'));
+        } catch (e) { /* ignore */ }
+    }
+    const overrideMap = new Map();
+    if (overrideData) {
+        for (const o of overrideData) {
+            overrideMap.set(o.speciesId, o);
+        }
+    }
+
     // --- Overall ---
     const overallRankings = [];
 
     for (const [id, data] of speciesScores) {
+        // scores order: [leads, closers, switches, chargers, attackers]
         const scores = data.scores;
-        if (scores.length < 2) continue;
+        if (scores.length < 5) continue;
 
-        // Sort scores descending for weighted geometric mean
-        const sorted = [...scores].sort((a, b) => b - a);
+        // Calculate consistency via Pokemon.calculateConsistency()
+        let consistencyScore = 100;
+        try {
+            const pokemon = new Pokemon(data.speciesId, 0, battle);
+            if (pokemon.initialize) {
+                pokemon.initialize(true);
+                pokemon.selectMove("fast", data.moveset[0]);
+                pokemon.selectMove("charged", data.moveset[1], 0);
+                if (data.moveset.length > 2) {
+                    pokemon.selectMove("charged", data.moveset[2], 1);
+                }
+                consistencyScore = pokemon.calculateConsistency();
+            }
+        } catch (e) {
+            // Fallback: use simple average
+            consistencyScore = scores.reduce((a, b) => a + b, 0) / scores.length;
+        }
 
-        // Weighted geometric mean (approximation of RankerOverall formula)
-        // Top scores weighted more heavily: exponents 12, 6, 4, 2
-        let overall;
-        if (sorted.length >= 4) {
+        // RankerOverall formula: take 4 scores from 5 scenarios
+        // leads, closers, max(switches, chargers), attackers → sort descending
+        const fourScores = [
+            scores[0],                          // leads
+            scores[1],                          // closers
+            Math.max(scores[2], scores[3]),     // max(switches, chargers)
+            scores[4]                           // attackers
+        ];
+        fourScores.sort((a, b) => b - a);
+
+        // Weighted geometric mean: s[0]^12 * s[1]^6 * s[2]^4 * s[3]^2 * consistency^2 → ^(1/26)
+        let overall = Math.pow(
+            Math.pow(fourScores[0], 12) *
+            Math.pow(fourScores[1], 6) *
+            Math.pow(fourScores[2], 4) *
+            Math.pow(fourScores[3], 2) *
+            Math.pow(consistencyScore, 2),
+            1/26
+        );
+
+        // Penalty for low attackers AND low consistency
+        if (scores[4] <= 75 && consistencyScore <= 75) {
             overall = Math.pow(
-                Math.pow(Math.max(sorted[0], 0.1), 12) *
-                Math.pow(Math.max(sorted[1], 0.1), 6) *
-                Math.pow(Math.max(sorted[2], 0.1), 4) *
-                Math.pow(Math.max(sorted[3], 0.1), 2),
-                1/24
-            );
-        } else {
-            overall = Math.pow(
-                scores.reduce((acc, s) => acc * Math.max(s, 0.1), 1),
-                1/scores.length
+                Math.pow(overall, 14) *
+                Math.pow(scores[4], 1) *
+                Math.pow(consistencyScore, 1),
+                1/16
             );
         }
 
-        overallRankings.push({
+        // Apply editor score blending (75% editor / 25% algorithmic)
+        const override = overrideMap.get(data.speciesId);
+        let editorScore = null;
+        let editorNotes = null;
+        if (override) {
+            if (override.editorScore) {
+                editorScore = override.editorScore;
+                overall = (overall * 0.25) + (editorScore * 0.75);
+            }
+            if (override.editorNotes) {
+                editorNotes = override.editorNotes;
+            }
+        }
+
+        const entry = {
             speciesId: data.speciesId,
             speciesName: data.speciesName,
             rating: Math.floor(overall * 10),
@@ -294,68 +359,44 @@ function computeOverallAndConsistency(cup, cp, speciesScores, statsMap) {
             moveset: data.moveset,
             matchups: data.matchups || [],
             counters: data.counters || [],
-            moves: data.moves
-        });
+            moves: data.moves,
+            scores: [
+                ...scores.map(s => Math.floor(s * 10) / 10),
+                Math.floor(consistencyScore * 10) / 10
+            ]
+        };
+
+        if (editorScore) entry.editorScore = editorScore;
+        if (editorNotes) entry.editorNotes = editorNotes;
+
+        const stats = statsMap.get(data.speciesId);
+        if (stats) entry.stats = stats;
+
+        overallRankings.push(entry);
     }
 
     overallRankings.sort((a, b) => b.score - a.score);
 
-    // Scale to 0-100
-    if (overallRankings.length > 0) {
-        const highest = overallRankings[0].score;
-        for (const r of overallRankings) {
-            r.score = Math.floor((r.score / highest) * 1000) / 10;
-            r.rating = Math.floor(r.score * 10);
-        }
-    }
-
-    // --- Consistency ---
-    const consistencyRankings = [];
-    for (const [id, data] of speciesScores) {
-        const scores = data.scores;
-        if (scores.length < 2) continue;
-
-        const avg = scores.reduce((a, b) => a + b, 0) / scores.length;
-        const variance = scores.reduce((a, s) => a + Math.pow(s - avg, 2), 0) / scores.length;
-        const consistency = Math.max(0, avg - Math.sqrt(variance) * 0.5);
-
-        consistencyRankings.push({
-            speciesId: data.speciesId,
-            speciesName: data.speciesName,
-            rating: Math.floor(consistency * 10),
-            score: Math.floor(consistency * 10) / 10,
-            moveset: data.moveset,
-            matchups: data.matchups || [],
-            counters: data.counters || [],
-            moves: data.moves
-        });
-    }
+    // --- Consistency rankings (from calculateConsistency scores already computed) ---
+    const consistencyRankings = overallRankings.map(r => ({
+        speciesId: r.speciesId,
+        speciesName: r.speciesName,
+        rating: 0,
+        score: r.scores[5], // consistency is the 6th element
+        moveset: r.moveset,
+        matchups: r.matchups,
+        counters: r.counters,
+        moves: r.moves
+    }));
 
     consistencyRankings.sort((a, b) => b.score - a.score);
 
+    // Scale consistency to 0-100
     if (consistencyRankings.length > 0) {
         const highest = consistencyRankings[0].score;
         for (const r of consistencyRankings) {
-            r.score = Math.floor((r.score / highest) * 1000) / 10;
+            r.score = highest > 0 ? Math.floor((r.score / highest) * 1000) / 10 : 0;
             r.rating = Math.floor(r.score * 10);
-        }
-    }
-
-    // --- Build scores arrays for overall rankings ---
-    // scores = [leads, closers, switches, chargers, attackers, consistency]
-    const consistencyMap = new Map();
-    for (const r of consistencyRankings) {
-        consistencyMap.set(r.speciesId, r.score);
-    }
-    for (const r of overallRankings) {
-        const data = speciesScores.get(r.speciesId);
-        if (data) {
-            const scenarioScores = data.scores.map(s => Math.floor(s * 10) / 10);
-            r.scores = [...scenarioScores, consistencyMap.get(r.speciesId) || 0];
-        }
-        const stats = statsMap.get(r.speciesId);
-        if (stats) {
-            r.stats = stats;
         }
     }
 
