@@ -34,9 +34,9 @@ $formats = array (
     'cup' => 'love',
     'cp' => 1500,
     'meta' => 'love',
-    'showCup' => true,
-    'showFormat' => true,
-    'showMeta' => true,
+    'showCup' => false,
+    'showFormat' => false,
+    'showMeta' => false,
     'rules' => 
     array (
       0 => 'Pokémon must be at or below 1,500 CP to enter.',
@@ -83,9 +83,9 @@ $formats = array (
     'cup' => 'majestic',
     'cp' => 1500,
     'meta' => 'majestic',
-    'showCup' => true,
-    'showFormat' => true,
-    'showMeta' => true,
+    'showCup' => false,
+    'showFormat' => false,
+    'showMeta' => false,
   ),
   6 => 
   array (
@@ -93,9 +93,9 @@ $formats = array (
     'cup' => 'crucible',
     'cp' => 2500,
     'meta' => 'crucible',
-    'showCup' => true,
-    'showFormat' => true,
-    'showMeta' => true,
+    'showCup' => false,
+    'showFormat' => false,
+    'showMeta' => false,
   ),
   7 => 
   array (
@@ -114,9 +114,9 @@ $formats = array (
     'cup' => 'battlefrontiermaster',
     'cp' => 10000,
     'meta' => 'battlefrontiermaster',
-    'showCup' => true,
-    'showFormat' => true,
-    'showMeta' => true,
+    'showCup' => false,
+    'showFormat' => false,
+    'showMeta' => false,
   ),
   9 => 
   array (
@@ -124,9 +124,9 @@ $formats = array (
     'cup' => 'amor',
     'cp' => 1500,
     'meta' => 'amor',
-    'showCup' => true,
-    'showFormat' => true,
-    'showMeta' => true,
+    'showCup' => false,
+    'showFormat' => false,
+    'showMeta' => false,
   ),
   10 => 
   array (
@@ -134,9 +134,9 @@ $formats = array (
     'cup' => 'laic2025remix',
     'cp' => 1500,
     'meta' => 'laic2025remix',
-    'showCup' => true,
-    'showFormat' => true,
-    'showMeta' => true,
+    'showCup' => false,
+    'showFormat' => false,
+    'showMeta' => false,
   ),
   11 => 
   array (
@@ -144,11 +144,103 @@ $formats = array (
     'cup' => 'chrono',
     'cp' => 1500,
     'meta' => 'chrono',
+    'showCup' => false,
+    'showFormat' => false,
+    'showMeta' => false,
+  ),
+  12 => 
+  array (
+    'title' => 'Kanto Cup',
+    'cup' => 'kanto',
+    'cp' => 1500,
+    'meta' => 'great',
     'showCup' => true,
     'showFormat' => true,
     'showMeta' => true,
+    'rules' => 
+    array (
+      0 => 'Pokémon must be at or below 1,500 CP to enter.',
+      1 => 'Only Pokémon with a Pokédex number from #001 to #151 are eligible.',
+    ),
   ),
-  12 => 
+  13 => 
+  array (
+    'title' => 'Spring Cup',
+    'cup' => 'spring',
+    'cp' => 1500,
+    'meta' => 'spring',
+    'showCup' => true,
+    'showFormat' => true,
+    'showMeta' => true,
+    'rules' => 
+    array (
+      0 => 'Pokémon must be at or below 1,500 CP to enter.',
+      1 => 'Only Water-, Grass-, and Fairy-type Pokémon are eligible.',
+      2 => 'Jumpluff, Roserade, and Toxapex are not eligible.',
+    ),
+  ),
+  14 => 
+  array (
+    'title' => 'Jungle Cup',
+    'cup' => 'jungle',
+    'cp' => 1500,
+    'meta' => 'jungle',
+    'showCup' => true,
+    'showFormat' => true,
+    'showMeta' => true,
+    'rules' => 
+    array (
+      0 => 'Pokémon must be at or below 1,500 CP to enter.',
+      1 => 'Only Normal-, Grass-, Electric-, Poison-, Ground-, Flying-, Bug-, and Dark-type Pokémon are eligible.',
+    ),
+  ),
+  15 => 
+  array (
+    'title' => 'Electric Cup',
+    'cup' => 'electric',
+    'cp' => 1500,
+    'meta' => 'great',
+    'showCup' => true,
+    'showFormat' => true,
+    'showMeta' => true,
+    'rules' => 
+    array (
+      0 => 'Pokémon must be at or below 1,500 CP to enter.',
+      1 => 'Only Electric-type Pokémon are eligible.',
+      2 => 'Stunfisk, Heliolisk, Charjabug, and Vikavolt are not eligible.',
+    ),
+  ),
+  16 => 
+  array (
+    'title' => 'Fantasy Cup',
+    'cup' => 'fantasy',
+    'cp' => 1500,
+    'meta' => 'fantasy',
+    'showCup' => true,
+    'showFormat' => true,
+    'showMeta' => true,
+    'rules' => 
+    array (
+      0 => 'Pokémon must be at or below 1,500 CP to enter.',
+      1 => 'Only Dragon-, Steel-, and Fairy-type Pokémon are eligible.',
+    ),
+  ),
+  17 => 
+  array (
+    'title' => 'Catch Cup: Memories in Motion',
+    'cup' => 'catch',
+    'cp' => 1500,
+    'meta' => 'great',
+    'showCup' => true,
+    'showFormat' => true,
+    'showMeta' => false,
+    'rules' => 
+    array (
+      0 => 'Pokémon must be at or below 1,500 CP to enter.',
+      1 => 'Only Pokémon caught from March 3 to June 2, 2026, are eligible.',
+    ),
+  ),
+  18 => 
   array (
     'title' => 'Little Cup',
     'cup' => 'little',
@@ -158,17 +250,7 @@ $formats = array (
     'showFormat' => false,
     'showMeta' => false,
   ),
-  13 => 
-  array (
-    'title' => 'Catch Cup',
-    'cup' => 'catch',
-    'cp' => 1500,
-    'meta' => 'great',
-    'showCup' => false,
-    'showFormat' => false,
-    'showMeta' => false,
-  ),
-  14 => 
+  19 => 
   array (
     'title' => 'Custom',
     'cup' => 'custom',

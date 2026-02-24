@@ -28,9 +28,9 @@
 		"cup": "love",
 		"cp": 1500,
 		"meta": "love",
-		"showCup": true,
-		"showFormat": true,
-		"showMeta": true,
+		"showCup": false,
+		"showFormat": false,
+		"showMeta": false,
 		"rules": [
 			"Pokémon must be at or below 1,500 CP to enter.",
 			"Only red- or pink-colored Pokémon are eligible."
@@ -71,18 +71,18 @@
 		"cup": "majestic",
 		"cp": 1500,
 		"meta": "majestic",
-		"showCup": true,
-		"showFormat": true,
-		"showMeta": true
+		"showCup": false,
+		"showFormat": false,
+		"showMeta": false
 	},
 	{
 		"title": "Battle Frontier (Crucible)",
 		"cup": "crucible",
 		"cp": 2500,
 		"meta": "crucible",
-		"showCup": true,
-		"showFormat": true,
-		"showMeta": true
+		"showCup": false,
+		"showFormat": false,
+		"showMeta": false
 	},
 	{
 		"title": "Battle Frontier (Great)",
@@ -99,51 +99,122 @@
 		"cup": "battlefrontiermaster",
 		"cp": 10000,
 		"meta": "battlefrontiermaster",
-		"showCup": true,
-		"showFormat": true,
-		"showMeta": true
+		"showCup": false,
+		"showFormat": false,
+		"showMeta": false
 	},
 	{
 		"title": "Devon Amor Cup",
 		"cup": "amor",
 		"cp": 1500,
 		"meta": "amor",
-		"showCup": true,
-		"showFormat": true,
-		"showMeta": true
+		"showCup": false,
+		"showFormat": false,
+		"showMeta": false
 	},
 	{
 		"title": "Gymbreakers LAIC 2025 Remix",
 		"cup": "laic2025remix",
 		"cp": 1500,
 		"meta": "laic2025remix",
-		"showCup": true,
-		"showFormat": true,
-		"showMeta": true
+		"showCup": false,
+		"showFormat": false,
+		"showMeta": false
 	},
 	{
 		"title": "Zygarden Chrono Meta",
 		"cup": "chrono",
 		"cp": 1500,
 		"meta": "chrono",
+		"showCup": false,
+		"showFormat": false,
+		"showMeta": false
+	},
+	{
+		"title": "Kanto Cup",
+		"cup": "kanto",
+		"cp": 1500,
+		"meta": "great",
 		"showCup": true,
 		"showFormat": true,
-		"showMeta": true
+		"showMeta": true,
+		"rules": [
+			"Pokémon must be at or below 1,500 CP to enter.",
+			"Only Pokémon with a Pokédex number from #001 to #151 are eligible."
+		]
+	},
+	{
+		"title": "Spring Cup",
+		"cup": "spring",
+		"cp": 1500,
+		"meta": "spring",
+		"showCup": true,
+		"showFormat": true,
+		"showMeta": true,
+		"rules": [
+			"Pokémon must be at or below 1,500 CP to enter.",
+			"Only Water-, Grass-, and Fairy-type Pokémon are eligible.",
+			"Jumpluff, Roserade, and Toxapex are not eligible."
+		]
+	},
+	{
+		"title": "Jungle Cup",
+		"cup": "jungle",
+		"cp": 1500,
+		"meta": "jungle",
+		"showCup": true,
+		"showFormat": true,
+		"showMeta": true,
+		"rules": [
+			"Pokémon must be at or below 1,500 CP to enter.",
+			"Only Normal-, Grass-, Electric-, Poison-, Ground-, Flying-, Bug-, and Dark-type Pokémon are eligible."
+		]
+	},
+	{
+		"title": "Electric Cup",
+		"cup": "electric",
+		"cp": 1500,
+		"meta": "great",
+		"showCup": true,
+		"showFormat": true,
+		"showMeta": true,
+		"rules": [
+			"Pokémon must be at or below 1,500 CP to enter.",
+			"Only Electric-type Pokémon are eligible.",
+			"Stunfisk, Heliolisk, Charjabug, and Vikavolt are not eligible."
+		]
+	},
+	{
+		"title": "Fantasy Cup",
+		"cup": "fantasy",
+		"cp": 1500,
+		"meta": "fantasy",
+		"showCup": true,
+		"showFormat": true,
+		"showMeta": true,
+		"rules": [
+			"Pokémon must be at or below 1,500 CP to enter.",
+			"Only Dragon-, Steel-, and Fairy-type Pokémon are eligible."
+		]
+	},
+	{
+		"title": "Catch Cup: Memories in Motion",
+		"cup": "catch",
+		"cp": 1500,
+		"meta": "great",
+		"showCup": true,
+		"showFormat": true,
+		"showMeta": false,
+		"rules": [
+			"Pokémon must be at or below 1,500 CP to enter.",
+			"Only Pokémon caught from March 3 to June 2, 2026, are eligible."
+		]
 	},
 	{
 		"title": "Little Cup",
 		"cup": "little",
 		"cp": 500,
 		"meta": "little",
-		"showCup": false,
-		"showFormat": false,
-		"showMeta": false
-	},
-	{
-		"title": "Catch Cup",
-		"cup": "catch",
-		"cp": 1500,
-		"meta": "great",
 		"showCup": false,
 		"showFormat": false,
 		"showMeta": false
