@@ -3,33 +3,6 @@
 $formats = array (
   0 => 
   array (
-    'title' => 'P!P Championship Series',
-    'cup' => 'championshipseries',
-    'cp' => 1500,
-    'meta' => 'championshipseries',
-    'showCup' => true,
-    'showFormat' => true,
-    'showMeta' => true,
-    'hideRankings' => true,
-  ),
-  1 => 
-  array (
-    'title' => 'Master Premier Cup',
-    'cup' => 'premier',
-    'cp' => 10000,
-    'meta' => 'premiermaster',
-    'showCup' => true,
-    'showFormat' => false,
-    'showMeta' => true,
-    'hideRankings' => true,
-    'rules' => 
-    array (
-      0 => 'No CP limit.',
-      1 => 'Legendary Pokémon, Mythical Pokémon, and Ultra Beasts are not eligible.',
-    ),
-  ),
-  2 => 
-  array (
     'title' => 'Little Cup',
     'cup' => 'little',
     'cp' => 500,
@@ -38,7 +11,7 @@ $formats = array (
     'showFormat' => false,
     'showMeta' => false,
   ),
-  3 => 
+  1 => 
   array (
     'title' => 'Catch Cup: Memories in Motion',
     'cup' => 'catch',
@@ -48,7 +21,7 @@ $formats = array (
     'showFormat' => true,
     'showMeta' => true,
   ),
-  4 => 
+  2 => 
   array (
     'title' => 'Kanto Cup',
     'cup' => 'kanto',
@@ -58,7 +31,7 @@ $formats = array (
     'showFormat' => true,
     'showMeta' => true,
   ),
-  5 => 
+  3 => 
   array (
     'title' => 'Spring Cup',
     'cup' => 'spring',
@@ -68,7 +41,7 @@ $formats = array (
     'showFormat' => true,
     'showMeta' => true,
   ),
-  6 => 
+  4 => 
   array (
     'title' => 'Jungle Cup',
     'cup' => 'jungle',
@@ -78,7 +51,7 @@ $formats = array (
     'showFormat' => true,
     'showMeta' => true,
   ),
-  7 => 
+  5 => 
   array (
     'title' => 'Electric Cup',
     'cup' => 'electric',
@@ -88,7 +61,7 @@ $formats = array (
     'showFormat' => true,
     'showMeta' => true,
   ),
-  8 => 
+  6 => 
   array (
     'title' => 'Fantasy Cup',
     'cup' => 'fantasy',
@@ -98,7 +71,7 @@ $formats = array (
     'showFormat' => true,
     'showMeta' => true,
   ),
-  9 => 
+  7 => 
   array (
     'title' => 'Custom',
     'cup' => 'custom',
