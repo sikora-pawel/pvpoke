@@ -4,7 +4,7 @@
 		"cup": "championshipseries",
 		"cp": 1500,
 		"meta": "championshipseries",
-		"showCup": false,
+		"showCup": true,
 		"showFormat": true,
 		"showMeta": true,
 		"hideRankings": true
@@ -136,7 +136,7 @@
 		"cup": "custom",
 		"cp": 1500,
 		"meta": "great",
-		"showCup": false,
+		"showCup": true,
 		"showFormat": true,
 		"showMeta": false
 	}
