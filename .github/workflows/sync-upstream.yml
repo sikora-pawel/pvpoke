@@ -104,9 +104,9 @@ jobs:
         run: |
           echo "Merging upstream changes into develop..."
 
-          # Merge upstream, preferring our changes for conflicts in rankings
+          # Merge upstream, preferring upstream for conflicts (upstream is authoritative for data)
           git merge upstream/master -m "Merge upstream pvpoke changes" \
-            --strategy-option=ours \
+            --strategy-option=theirs \
             --allow-unrelated-histories || true
 
           # Save the synced commit hash
