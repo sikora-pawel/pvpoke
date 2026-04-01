@@ -37578,6 +37578,7 @@
           "formChange": {
             "type": "set",
             "trigger": "none",
+            "alternativeFormId": "mimikyu",
             "resetOnSwitch": false
         },
         "buddyDistance": 5,
