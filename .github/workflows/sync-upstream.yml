@@ -114,6 +114,17 @@ jobs:
           git add .last-upstream-sync
           git commit -m "Update last upstream sync marker" || true
 
+      - name: Patch gamemaster data
+        if: steps.sync.outputs.has_changes == 'true'
+        run: |
+          python3 scripts/patch-gamemaster.py
+          if git diff --quiet; then
+            echo "No patches needed"
+          else
+            git add -A
+            git commit -m "Auto-patch gamemaster data (post-upstream)"
+          fi
+
       - name: Setup Node.js
         if: steps.sync.outputs.has_changes == 'true'
         uses: actions/setup-node@v4
