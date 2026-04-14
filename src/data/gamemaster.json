@@ -1,5 +1,5 @@
 {
-    "timestamp": "2026-04-11 16:16:16",
+    "timestamp": "2026-04-14 04:15:20",
     "id": "gamemaster",
     "title": "Default",
     "settings": {
@@ -39943,7 +39943,7 @@
             },
             "buddyDistance": 3,
             "thirdMoveCost": 50000,
-            "released": false,
+            "released": true,
             "family": {
                 "id": "FAMILY_SILICOBRA",
                 "evolutions": ["sandaconda"]
@@ -39968,7 +39968,7 @@
             },
             "buddyDistance": 3,
             "thirdMoveCost": 50000,
-            "released": false,
+            "released": true,
             "family": {
                 "id": "FAMILY_SILICOBRA",
                 "parent": "silicobra"
