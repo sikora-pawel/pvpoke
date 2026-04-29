@@ -1,0 +1,63 @@
+name: Sync pvpoke-re i18n
+
+on:
+  schedule:
+    # 06:00 UTC every Monday.
+    - cron: '0 6 * * 1'
+  workflow_dispatch:
+    inputs:
+      force_commit:
+        description: 'Commit even if no diff is detected'
+        required: false
+        default: 'false'
+        type: boolean
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout master
+        uses: actions/checkout@v4
+        with:
+          ref: master
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Configure Git
+        run: |
+          git config user.name "GitHub Actions Bot"
+          git config user.email "actions@github.com"
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Run pvpoke-re scraper
+        run: python3 scripts/scrape_pvpoke_re.py
+
+      - name: Detect changes
+        id: changes
+        run: |
+          if git diff --quiet src/data/i18n/; then
+            echo "has_changes=false" >> $GITHUB_OUTPUT
+          else
+            echo "has_changes=true" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Commit i18n updates
+        if: steps.changes.outputs.has_changes == 'true' || github.event.inputs.force_commit == 'true'
+        run: |
+          git add src/data/i18n/
+          git commit -m "Auto-update pvpoke-re i18n ($(date -u +%Y-%m-%d))
+
+          Co-Authored-By: GitHub Actions <actions@github.com>"
+          git push origin master
+
+      - name: Log no-op
+        if: steps.changes.outputs.has_changes == 'false' && github.event.inputs.force_commit != 'true'
+        run: echo "No i18n changes today, skipping commit."

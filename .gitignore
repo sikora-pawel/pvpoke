@@ -1,3 +1,4 @@
 src/modules/config.php
 src/articles/article-assets
 .claude/settings.local.json
+scripts/.cache/
