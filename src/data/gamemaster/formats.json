@@ -101,19 +101,19 @@
 		"showMeta": true
 	},
 	{
-		"title": "Devon Equinox Cup",
-		"cup": "equinox",
+		"title": "Devon Maelstrom Cup",
+		"cup": "maelstrom",
 		"cp": 1500,
-		"meta": "equinox",
+		"meta": "maelstrom",
 		"showCup": true,
 		"showFormat": true,
 		"showMeta": true
 	},
 	{
-		"title": "Devon Maelstrom Cup",
-		"cup": "maelstrom",
+		"title": "Devon Cosy Cup",
+		"cup": "cosy",
 		"cp": 1500,
-		"meta": "maelstrom",
+		"meta": "cosy",
 		"showCup": true,
 		"showFormat": true,
 		"showMeta": true
