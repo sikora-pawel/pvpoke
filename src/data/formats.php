@@ -117,20 +117,20 @@ $formats = array (
   ),
   9 => 
   array (
-    'title' => 'Devon Equinox Cup',
-    'cup' => 'equinox',
+    'title' => 'Devon Maelstrom Cup',
+    'cup' => 'maelstrom',
     'cp' => 1500,
-    'meta' => 'equinox',
+    'meta' => 'maelstrom',
     'showCup' => true,
     'showFormat' => true,
     'showMeta' => true,
   ),
   10 => 
   array (
-    'title' => 'Devon Maelstrom Cup',
-    'cup' => 'maelstrom',
+    'title' => 'Devon Cosy Cup',
+    'cup' => 'cosy',
     'cp' => 1500,
-    'meta' => 'maelstrom',
+    'meta' => 'cosy',
     'showCup' => true,
     'showFormat' => true,
     'showMeta' => true,
