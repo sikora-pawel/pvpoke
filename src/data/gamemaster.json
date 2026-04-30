@@ -1,5 +1,5 @@
 {
-    "timestamp": "2026-04-29 01:55:04",
+    "timestamp": "2026-04-30 02:56:27",
     "id": "gamemaster",
     "title": "Default",
     "settings": {
@@ -594,6 +594,15 @@
             "cup": "battlefrontiermaster",
             "cp": 10000,
             "meta": "battlefrontiermaster",
+            "showCup": true,
+            "showFormat": true,
+            "showMeta": true
+        },
+        {
+            "title": "Devon Equinox Cup",
+            "cup": "equinox",
+            "cp": 1500,
+            "meta": "equinox",
             "showCup": true,
             "showFormat": true,
             "showMeta": true
