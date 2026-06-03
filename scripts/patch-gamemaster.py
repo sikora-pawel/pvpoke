@@ -8,13 +8,44 @@ Fixes known data issues that would break app deserialization.
 
 import json
 import os
+import re
 
 DATA_DIR = os.path.join(os.path.dirname(__file__), '..', 'src', 'data')
+
+
+def _collapse_scalar_arrays(text):
+    """Collapse innermost arrays of scalars onto one line, matching the source
+    style (e.g. "buffs": [0, -2]) instead of json's one-element-per-line output."""
+    def repl(m):
+        items = [tok.strip() for tok in m.group(0)[1:-1].split(',')]
+        return '[' + ', '.join(tok for tok in items if tok) + ']'
+    # Innermost arrays only: no nested brackets/braces inside.
+    return re.sub(r'\[[^\[\]{}]*\]', repl, text)
+
+
+def write_gamemaster_json(filepath, payload):
+    """Write JSON preserving source style: minified for *.min.*, otherwise
+    4-space indent with scalar arrays kept inline."""
+    is_minified = '.min.' in os.path.basename(filepath)
+    with open(filepath, 'w') as f:
+        if is_minified:
+            json.dump(payload, f, separators=(',', ':'))
+        else:
+            f.write(_collapse_scalar_arrays(json.dumps(payload, indent=4)))
+        f.write('\n')
 
 GAMEMASTER_FILES = [
     os.path.join(DATA_DIR, 'gamemaster', 'pokemon.json'),
     os.path.join(DATA_DIR, 'gamemaster.json'),
     os.path.join(DATA_DIR, 'gamemaster.min.json'),
+]
+
+# Files containing the moves list. The two wrappers nest it under 'moves';
+# gamemaster/moves.json is a plain list.
+MOVES_FILES = [
+    os.path.join(DATA_DIR, 'gamemaster.json'),
+    os.path.join(DATA_DIR, 'gamemaster.min.json'),
+    os.path.join(DATA_DIR, 'gamemaster', 'moves.json'),
 ]
 
 
@@ -35,13 +66,27 @@ def save_pokemon(filepath, pokemon_list, wrapper):
     else:
         payload = pokemon_list
 
-    is_minified = '.min.' in os.path.basename(filepath)
-    with open(filepath, 'w') as f:
-        if is_minified:
-            json.dump(payload, f, separators=(',', ':'))
-        else:
-            json.dump(payload, f, indent=4)
-        f.write('\n')
+    write_gamemaster_json(filepath, payload)
+
+
+def load_moves(filepath):
+    """Load moves list from a gamemaster file (plain list or nested under 'moves' key)."""
+    with open(filepath) as f:
+        data = json.load(f)
+    if isinstance(data, list):
+        return data, None
+    return data['moves'], data
+
+
+def save_moves(filepath, moves_list, wrapper):
+    """Save moves list back, preserving original format."""
+    if wrapper is not None:
+        wrapper['moves'] = moves_list
+        payload = wrapper
+    else:
+        payload = moves_list
+
+    write_gamemaster_json(filepath, payload)
 
 
 def patch_formchange_missing_alternative_form_id(pokemon_list):
@@ -79,8 +124,42 @@ def patch_formchange_missing_alternative_form_id(pokemon_list):
     return patched
 
 
+def dedupe_moves(moves_list):
+    """Remove duplicate moveId entries that crash the app's Dictionary(uniqueKeysWithValues:).
+
+    Keeps the richest entry per moveId (most keys); ties keep the first occurrence.
+    Preserves original ordering of the kept entries.
+    """
+    # Pick which index to keep for each moveId
+    keep_for_id = {}
+    for i, m in enumerate(moves_list):
+        mid = m.get('moveId')
+        if mid is None:
+            continue
+        if mid not in keep_for_id or len(m) > len(moves_list[keep_for_id[mid]]):
+            keep_for_id[mid] = i
+
+    keep_indices = set(keep_for_id.values())
+    removed = 0
+    deduped = []
+    for i, m in enumerate(moves_list):
+        mid = m.get('moveId')
+        if mid is None or i in keep_indices:
+            deduped.append(m)
+        else:
+            print(f"  Removed duplicate move {mid} (idx {i}, {len(m)} keys)")
+            removed += 1
+
+    moves_list[:] = deduped
+    return removed
+
+
 PATCHES = [
     ("formChange missing alternativeFormId", patch_formchange_missing_alternative_form_id),
+]
+
+MOVES_PATCHES = [
+    ("duplicate moveId", dedupe_moves),
 ]
 
 
@@ -103,6 +182,24 @@ def main():
 
         if file_patched > 0:
             save_pokemon(filepath, pokemon_list, wrapper)
+            total_patched += file_patched
+
+    for filepath in MOVES_FILES:
+        if not os.path.exists(filepath):
+            continue
+
+        print(f"Checking {os.path.relpath(filepath, DATA_DIR)} (moves)...")
+        moves_list, wrapper = load_moves(filepath)
+
+        file_patched = 0
+        for name, patch_fn in MOVES_PATCHES:
+            count = patch_fn(moves_list)
+            if count > 0:
+                print(f"  [{name}]: {count} fix(es)")
+                file_patched += count
+
+        if file_patched > 0:
+            save_moves(filepath, moves_list, wrapper)
             total_patched += file_patched
 
     if total_patched > 0:
