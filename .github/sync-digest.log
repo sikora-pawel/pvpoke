@@ -65,3 +65,19 @@ Cups:   - all (1500)
   - battlefrontiermaster (10000)
   - cosy (1500)
 
+---
+Time: 2026-06-09 07:02:01 UTC
+Commits:
+  481ee7d77 Updated GL editor scores, weightings, and meta groups
+  c2bf3b8c4 Merge pull request #373 from crsiebler/fix/shadow-krabby-kingler-gamemaster
+  3de68b145 fix(data): add Shadow Krabby and Kingler
+Cups:   - all (1500)
+  - all (2500)
+  - all (10000)
+  - naic2026 (1500)
+  - bayou (1500)
+  - spellcraft (1500)
+  - bfretro (2500)
+  - battlefrontiermaster (10000)
+  - cosy (1500)
+
