@@ -1,4 +1,6 @@
 {
+  "bastille": "Devon Bastille Cup",
+  "bastille_1500": "Devon Bastille Cup",
   "battlefrontiermaster": "Battle Frontier (Master)",
   "battlefrontiermaster_10000": "Battle Frontier (Master)",
   "bayou": "Battle Frontier (Bayou Cup)",
@@ -9,16 +11,18 @@
   "catch_1500": "Coupe Attrape (Ligue Super)",
   "championshipseries": "Coupe Championnats",
   "championshipseries_1500": "Coupe Championnats",
-  "cosy": "Devon Cosy Cup",
-  "cosy_1500": "Devon Cosy Cup",
   "equinox": "Devon Equinox Cup",
   "equinox_1500": "Devon Equinox Cup",
   "little": "Coupe des Jeunes",
   "little_500": "Coupe des Jeunes",
+  "mega": "Ligue Master (Méga)",
+  "mega_10000": "Ligue Master (Méga)",
   "naic2026": "Coupe Championnats 2026",
   "naic2026_1500": "Coupe Championnats 2026",
   "premier": "Majeure Master",
   "premier_10000": "Majeure Master",
   "spellcraft": "Battle Frontier (Spellcraft Cup)",
-  "spellcraft_1500": "Battle Frontier (Spellcraft Cup)"
+  "spellcraft_1500": "Battle Frontier (Spellcraft Cup)",
+  "sunshine": "Coupe Soleil (Ligue Super)",
+  "sunshine_1500": "Coupe Soleil (Ligue Super)"
 }

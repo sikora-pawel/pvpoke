@@ -1,4 +1,6 @@
 {
+  "bastille": "Devon Bastille Cup",
+  "bastille_1500": "Devon Bastille Cup",
   "battlefrontiermaster": "Battle Frontier (Master)",
   "battlefrontiermaster_10000": "Battle Frontier (Master)",
   "bayou": "Battle Frontier (Bayou Cup)",
@@ -9,16 +11,18 @@
   "catch_1500": "速成カップ (スーパーリーグ)",
   "championshipseries": "チャンピオンシップシリーズカップ",
   "championshipseries_1500": "チャンピオンシップシリーズカップ",
-  "cosy": "Devon Cosy Cup",
-  "cosy_1500": "Devon Cosy Cup",
   "equinox": "Devon Equinox Cup",
   "equinox_1500": "Devon Equinox Cup",
   "little": "リトルカップ",
   "little_500": "リトルカップ",
+  "mega": "マスターリーグ (メガ)",
+  "mega_10000": "マスターリーグ (メガ)",
   "naic2026": "チャンピオンシップ2026シリーズカップ",
   "naic2026_1500": "チャンピオンシップ2026シリーズカップ",
   "premier": "マスタープレミア",
   "premier_10000": "マスタープレミア",
   "spellcraft": "Battle Frontier (Spellcraft Cup)",
-  "spellcraft_1500": "Battle Frontier (Spellcraft Cup)"
+  "spellcraft_1500": "Battle Frontier (Spellcraft Cup)",
+  "sunshine": "陽光カップ (スーパーリーグ)",
+  "sunshine_1500": "陽光カップ (スーパーリーグ)"
 }

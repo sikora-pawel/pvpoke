@@ -1,4 +1,6 @@
 {
+  "bastille": "Devon Bastille Cup",
+  "bastille_1500": "Devon Bastille Cup",
   "battlefrontiermaster": "Battle Frontier (Master)",
   "battlefrontiermaster_10000": "Battle Frontier (Master)",
   "bayou": "Battle Frontier (Bayou Cup)",
@@ -9,16 +11,18 @@
   "catch_1500": "Copa Captura (Liga Super)",
   "championshipseries": "Copa de la serie de campeonatos mundiales",
   "championshipseries_1500": "Copa de la serie de campeonatos mundiales",
-  "cosy": "Devon Cosy Cup",
-  "cosy_1500": "Devon Cosy Cup",
   "equinox": "Devon Equinox Cup",
   "equinox_1500": "Devon Equinox Cup",
   "little": "Copa Chica",
   "little_500": "Copa Chica",
+  "mega": "Liga Master Ball (Mega)",
+  "mega_10000": "Liga Master Ball (Mega)",
   "naic2026": "Copa de la serie de campeonatos mundiales 2026",
   "naic2026_1500": "Copa de la serie de campeonatos mundiales 2026",
   "premier": "Master Premier",
   "premier_10000": "Master Premier",
   "spellcraft": "Battle Frontier (Spellcraft Cup)",
-  "spellcraft_1500": "Battle Frontier (Spellcraft Cup)"
+  "spellcraft_1500": "Battle Frontier (Spellcraft Cup)",
+  "sunshine": "Copa Luz Sola (Liga Super)",
+  "sunshine_1500": "Copa Luz Sola (Liga Super)"
 }
