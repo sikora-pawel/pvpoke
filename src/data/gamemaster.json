@@ -450,7 +450,7 @@
             "showFormat": false,
             "showMeta": true,
             "hideRankings": true,
-            "rules": ["No CP limit.", "Legendary Pokémon,  Mythical Pokémon,  and Ultra Beasts are not eligible."]
+            "rules": ["No CP limit.", "Legendary Pok\u00e9mon, Mythical Pok\u00e9mon, and Ultra Beasts are not eligible."]
         },
         {
             "title": "NAIC 2026 Championship Series Cup",
@@ -460,7 +460,7 @@
             "showCup": true,
             "showFormat": true,
             "showMeta": true,
-            "rules": ["Pokémon must be at or below 1, 500 CP to enter.", "Only Fairy-,  Normal-,  Psychic- and Water-type Pokémon are eligible.", "The following types are not allowed: Dark,  Grass,  Steel", "The following Pokemon are not allowed: Araquanid,  Carbink,  Chansey,  Chinchou,  Claydol,  Clefable,  Cresselia,  Dedenne,  Diggersby,  Farfetch'd,  Gastrodon,  Golisopod,  Greedent,  Jellicent,  Lanturn,  Lickilicky,  Lickitung,  Lugia,  Medicham,  Oranguru,  Poliwrath"]
+            "rules": ["Pok\u00e9mon must be at or below 1, 500 CP to enter.", "Only Fairy-, Normal-, Psychic- and Water-type Pok\u00e9mon are eligible.", "The following types are not allowed: Dark, Grass, Steel", "The following Pokemon are not allowed: Araquanid, Carbink, Chansey, Chinchou, Claydol, Clefable, Cresselia, Dedenne, Diggersby, Farfetch'd, Gastrodon, Golisopod, Greedent, Jellicent, Lanturn, Lickilicky, Lickitung, Lugia, Medicham, Oranguru, Poliwrath"]
         },
         {
             "title": "Sunshine Cup",
@@ -470,7 +470,7 @@
             "showCup": true,
             "showFormat": true,
             "showMeta": true,
-            "rules": ["Pokémon must be at or below 1, 500 CP to enter.", "Only Normal-,  Fire-,  Grass-,  and Ground-type Pokémon are eligible.", "The following Pokemon are not allowed: Charizard"]
+            "rules": ["Pok\u00e9mon must be at or below 1, 500 CP to enter.", "Only Normal-, Fire-, Grass-, and Ground-type Pok\u00e9mon are eligible.", "The following Pokemon are not allowed: Charizard"]
         },
         {
             "title": "Mega Master League",
@@ -38547,7 +38547,8 @@
             "formChange": {
                 "type": "set",
                 "trigger": "none",
-                "resetOnSwitch": false
+                "resetOnSwitch": false,
+                "alternativeFormId": "mimikyu"
             },
             "buddyDistance": 5,
             "thirdMoveCost": 50000,
