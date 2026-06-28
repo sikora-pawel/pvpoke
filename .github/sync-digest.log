@@ -31,3 +31,21 @@ Cups:   - all (1500)
   - equinox (1500)
   - bastille (1500)
 
+---
+Time: 2026-06-28 07:14:31 UTC
+Commits:
+  00f0afe7f Update gamemaster.json
+  92cca7c2b Mega Skarmory stats
+  11d8781f9 Merge pull request #375 from tomaioo/fix/security/arbitrary-file-write-via-write-php
+  7401c82f1 fix(data): arbitrary file write via write.php
+Cups:   - all (1500)
+  - all (2500)
+  - all (10000)
+  - summer (1500)
+  - copadiluvio (1500)
+  - tsuki (1500)
+  - ligaultra (2500)
+  - coupedusillage (10000)
+  - equinox (1500)
+  - bastille (1500)
+
