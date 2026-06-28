@@ -37,7 +37,8 @@ if($_POST['category'] === 'full') {
 	$jsonData = $_POST['data'];
 }
 
-$filepath = 'rankings/' . $_POST['cup'] . '/' . $_POST['category'] . '/rankings-' . $_POST['league'] . '.json';
+$cup = basename($_POST['cup']);
+$filepath = 'rankings/' . $cup . '/' . $_POST['category'] . '/rankings-' . $_POST['league'] . '.json';
 
 // Create directory if it doesn't exist
 $directory = dirname($filepath);
