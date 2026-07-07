@@ -1,13 +1,12 @@
 [
 	{
-		"title": "P!P Championship Series",
-		"cup": "championshipseries",
+		"title": "Competitors Cup",
+		"cup": "competitors",
 		"cp": 1500,
 		"meta": "championshipseries",
 		"showCup": true,
 		"showFormat": true,
-		"showMeta": true,
-		"hideRankings": true
+		"showMeta": true
 	},
 	{
 		"title": "Master Premier Cup",

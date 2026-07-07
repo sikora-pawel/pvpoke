@@ -110,10 +110,25 @@ function getActiveCups() {
     const activeCups = formats.filter(f =>
         f.showFormat &&
         !f.hideRankings &&
-        f.cup !== 'custom'
+        f.cup !== 'custom' &&
+        !cupHasRankingAlias(f.cup)
     );
 
     return [...mainLeagues, ...activeCups];
+}
+
+/**
+ * Cups with a rankingAlias use another cup's rankings (e.g. "all"),
+ * so no rankings should be generated for them directly.
+ */
+function cupHasRankingAlias(cupName) {
+    const cupPath = path.join(DATA_PATH, 'gamemaster/cups', `${cupName}.json`);
+    if (!fs.existsSync(cupPath)) return false;
+    try {
+        return !!JSON.parse(fs.readFileSync(cupPath, 'utf8')).rankingAlias;
+    } catch (e) {
+        return false;
+    }
 }
 
 /**

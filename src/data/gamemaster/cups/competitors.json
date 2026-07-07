@@ -1,0 +1,12 @@
+{
+	"name": "competitors",
+	"title": "Competitors Cup",
+	"include": [],
+	"exclude": [{
+		"filterType": "tag",
+		"values": ["mega"]
+	}, {
+		"filterType": "id",
+		"values": ["mimikyu"]
+	}]
+}

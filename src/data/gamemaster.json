@@ -1,5 +1,5 @@
 {
-    "timestamp": "2026-07-05 19:43:15",
+    "timestamp": "2026-07-07 13:23:55",
     "id": "gamemaster",
     "title": "Default",
     "settings": {
@@ -36,13 +36,148 @@
     ],
     "cups": [
         {
-            "name": "all",
-            "title": "All Pokemon",
+            "name": "gobattleleague",
+            "title": "GO Battle League",
+            "rankingAlias": "all",
             "include": [],
             "exclude": [
                 {
                     "filterType": "tag",
                     "values": ["mega"]
+                }
+            ],
+            "partySize": 3,
+            "presetOnly": true
+        },
+        {
+            "name": "bfretro",
+            "title": "UL Retro Cup",
+            "include": [],
+            "exclude": [
+                {
+                    "filterType": "type",
+                    "values": ["dark", "fairy", "steel"]
+                },
+                {
+                    "filterType": "tag",
+                    "values": ["mega"]
+                },
+                {
+                    "filterType": "id",
+                    "values": ["bellibolt", "cradily", "cresselia", "dusknoir", "giratina_altered", "jellicent", "lapras", "lickilicky", "mewtwo_armored", "oranguru", "regidrago", "zygarde_complete"]
+                }
+            ],
+            "partySize": 3,
+            "presetOnly": true
+        },
+        {
+            "name": "classic",
+            "title": "Classic",
+            "include": [],
+            "exclude": [
+                {
+                    "filterType": "tag",
+                    "values": ["mega"]
+                }
+            ],
+            "partySize": 3,
+            "levelCap": 40
+        },
+        {
+            "name": "retro",
+            "title": "Retro Cup",
+            "include": [],
+            "exclude": [
+                {
+                    "filterType": "type",
+                    "values": ["dark", "fairy", "steel"]
+                },
+                {
+                    "filterType": "tag",
+                    "values": ["mega"]
+                }
+            ],
+            "partySize": 3,
+            "presetOnly": true
+        },
+        {
+            "name": "competitors",
+            "title": "Competitors Cup",
+            "include": [],
+            "exclude": [
+                {
+                    "filterType": "tag",
+                    "values": ["mega"]
+                },
+                {
+                    "filterType": "id",
+                    "values": ["mimikyu"]
+                }
+            ]
+        },
+        {
+            "name": "summer",
+            "title": "Summer Cup",
+            "include": [
+                {
+                    "filterType": "type",
+                    "values": ["normal", "grass", "fire", "water", "electric", "bug"]
+                }
+            ],
+            "exclude": [
+                {
+                    "filterType": "tag",
+                    "values": ["mega"]
+                }
+            ]
+        },
+        {
+            "name": "spellcraft",
+            "title": "Spellcraft Cup",
+            "include": [
+                {
+                    "filterType": "type",
+                    "values": ["bug", "electric", "grass", "poison", "psychic"]
+                },
+                {
+                    "filterType": "id",
+                    "values": ["banette", "delphox", "houndstone", "misdreavus", "mismagius", "polteageist", "azelf", "mesprit", "uxie"]
+                }
+            ],
+            "exclude": [
+                {
+                    "filterType": "tag",
+                    "values": ["mega", "shadow", "legendary", "ultrabeast"]
+                },
+                {
+                    "filterType": "type",
+                    "values": ["dark", "fire", "ground", "rock", "steel"]
+                },
+                {
+                    "filterType": "id",
+                    "values": ["abomasnow", "amoonguss", "araquanid", "bellibolt", "charjabug", "dhelmise", "dragalge", "golbat", "gourgeist_average", "gourgeist_large", "gourgeist_small", "gourgeist_super", "jumpluff", "lanturn", "ledian", "nidorina", "oranguru", "pachirisu", "pumpkaboo_average", "pumpkaboo_large", "pumpkaboo_small", "pumpkaboo_super", "rotom", "rotom_fan", "rotom_frost", "rotom_mow", "rotom_wash", "slowking_galarian", "smoochum", "spidops", "swalot", "toxapex", "toxtricity", "vespiquen", "vikavolt"]
+                }
+            ]
+        },
+        {
+            "name": "mega",
+            "title": "All Pokemon",
+            "include": [],
+            "exclude": []
+        },
+        {
+            "name": "championshipseries",
+            "title": "P!P Championship Series",
+            "rankingAlias": "all",
+            "include": [],
+            "exclude": [
+                {
+                    "filterType": "tag",
+                    "values": ["mega"]
+                },
+                {
+                    "filterType": "id",
+                    "values": ["mimikyu"]
                 }
             ]
         },
@@ -85,158 +220,6 @@
             "excludeLowPokemon": 1
         },
         {
-            "name": "battlefrontiermaster",
-            "title": "Battle Frontier (Master League)",
-            "include": [],
-            "exclude": [
-                {
-                    "filterType": "id",
-                    "values": ["dragonite_mega", "garchomp_mega", "groudon_primal", "gyarados_mega", "heracross_mega", "kyogre_primal", "latias_mega", "latios_mega", "metagross_mega", "rayquaza_mega", "salamence_mega", "tyranitar_mega"]
-                }
-            ],
-            "restrictedPicks": 1,
-            "restrictedPokemon": ["eternatus", "palkia_origin", "swampert_mega", "zacian_crowned_sword", "zamazenta_crowned_shield"],
-            "tierRules": {
-                "max": 11,
-                "floor": 0,
-                "tiers": [
-                    {
-                        "points": 5,
-                        "pokemon": ["eternatus", "palkia_origin", "swampert_mega", "zacian_crowned_sword", "zamazenta_crowned_shield"]
-                    },
-                    {
-                        "points": 4,
-                        "pokemon": ["aggron_mega", "charizard_mega_y", "gallade_mega", "gardevoir_mega", "kyurem_black", "kyurem_white", "scizor_mega", "zygarde_complete"]
-                    },
-                    {
-                        "points": 3,
-                        "pokemon": ["blastoise_mega", "blaziken_mega", "dialga_origin", "gengar_mega", "groudon", "kyogre", "landorus_therian", "lucario_mega", "lunala", "marshadow", "meloetta_aria", "metagross", "steelix_mega", "xerneas", "yveltal"]
-                    },
-                    {
-                        "points": 2,
-                        "pokemon": ["dialga", "florges", "giratina_origin", "ho_oh", "keldeo_ordinary", "keldeo_resolute", "lugia", "mewtwo", "necrozma_dawn_wings", "necrozma_dusk_mane", "palkia", "primarina", "reshiram", "rhyperior", "solgaleo", "tyranitar", "zekrom"]
-                    },
-                    {
-                        "points": 1,
-                        "pokemon": ["charizard_mega_x", "garchomp", "giratina_altered", "gyarados", "heatran", "kangaskhan_mega", "kyurem", "melmetal", "moltres", "moltres_galarian", "slowbro_mega", "tapu_lele", "urshifu_rapid_strike", "urshifu_single_strike", "volcanion", "zacian_hero", "zarude"]
-                    }
-                ]
-            }
-        },
-        {
-            "name": "bayou",
-            "title": "Bayou Cup",
-            "include": [
-                {
-                    "filterType": "type",
-                    "values": ["bug", "ghost", "grass", "poison", "water"]
-                }
-            ],
-            "exclude": [
-                {
-                    "filterType": "tag",
-                    "values": ["mega", "legendary", "mythical", "ultrabeast"]
-                },
-                {
-                    "filterType": "id",
-                    "values": ["aegislash_shield", "araquanid", "charjabug", "clodsire", "corsola_galarian", "cradily", "crustle", "dragalge", "drapion", "dusclops", "dusknoir", "empoleon", "forretress", "jellicent", "kingdra", "lapras", "lanturn", "mantine", "overqwil", "qwilfish_hisuian", "sableye", "scizor", "spidops", "spiritomb", "toxapex", "toxtricity", "walrein", "wormadam_trash"]
-                }
-            ]
-        },
-        {
-            "name": "bfretro",
-            "title": "UL Retro Cup",
-            "include": [],
-            "exclude": [
-                {
-                    "filterType": "type",
-                    "values": ["dark", "fairy", "steel"]
-                },
-                {
-                    "filterType": "tag",
-                    "values": ["mega"]
-                },
-                {
-                    "filterType": "id",
-                    "values": ["bellibolt", "cradily", "cresselia", "dusknoir", "giratina_altered", "jellicent", "lapras", "lickilicky", "mewtwo_armored", "oranguru", "regidrago", "zygarde_complete"]
-                }
-            ],
-            "partySize": 3,
-            "presetOnly": true
-        },
-        {
-            "name": "catch",
-            "title": "Catch Cup",
-            "include": [],
-            "exclude": [
-                {
-                    "filterType": "id",
-                    "values": ["deoxys_defense", "regirock", "regice", "mew", "victini", "genesect", "rayquaza", "zygarde", "latios", "latias", "raikou", "suicune", "entei", "celebi", "diancie", "regidrago", "regieleki", "ho_oh", "buzzwole", "marowak_alolan_shadow", "lapras_shadow", "hitmontop_shadow", "meganium_shadow", "jumpluff_shadow", "steelix_shadow", "walrein_shadow", "poliwrath_shadow", "politoed_shadow", "sealeo_shadow", "guzzlord", "zapdos_shadow", "sableye_shadow", "feraligatr_shadow", "golurk_shadow", "quagsire_shadow", "diggersby_shadow", "zapdos_shadow", "bastiodon_shadow", "typhlosion_shadow", "registeel_shadow", "dusknoir_shadow", "dusclops_shadow"]
-                },
-                {
-                    "filterType": "tag",
-                    "values": ["mega"]
-                }
-            ]
-        },
-        {
-            "name": "championshipseries",
-            "title": "P!P Championship Series",
-            "rankingAlias": "all",
-            "include": [],
-            "exclude": [
-                {
-                    "filterType": "tag",
-                    "values": ["mega"]
-                },
-                {
-                    "filterType": "id",
-                    "values": ["mimikyu"]
-                }
-            ]
-        },
-        {
-            "name": "classic",
-            "title": "Classic",
-            "include": [],
-            "exclude": [
-                {
-                    "filterType": "tag",
-                    "values": ["mega"]
-                }
-            ],
-            "partySize": 3,
-            "levelCap": 40
-        },
-        {
-            "name": "copadiluvio",
-            "title": "Battle Frontier (Copa Dilúvio)",
-            "include": [
-                {
-                    "filterType": "type",
-                    "values": ["dark", "steel", "water", "dragon"]
-                },
-                {
-                    "filterType": "id",
-                    "values": []
-                }
-            ],
-            "exclude": [
-                {
-                    "filterType": "tag",
-                    "values": ["legendary", "mythical", "mega", "ultrabeast", "shadow"]
-                },
-                {
-                    "filterType": "type",
-                    "values": ["fire", "ground", "electric", "fighting", "grass", "fairy", "ghost"]
-                },
-                {
-                    "filterType": "id",
-                    "values": ["araquanid", "bastiodon", "corviknight", "durant", "empoleon", "escavalier", "forretress", "klang", "mandibuzz", "mantine", "obstagoon", "orthworm", "probopass", "scizor", "steelix", "toxapex", "umbreon", "vullaby", "wormadam_trash"]
-                }
-            ]
-        },
-        {
             "name": "cosy",
             "title": "Devon Cosy Cup",
             "link": "https://devon.gg",
@@ -266,38 +249,117 @@
             "excludeLowPokemon": 1
         },
         {
-            "name": "coupedusillage",
-            "title": "Battle Frontier (Coupe du Sillage)",
+            "name": "bayou",
+            "title": "Bayou Cup",
             "include": [
                 {
                     "filterType": "type",
-                    "values": ["fairy", "flying", "ice", "psychic", "water", "normal"]
-                },
-                {
-                    "filterType": "id",
-                    "values": ["shaymin_land", "banette_mega", "giratina_altered", "giratina_altered_shadow", "goodra", "sceptile_mega", "xurkitree"]
+                    "values": ["bug", "ghost", "grass", "poison", "water"]
                 }
             ],
             "exclude": [
                 {
                     "filterType": "tag",
-                    "values": []
-                },
-                {
-                    "filterType": "type",
-                    "values": []
+                    "values": ["mega", "legendary", "mythical", "ultrabeast"]
                 },
                 {
                     "filterType": "id",
-                    "values": ["meloetta_aria", "xerneas", "moltres_galarian", "salamence_mega", "metagross", "rayquaza_mega", "charizard_mega_y", "gallade_mega", "gardevoir_mega", "dragonite_mega", "lunala", "gyarados_mega", "yveltal", "kyurem_black", "kyurem_white", "kyogre_primal", "metagross_mega", "latios_mega", "latias_mega", "swampert_mega", "zacian_crowned_sword", "palkia_origin", "mewtwo_mega_x", "mewtwo_mega_y"]
+                    "values": ["aegislash_shield", "araquanid", "charjabug", "clodsire", "corsola_galarian", "cradily", "crustle", "dragalge", "drapion", "dusclops", "dusknoir", "empoleon", "forretress", "jellicent", "kingdra", "lapras", "lanturn", "mantine", "overqwil", "qwilfish_hisuian", "sableye", "scizor", "spidops", "spiritomb", "toxapex", "toxtricity", "walrein", "wormadam_trash"]
                 }
             ]
         },
         {
-            "name": "custom",
-            "title": "Custom",
+            "name": "fantasy",
+            "title": "Fantasy Cup",
+            "include": [
+                {
+                    "filterType": "type",
+                    "values": ["steel", "dragon", "fairy"]
+                }
+            ],
+            "exclude": [
+                {
+                    "filterType": "tag",
+                    "values": ["mega"]
+                }
+            ]
+        },
+        {
+            "name": "ligaultra",
+            "title": "Battle Frontier (Liga Ultra)",
             "include": [],
-            "exclude": []
+            "exclude": [
+                {
+                    "filterType": "id",
+                    "values": ["bellibolt", "jellicent", "mewtwo_armored", "mimikyu", "tinkaton", "zygarde_complete"]
+                }
+            ]
+        },
+        {
+            "name": "maelstrom",
+            "title": "Maelstrom Cup",
+            "link": "https://devon.gg",
+            "cup": "maelstrom",
+            "include": [],
+            "exclude": [
+                {
+                    "filterType": "id",
+                    "name": "Species",
+                    "values": ["aegislash_shield", "altaria", "annihilape", "araquanid", "azumarill", "carbink", "corsola_galarian", "corviknight", "doublade", "empoleon", "florges", "forretress", "furret", "gastrodon", "guzzlord", "jellicent", "lickilicky", "marowak", "quagsire", "scizor", "stunfisk", "tinkaton", "wigglytuff"]
+                },
+                {
+                    "filterType": "tag",
+                    "name": "Tag",
+                    "values": ["mega"]
+                }
+            ],
+            "overrides": [],
+            "league": 1500,
+            "useDefaultMovesets": 1,
+            "excludeLowPokemon": 1
+        },
+        {
+            "name": "catch",
+            "title": "Catch Cup",
+            "include": [],
+            "exclude": [
+                {
+                    "filterType": "id",
+                    "values": ["deoxys_defense", "regirock", "regice", "mew", "victini", "genesect", "rayquaza", "zygarde", "latios", "latias", "raikou", "suicune", "entei", "celebi", "diancie", "regidrago", "regieleki", "ho_oh", "buzzwole", "marowak_alolan_shadow", "lapras_shadow", "hitmontop_shadow", "meganium_shadow", "jumpluff_shadow", "steelix_shadow", "walrein_shadow", "poliwrath_shadow", "politoed_shadow", "sealeo_shadow", "guzzlord", "zapdos_shadow", "sableye_shadow", "feraligatr_shadow", "golurk_shadow", "quagsire_shadow", "diggersby_shadow", "zapdos_shadow", "bastiodon_shadow", "typhlosion_shadow", "registeel_shadow", "dusknoir_shadow", "dusclops_shadow"]
+                },
+                {
+                    "filterType": "tag",
+                    "values": ["mega"]
+                }
+            ]
+        },
+        {
+            "name": "copadiluvio",
+            "title": "Battle Frontier (Copa Dil\u00favio)",
+            "include": [
+                {
+                    "filterType": "type",
+                    "values": ["dark", "steel", "water", "dragon"]
+                },
+                {
+                    "filterType": "id",
+                    "values": []
+                }
+            ],
+            "exclude": [
+                {
+                    "filterType": "tag",
+                    "values": ["legendary", "mythical", "mega", "ultrabeast", "shadow"]
+                },
+                {
+                    "filterType": "type",
+                    "values": ["fire", "ground", "electric", "fighting", "grass", "fairy", "ghost"]
+                },
+                {
+                    "filterType": "id",
+                    "values": ["araquanid", "bastiodon", "corviknight", "durant", "empoleon", "escavalier", "forretress", "klang", "mandibuzz", "mantine", "obstagoon", "orthworm", "probopass", "scizor", "steelix", "toxapex", "umbreon", "vullaby", "wormadam_trash"]
+                }
+            ]
         },
         {
             "name": "equinox",
@@ -340,91 +402,72 @@
             "cup": "equinox"
         },
         {
-            "name": "fantasy",
-            "title": "Fantasy Cup",
+            "name": "sunshine",
+            "title": "Sunshine Cup",
             "include": [
                 {
                     "filterType": "type",
-                    "values": ["steel", "dragon", "fairy"]
+                    "values": ["normal", "fire", "ground", "grass"]
                 }
             ],
             "exclude": [
                 {
                     "filterType": "tag",
                     "values": ["mega"]
-                }
-            ]
-        },
-        {
-            "name": "gobattleleague",
-            "title": "GO Battle League",
-            "rankingAlias": "all",
-            "include": [],
-            "exclude": [
+                },
                 {
-                    "filterType": "tag",
-                    "values": ["mega"]
+                    "filterType": "id",
+                    "values": ["charizard"]
                 }
             ],
             "partySize": 3,
             "presetOnly": true
         },
         {
-            "name": "ligaultra",
-            "title": "Battle Frontier (Liga Ultra)",
-            "include": [],
-            "exclude": [
-                {
-                    "filterType": "id",
-                    "values": ["bellibolt", "jellicent", "mewtwo_armored", "mimikyu", "tinkaton", "zygarde_complete"]
-                }
-            ]
-        },
-        {
-            "name": "little",
-            "title": "Little Cup",
-            "include": [
-                {
-                    "filterType": "evolution",
-                    "values": [1]
-                }
-            ],
-            "exclude": [
-                {
-                    "filterType": "id",
-                    "values": ["shuckle", "smeargle"]
-                }
-            ],
-            "levelCap": 50
-        },
-        {
-            "name": "maelstrom",
-            "title": "Maelstrom Cup",
-            "link": "https://devon.gg",
-            "cup": "maelstrom",
-            "include": [],
-            "exclude": [
-                {
-                    "filterType": "id",
-                    "name": "Species",
-                    "values": ["aegislash_shield", "altaria", "annihilape", "araquanid", "azumarill", "carbink", "corsola_galarian", "corviknight", "doublade", "empoleon", "florges", "forretress", "furret", "gastrodon", "guzzlord", "jellicent", "lickilicky", "marowak", "quagsire", "scizor", "stunfisk", "tinkaton", "wigglytuff"]
-                },
-                {
-                    "filterType": "tag",
-                    "name": "Tag",
-                    "values": ["mega"]
-                }
-            ],
-            "overrides": [],
-            "league": 1500,
-            "useDefaultMovesets": 1,
-            "excludeLowPokemon": 1
-        },
-        {
-            "name": "mega",
-            "title": "All Pokemon",
+            "name": "custom",
+            "title": "Custom",
             "include": [],
             "exclude": []
+        },
+        {
+            "name": "premier",
+            "title": "Premier Cup",
+            "include": [],
+            "exclude": [
+                {
+                    "filterType": "tag",
+                    "values": ["legendary", "mythical", "ultrabeast", "mega"]
+                }
+            ],
+            "partySize": 3
+        },
+        {
+            "name": "coupedusillage",
+            "title": "Battle Frontier (Coupe du Sillage)",
+            "include": [
+                {
+                    "filterType": "type",
+                    "values": ["fairy", "flying", "ice", "psychic", "water", "normal"]
+                },
+                {
+                    "filterType": "id",
+                    "values": ["shaymin_land", "banette_mega", "giratina_altered", "giratina_altered_shadow", "goodra", "sceptile_mega", "xurkitree"]
+                }
+            ],
+            "exclude": [
+                {
+                    "filterType": "tag",
+                    "values": []
+                },
+                {
+                    "filterType": "type",
+                    "values": []
+                },
+                {
+                    "filterType": "id",
+                    "values": ["meloetta_aria", "xerneas", "moltres_galarian", "salamence_mega", "metagross", "rayquaza_mega", "charizard_mega_y", "gallade_mega", "gardevoir_mega", "dragonite_mega", "lunala", "gyarados_mega", "yveltal", "kyurem_black", "kyurem_white", "kyogre_primal", "metagross_mega", "latios_mega", "latias_mega", "swampert_mega", "zacian_crowned_sword", "palkia_origin", "mewtwo_mega_x", "mewtwo_mega_y"]
+                }
+            ]
         },
         {
             "name": "naic2026",
@@ -451,99 +494,54 @@
             ]
         },
         {
-            "name": "premier",
-            "title": "Premier Cup",
+            "name": "battlefrontiermaster",
+            "title": "Battle Frontier (Master League)",
             "include": [],
             "exclude": [
                 {
-                    "filterType": "tag",
-                    "values": ["legendary", "mythical", "ultrabeast", "mega"]
+                    "filterType": "id",
+                    "values": ["dragonite_mega", "garchomp_mega", "groudon_primal", "gyarados_mega", "heracross_mega", "kyogre_primal", "latias_mega", "latios_mega", "metagross_mega", "rayquaza_mega", "salamence_mega", "tyranitar_mega"]
                 }
             ],
-            "partySize": 3
+            "restrictedPicks": 1,
+            "restrictedPokemon": ["eternatus", "palkia_origin", "swampert_mega", "zacian_crowned_sword", "zamazenta_crowned_shield"],
+            "tierRules": {
+                "max": 11,
+                "floor": 0,
+                "tiers": [
+                    {
+                        "points": 5,
+                        "pokemon": ["eternatus", "palkia_origin", "swampert_mega", "zacian_crowned_sword", "zamazenta_crowned_shield"]
+                    },
+                    {
+                        "points": 4,
+                        "pokemon": ["aggron_mega", "charizard_mega_y", "gallade_mega", "gardevoir_mega", "kyurem_black", "kyurem_white", "scizor_mega", "zygarde_complete"]
+                    },
+                    {
+                        "points": 3,
+                        "pokemon": ["blastoise_mega", "blaziken_mega", "dialga_origin", "gengar_mega", "groudon", "kyogre", "landorus_therian", "lucario_mega", "lunala", "marshadow", "meloetta_aria", "metagross", "steelix_mega", "xerneas", "yveltal"]
+                    },
+                    {
+                        "points": 2,
+                        "pokemon": ["dialga", "florges", "giratina_origin", "ho_oh", "keldeo_ordinary", "keldeo_resolute", "lugia", "mewtwo", "necrozma_dawn_wings", "necrozma_dusk_mane", "palkia", "primarina", "reshiram", "rhyperior", "solgaleo", "tyranitar", "zekrom"]
+                    },
+                    {
+                        "points": 1,
+                        "pokemon": ["charizard_mega_x", "garchomp", "giratina_altered", "gyarados", "heatran", "kangaskhan_mega", "kyurem", "melmetal", "moltres", "moltres_galarian", "slowbro_mega", "tapu_lele", "urshifu_rapid_strike", "urshifu_single_strike", "volcanion", "zacian_hero", "zarude"]
+                    }
+                ]
+            }
         },
         {
-            "name": "retro",
-            "title": "Retro Cup",
+            "name": "all",
+            "title": "All Pokemon",
             "include": [],
-            "exclude": [
-                {
-                    "filterType": "type",
-                    "values": ["dark", "fairy", "steel"]
-                },
-                {
-                    "filterType": "tag",
-                    "values": ["mega"]
-                }
-            ],
-            "partySize": 3,
-            "presetOnly": true
-        },
-        {
-            "name": "spellcraft",
-            "title": "Spellcraft Cup",
-            "include": [
-                {
-                    "filterType": "type",
-                    "values": ["bug", "electric", "grass", "poison", "psychic"]
-                },
-                {
-                    "filterType": "id",
-                    "values": ["banette", "delphox", "houndstone", "misdreavus", "mismagius", "polteageist", "azelf", "mesprit", "uxie"]
-                }
-            ],
-            "exclude": [
-                {
-                    "filterType": "tag",
-                    "values": ["mega", "shadow", "legendary", "ultrabeast"]
-                },
-                {
-                    "filterType": "type",
-                    "values": ["dark", "fire", "ground", "rock", "steel"]
-                },
-                {
-                    "filterType": "id",
-                    "values": ["abomasnow", "amoonguss", "araquanid", "bellibolt", "charjabug", "dhelmise", "dragalge", "golbat", "gourgeist_average", "gourgeist_large", "gourgeist_small", "gourgeist_super", "jumpluff", "lanturn", "ledian", "nidorina", "oranguru", "pachirisu", "pumpkaboo_average", "pumpkaboo_large", "pumpkaboo_small", "pumpkaboo_super", "rotom", "rotom_fan", "rotom_frost", "rotom_mow", "rotom_wash", "slowking_galarian", "smoochum", "spidops", "swalot", "toxapex", "toxtricity", "vespiquen", "vikavolt"]
-                }
-            ]
-        },
-        {
-            "name": "summer",
-            "title": "Summer Cup",
-            "include": [
-                {
-                    "filterType": "type",
-                    "values": ["normal", "grass", "fire", "water", "electric", "bug"]
-                }
-            ],
             "exclude": [
                 {
                     "filterType": "tag",
                     "values": ["mega"]
                 }
             ]
-        },
-        {
-            "name": "sunshine",
-            "title": "Sunshine Cup",
-            "include": [
-                {
-                    "filterType": "type",
-                    "values": ["normal", "fire", "ground", "grass"]
-                }
-            ],
-            "exclude": [
-                {
-                    "filterType": "tag",
-                    "values": ["mega"]
-                },
-                {
-                    "filterType": "id",
-                    "values": ["charizard"]
-                }
-            ],
-            "partySize": 3,
-            "presetOnly": true
         },
         {
             "name": "tsuki",
@@ -572,18 +570,34 @@
                     "values": ["abomasnow", "amaura", "annihilape", "aurorus", "azumarill", "bewear", "carbink", "cetoddle", "chansey", "clefable", "corsola_galarian", "cradily", "crustle", "dolliv", "drampa", "dubwool", "dudunsparce", "dunsparce", "dusknoir", "frillish", "furfrou", "furret", "girafarig", "greedent", "jellicent", "kangaskhan", "kecleon", "lapras", "lickilicky", "lickitung", "lileep", "linoone", "miltank", "mimikyu", "naclstack", "ninetales_alolan", "oinkologne", "oinkologne_female", "oranguru", "relicanth", "spinda", "ursaring", "vigoroth", "weezing_galarian", "wigglytuff", "wyrdeer", "zangoose"]
                 }
             ]
+        },
+        {
+            "name": "little",
+            "title": "Little Cup",
+            "include": [
+                {
+                    "filterType": "evolution",
+                    "values": [1]
+                }
+            ],
+            "exclude": [
+                {
+                    "filterType": "id",
+                    "values": ["shuckle", "smeargle"]
+                }
+            ],
+            "levelCap": 50
         }
     ],
     "formats": [
         {
-            "title": "P!P Championship Series",
-            "cup": "championshipseries",
+            "title": "Competitors Cup",
+            "cup": "competitors",
             "cp": 1500,
             "meta": "championshipseries",
             "showCup": true,
             "showFormat": true,
-            "showMeta": true,
-            "hideRankings": true
+            "showMeta": true
         },
         {
             "title": "Master Premier Cup",
@@ -604,7 +618,7 @@
             "showCup": true,
             "showFormat": true,
             "showMeta": true,
-            "rules": ["Pokémon must be at or below 1, 500 CP to enter.", "Only Normal-,  Fire-,  Water-,  Grass-,  Electric-,  and Bug-type Pokémon are eligible."]
+            "rules": ["Pok\u00e9mon must be at or below 1, 500 CP to enter.", "Only Normal-, Fire-, Water-, Grass-, Electric-, and Bug-type Pok\u00e9mon are eligible."]
         },
         {
             "title": "Fantasy Cup (Ultra League)",
@@ -614,7 +628,7 @@
             "showCup": true,
             "showFormat": true,
             "showMeta": true,
-            "rules": ["Pokémon must be at or below 2, 500 CP to enter.", "Only Dragon-,  Steel-,  and Fairy-type Pokémon are eligible."]
+            "rules": ["Pok\u00e9mon must be at or below 2, 500 CP to enter.", "Only Dragon-, Steel-, and Fairy-type Pok\u00e9mon are eligible."]
         },
         {
             "title": "Retro Cup",
@@ -624,10 +638,10 @@
             "showCup": true,
             "showFormat": true,
             "showMeta": true,
-            "rules": ["Pokémon must be at or below 2, 500 CP to enter.", "Dark-,  Steel-,  and Fairy-type Pokémon are not eligible."]
+            "rules": ["Pok\u00e9mon must be at or below 2, 500 CP to enter.", "Dark-, Steel-, and Fairy-type Pok\u00e9mon are not eligible."]
         },
         {
-            "title": "Battle Frontier (Copa Dilúvio)",
+            "title": "Battle Frontier (Copa Dil\u00favio)",
             "cup": "copadiluvio",
             "cp": 1500,
             "meta": "copadiluvio",
@@ -39002,8 +39016,8 @@
             "formChange": {
                 "type": "set",
                 "trigger": "none",
-                "resetOnSwitch": false,
-                "alternativeFormId": "mimikyu"
+                "alternativeFormId": "mimikyu",
+                "resetOnSwitch": false
             },
             "buddyDistance": 5,
             "thirdMoveCost": 50000,
@@ -48444,17 +48458,6 @@
             "turns": 1
         },
         {
-            "moveId": "PLAY_ROUGH",
-            "name": "Play Rough",
-            "type": "fairy",
-            "power": 90,
-            "energy": 60,
-            "energyGain": 0,
-            "cooldown": 500,
-            "archetype": "High Energy",
-            "turns": 1
-        },
-        {
             "moveId": "PLASMA_FISTS",
             "name": "Plasma Fists",
             "type": "electric",
@@ -48463,6 +48466,18 @@
             "energyGain": 0,
             "cooldown": 500,
             "archetype": "Spam/Bait",
+            "turns": 1,
+            "abbreviation": "PlF"
+        },
+        {
+            "moveId": "PLAY_ROUGH",
+            "name": "Play Rough",
+            "type": "fairy",
+            "power": 90,
+            "energy": 60,
+            "energyGain": 0,
+            "cooldown": 500,
+            "archetype": "High Energy",
             "turns": 1
         },
         {

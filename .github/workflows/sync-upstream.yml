@@ -29,6 +29,11 @@ permissions:
   pages: write
   id-token: write
 
+# Scenario regeneration makes runs long; never let two syncs race on develop/master
+concurrency:
+  group: sync-upstream
+  cancel-in-progress: false
+
 jobs:
   sync-and-generate:
     runs-on: ubuntu-latest
@@ -145,6 +150,11 @@ jobs:
         run: |
           cd scripts/cli
           echo "Generating rankings..."
+
+          # Generate dedicated Competitors Cup scenario/overall rankings (GL minus
+          # Mimikyu). Open leagues track upstream's committed rankings as-is; the
+          # competitors overrides were re-derived by patch-gamemaster.py above.
+          node generate-scenario-rankings.js --cups=competitors:1500 2>&1 | tee /tmp/scenario-output.txt
 
           # Run and capture output
           node generate-rankings.js 2>&1 | tee /tmp/rankings-output.txt

@@ -3,16 +3,26 @@
 $formats = array (
   0 => 
   array (
+    'title' => 'Competitors Cup',
+    'cup' => 'competitors',
+    'cp' => 1500,
+    'meta' => 'championshipseries',
+    'showCup' => true,
+    'showFormat' => true,
+    'showMeta' => true,
+  ),
+  1 => 
+  array (
     'title' => 'P!P Championship Series',
     'cup' => 'championshipseries',
     'cp' => 1500,
     'meta' => 'championshipseries',
-    'showCup' => false,
+    'showCup' => true,
     'showFormat' => true,
     'showMeta' => true,
     'hideRankings' => true,
   ),
-  1 => 
+  2 => 
   array (
     'title' => 'Master Premier Cup',
     'cup' => 'premier',
@@ -28,7 +38,7 @@ $formats = array (
       1 => 'Legendary Pokémon, Mythical Pokémon, and Ultra Beasts are not eligible.',
     ),
   ),
-  2 => 
+  3 => 
   array (
     'title' => 'Summer Cup',
     'cup' => 'summer',
@@ -43,7 +53,7 @@ $formats = array (
       1 => 'Only Normal-, Fire-, Water-, Grass-, Electric-, and Bug-type Pokémon are eligible.',
     ),
   ),
-  3 => 
+  4 => 
   array (
     'title' => 'Fantasy Cup (Ultra League)',
     'cup' => 'fantasy',
@@ -58,7 +68,7 @@ $formats = array (
       1 => 'Only Dragon-, Steel-, and Fairy-type Pokémon are eligible.',
     ),
   ),
-  4 => 
+  5 => 
   array (
     'title' => 'Retro Cup',
     'cup' => 'retro',
@@ -73,7 +83,7 @@ $formats = array (
       1 => 'Dark-, Steel-, and Fairy-type Pokémon are not eligible.',
     ),
   ),
-  5 => 
+  6 => 
   array (
     'title' => 'Battle Frontier (Copa Dilúvio)',
     'cup' => 'copadiluvio',
@@ -83,7 +93,7 @@ $formats = array (
     'showFormat' => true,
     'showMeta' => true,
   ),
-  6 => 
+  7 => 
   array (
     'title' => 'Battle Frontier (Tsuki Cup)',
     'cup' => 'tsuki',
@@ -93,7 +103,7 @@ $formats = array (
     'showFormat' => true,
     'showMeta' => true,
   ),
-  7 => 
+  8 => 
   array (
     'title' => 'Battle Frontier (Liga Ultra)',
     'cup' => 'ligaultra',
@@ -103,7 +113,7 @@ $formats = array (
     'showFormat' => true,
     'showMeta' => true,
   ),
-  8 => 
+  9 => 
   array (
     'title' => 'Battle Frontier (Coupe du Sillage)',
     'cup' => 'coupedusillage',
@@ -113,7 +123,7 @@ $formats = array (
     'showFormat' => true,
     'showMeta' => true,
   ),
-  9 => 
+  10 => 
   array (
     'title' => 'Devon Equinox Cup',
     'cup' => 'equinox',
@@ -123,7 +133,7 @@ $formats = array (
     'showFormat' => true,
     'showMeta' => true,
   ),
-  10 => 
+  11 => 
   array (
     'title' => 'Devon Bastille Cup',
     'cup' => 'bastille',
@@ -133,7 +143,7 @@ $formats = array (
     'showFormat' => true,
     'showMeta' => true,
   ),
-  11 => 
+  12 => 
   array (
     'title' => 'Little Cup',
     'cup' => 'little',
@@ -143,7 +153,7 @@ $formats = array (
     'showFormat' => false,
     'showMeta' => false,
   ),
-  12 => 
+  13 => 
   array (
     'title' => 'Catch Cup',
     'cup' => 'catch',
@@ -153,13 +163,13 @@ $formats = array (
     'showFormat' => false,
     'showMeta' => false,
   ),
-  13 => 
+  14 => 
   array (
     'title' => 'Custom',
     'cup' => 'custom',
     'cp' => 1500,
     'meta' => 'great',
-    'showCup' => false,
+    'showCup' => true,
     'showFormat' => true,
     'showMeta' => false,
   ),

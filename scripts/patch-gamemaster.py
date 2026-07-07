@@ -40,6 +40,32 @@ GAMEMASTER_FILES = [
     os.path.join(DATA_DIR, 'gamemaster.min.json'),
 ]
 
+# Competitors Cup (Worlds 2026 format): GL 1500 without Mimikyu. Open leagues track
+# upstream as-is (new battle system, Mimikyu released); the cup has its own dedicated
+# rankings and overrides, both re-derived after every upstream merge. Flip to False
+# once the cup ends (2026-08-30).
+COMPETITORS_CUP_ACTIVE = True
+
+COMPETITORS_FORMAT = {
+    "title": "Competitors Cup",
+    "cup": "competitors",
+    "cp": 1500,
+    "meta": "championshipseries",
+    "showCup": True,
+    "showFormat": True,
+    "showMeta": True,
+}
+
+COMPETITORS_CUP_FILE = os.path.join(DATA_DIR, 'gamemaster', 'cups', 'competitors.json')
+
+# Files containing the formats list. gamemaster/formats.json is a plain list
+# (tab-indented); the two wrappers nest it under 'formats' (and cups under 'cups').
+FORMATS_FILES = [
+    os.path.join(DATA_DIR, 'gamemaster', 'formats.json'),
+    os.path.join(DATA_DIR, 'gamemaster.json'),
+    os.path.join(DATA_DIR, 'gamemaster.min.json'),
+]
+
 # Files containing the moves list. The two wrappers nest it under 'moves';
 # gamemaster/moves.json is a plain list.
 MOVES_FILES = [
@@ -154,6 +180,76 @@ def dedupe_moves(moves_list):
     return removed
 
 
+def sync_competitors_overrides():
+    """Derive overrides/competitors/1500.json from overrides/all/1500.json
+    (minus Mimikyu) so Competitors movesets/editor scores track upstream's
+    ongoing GL editorial changes."""
+    if not COMPETITORS_CUP_ACTIVE:
+        return 0
+    src = os.path.join(DATA_DIR, 'overrides', 'all', '1500.json')
+    dst = os.path.join(DATA_DIR, 'overrides', 'competitors', '1500.json')
+    if not os.path.exists(src):
+        return 0
+    with open(src) as f:
+        entries = [e for e in json.load(f) if e.get('speciesId') != 'mimikyu']
+    payload = json.dumps(entries, separators=(',', ':'), ensure_ascii=False)
+    if os.path.exists(dst):
+        with open(dst) as f:
+            if f.read().strip() == payload:
+                return 0
+    os.makedirs(os.path.dirname(dst), exist_ok=True)
+    with open(dst, 'w') as f:
+        f.write(payload)
+    print(f"  Synced overrides/competitors/1500.json ({len(entries)} entries)")
+    return 1
+
+
+def ensure_competitors_format(formats_list):
+    """Re-insert the Competitors Cup format entry if an upstream merge dropped it."""
+    if not COMPETITORS_CUP_ACTIVE:
+        return 0
+    if any(f.get('cup') == 'competitors' for f in formats_list):
+        return 0
+    formats_list.insert(0, dict(COMPETITORS_FORMAT))
+    print("  Re-inserted Competitors Cup format entry")
+    return 1
+
+
+def remove_pip_format(formats_list):
+    """Drop upstream's 'P!P Championship Series' format: it aliases open GL
+    rankings, so in the app it's a duplicate of Great League — the dedicated
+    Competitors Cup covers the tournament format instead. (The championshipseries
+    meta GROUP file stays; the Competitors format references it.)"""
+    if not COMPETITORS_CUP_ACTIVE:
+        return 0
+    before = len(formats_list)
+    formats_list[:] = [f for f in formats_list if f.get('cup') != 'championshipseries']
+    removed = before - len(formats_list)
+    if removed:
+        print("  Removed P!P Championship Series format (duplicate of Great League)")
+    return removed
+
+
+def ensure_competitors_cup(cups_list):
+    """Ensure the compiled gamemaster's cups array contains the competitors cup
+    (upstream's compiled gamemaster.json doesn't know about it)."""
+    if not COMPETITORS_CUP_ACTIVE:
+        return 0
+    if any(c.get('name') == 'competitors' for c in cups_list):
+        return 0
+    with open(COMPETITORS_CUP_FILE) as f:
+        cups_list.append(json.load(f))
+    print("  Re-inserted competitors cup definition")
+    return 1
+
+
+def write_formats_json(filepath, formats_list):
+    """gamemaster/formats.json is tab-indented."""
+    with open(filepath, 'w') as f:
+        f.write(json.dumps(formats_list, indent='\t', ensure_ascii=False))
+        f.write('\n')
+
+
 PATCHES = [
     ("formChange missing alternativeFormId", patch_formchange_missing_alternative_form_id),
 ]
@@ -201,6 +297,30 @@ def main():
         if file_patched > 0:
             save_moves(filepath, moves_list, wrapper)
             total_patched += file_patched
+
+    for filepath in FORMATS_FILES:
+        if not os.path.exists(filepath):
+            continue
+
+        print(f"Checking {os.path.relpath(filepath, DATA_DIR)} (formats)...")
+        with open(filepath) as f:
+            data = json.load(f)
+        is_wrapper = not isinstance(data, list)
+        formats_list = data['formats'] if is_wrapper else data
+
+        file_patched = ensure_competitors_format(formats_list)
+        file_patched += remove_pip_format(formats_list)
+        if is_wrapper and 'cups' in data:
+            file_patched += ensure_competitors_cup(data['cups'])
+
+        if file_patched > 0:
+            if is_wrapper:
+                write_gamemaster_json(filepath, data)
+            else:
+                write_formats_json(filepath, formats_list)
+            total_patched += file_patched
+
+    total_patched += sync_competitors_overrides()
 
     if total_patched > 0:
         print(f"\nTotal patches applied: {total_patched}")
