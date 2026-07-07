@@ -40,10 +40,10 @@ GAMEMASTER_FILES = [
     os.path.join(DATA_DIR, 'gamemaster.min.json'),
 ]
 
-# Competitors Cup (Worlds 2026 format): GL 1500 on the OLD battle system, no Mimikyu.
-# Upstream serves the new battle system (Mimikyu released, ranked in open GL), so after
-# every upstream merge we must re-assert the old-system state. Flip to False once the
-# cup ends (2026-08-30) to resume tracking upstream as-is.
+# Competitors Cup (Worlds 2026 format): GL 1500 without Mimikyu. Open leagues track
+# upstream as-is (new battle system, Mimikyu released); the cup has its own dedicated
+# rankings and overrides, both re-derived after every upstream merge. Flip to False
+# once the cup ends (2026-08-30).
 COMPETITORS_CUP_ACTIVE = True
 
 COMPETITORS_FORMAT = {
@@ -180,19 +180,28 @@ def dedupe_moves(moves_list):
     return removed
 
 
-def patch_mimikyu_unreleased(pokemon_list):
-    """Competitors Cup runs on the old battle system where Mimikyu doesn't exist.
-    Upstream marks it released (new system); un-release it so open GL rankings
-    double as the Competitors meta."""
+def sync_competitors_overrides():
+    """Derive overrides/competitors/1500.json from overrides/all/1500.json
+    (minus Mimikyu) so Competitors movesets/editor scores track upstream's
+    ongoing GL editorial changes."""
     if not COMPETITORS_CUP_ACTIVE:
         return 0
-    patched = 0
-    for p in pokemon_list:
-        if p['speciesId'] in ('mimikyu', 'mimikyu_busted') and p.get('released'):
-            p['released'] = False
-            print(f"  Patched {p['speciesId']}: released = false (Competitors Cup)")
-            patched += 1
-    return patched
+    src = os.path.join(DATA_DIR, 'overrides', 'all', '1500.json')
+    dst = os.path.join(DATA_DIR, 'overrides', 'competitors', '1500.json')
+    if not os.path.exists(src):
+        return 0
+    with open(src) as f:
+        entries = [e for e in json.load(f) if e.get('speciesId') != 'mimikyu']
+    payload = json.dumps(entries, separators=(',', ':'), ensure_ascii=False)
+    if os.path.exists(dst):
+        with open(dst) as f:
+            if f.read().strip() == payload:
+                return 0
+    os.makedirs(os.path.dirname(dst), exist_ok=True)
+    with open(dst, 'w') as f:
+        f.write(payload)
+    print(f"  Synced overrides/competitors/1500.json ({len(entries)} entries)")
+    return 1
 
 
 def ensure_competitors_format(formats_list):
@@ -228,7 +237,6 @@ def write_formats_json(filepath, formats_list):
 
 PATCHES = [
     ("formChange missing alternativeFormId", patch_formchange_missing_alternative_form_id),
-    ("mimikyu unreleased (Competitors Cup)", patch_mimikyu_unreleased),
 ]
 
 MOVES_PATCHES = [
@@ -295,6 +303,8 @@ def main():
             else:
                 write_formats_json(filepath, formats_list)
             total_patched += file_patched
+
+    total_patched += sync_competitors_overrides()
 
     if total_patched > 0:
         print(f"\nTotal patches applied: {total_patched}")

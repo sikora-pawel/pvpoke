@@ -151,11 +151,10 @@ jobs:
           cd scripts/cli
           echo "Generating rankings..."
 
-          # Regenerate open-league scenario/overall rankings first: the upstream merge
-          # brings in EmpoleonDynamite's generated rankings (Mimikyu meta / new battle
-          # system), which must be replaced with old-system Competitors-compatible data.
-          # Runs after patch-gamemaster.py, so Mimikyu is unreleased here.
-          node generate-scenario-rankings.js --cups=all:1500,all:2500,all:10000 2>&1 | tee /tmp/scenario-output.txt
+          # Generate dedicated Competitors Cup scenario/overall rankings (GL minus
+          # Mimikyu). Open leagues track upstream's committed rankings as-is; the
+          # competitors overrides were re-derived by patch-gamemaster.py above.
+          node generate-scenario-rankings.js --cups=competitors:1500 2>&1 | tee /tmp/scenario-output.txt
 
           # Run and capture output
           node generate-rankings.js 2>&1 | tee /tmp/rankings-output.txt
