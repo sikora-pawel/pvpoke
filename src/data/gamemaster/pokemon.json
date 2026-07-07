@@ -38196,7 +38196,7 @@
         "searchPriority": 4,
         "buddyDistance": 5,
         "thirdMoveCost": 50000,
-        "released": true
+        "released": false
     },
     {
         "dex": 778,

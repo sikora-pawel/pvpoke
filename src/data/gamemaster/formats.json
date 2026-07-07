@@ -1,5 +1,14 @@
 [
 	{
+		"title": "Competitors Cup",
+		"cup": "competitors",
+		"cp": 1500,
+		"meta": "championshipseries",
+		"showCup": true,
+		"showFormat": true,
+		"showMeta": true
+	},
+	{
 		"title": "P!P Championship Series",
 		"cup": "championshipseries",
 		"cp": 1500,
