@@ -215,6 +215,21 @@ def ensure_competitors_format(formats_list):
     return 1
 
 
+def remove_pip_format(formats_list):
+    """Drop upstream's 'P!P Championship Series' format: it aliases open GL
+    rankings, so in the app it's a duplicate of Great League — the dedicated
+    Competitors Cup covers the tournament format instead. (The championshipseries
+    meta GROUP file stays; the Competitors format references it.)"""
+    if not COMPETITORS_CUP_ACTIVE:
+        return 0
+    before = len(formats_list)
+    formats_list[:] = [f for f in formats_list if f.get('cup') != 'championshipseries']
+    removed = before - len(formats_list)
+    if removed:
+        print("  Removed P!P Championship Series format (duplicate of Great League)")
+    return removed
+
+
 def ensure_competitors_cup(cups_list):
     """Ensure the compiled gamemaster's cups array contains the competitors cup
     (upstream's compiled gamemaster.json doesn't know about it)."""
@@ -294,6 +309,7 @@ def main():
         formats_list = data['formats'] if is_wrapper else data
 
         file_patched = ensure_competitors_format(formats_list)
+        file_patched += remove_pip_format(formats_list)
         if is_wrapper and 'cups' in data:
             file_patched += ensure_competitors_cup(data['cups'])
 
