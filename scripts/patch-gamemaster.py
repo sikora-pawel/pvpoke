@@ -40,6 +40,32 @@ GAMEMASTER_FILES = [
     os.path.join(DATA_DIR, 'gamemaster.min.json'),
 ]
 
+# Competitors Cup (Worlds 2026 format): GL 1500 on the OLD battle system, no Mimikyu.
+# Upstream serves the new battle system (Mimikyu released, ranked in open GL), so after
+# every upstream merge we must re-assert the old-system state. Flip to False once the
+# cup ends (2026-08-30) to resume tracking upstream as-is.
+COMPETITORS_CUP_ACTIVE = True
+
+COMPETITORS_FORMAT = {
+    "title": "Competitors Cup",
+    "cup": "competitors",
+    "cp": 1500,
+    "meta": "championshipseries",
+    "showCup": True,
+    "showFormat": True,
+    "showMeta": True,
+}
+
+COMPETITORS_CUP_FILE = os.path.join(DATA_DIR, 'gamemaster', 'cups', 'competitors.json')
+
+# Files containing the formats list. gamemaster/formats.json is a plain list
+# (tab-indented); the two wrappers nest it under 'formats' (and cups under 'cups').
+FORMATS_FILES = [
+    os.path.join(DATA_DIR, 'gamemaster', 'formats.json'),
+    os.path.join(DATA_DIR, 'gamemaster.json'),
+    os.path.join(DATA_DIR, 'gamemaster.min.json'),
+]
+
 # Files containing the moves list. The two wrappers nest it under 'moves';
 # gamemaster/moves.json is a plain list.
 MOVES_FILES = [
@@ -154,8 +180,55 @@ def dedupe_moves(moves_list):
     return removed
 
 
+def patch_mimikyu_unreleased(pokemon_list):
+    """Competitors Cup runs on the old battle system where Mimikyu doesn't exist.
+    Upstream marks it released (new system); un-release it so open GL rankings
+    double as the Competitors meta."""
+    if not COMPETITORS_CUP_ACTIVE:
+        return 0
+    patched = 0
+    for p in pokemon_list:
+        if p['speciesId'] in ('mimikyu', 'mimikyu_busted') and p.get('released'):
+            p['released'] = False
+            print(f"  Patched {p['speciesId']}: released = false (Competitors Cup)")
+            patched += 1
+    return patched
+
+
+def ensure_competitors_format(formats_list):
+    """Re-insert the Competitors Cup format entry if an upstream merge dropped it."""
+    if not COMPETITORS_CUP_ACTIVE:
+        return 0
+    if any(f.get('cup') == 'competitors' for f in formats_list):
+        return 0
+    formats_list.insert(0, dict(COMPETITORS_FORMAT))
+    print("  Re-inserted Competitors Cup format entry")
+    return 1
+
+
+def ensure_competitors_cup(cups_list):
+    """Ensure the compiled gamemaster's cups array contains the competitors cup
+    (upstream's compiled gamemaster.json doesn't know about it)."""
+    if not COMPETITORS_CUP_ACTIVE:
+        return 0
+    if any(c.get('name') == 'competitors' for c in cups_list):
+        return 0
+    with open(COMPETITORS_CUP_FILE) as f:
+        cups_list.append(json.load(f))
+    print("  Re-inserted competitors cup definition")
+    return 1
+
+
+def write_formats_json(filepath, formats_list):
+    """gamemaster/formats.json is tab-indented."""
+    with open(filepath, 'w') as f:
+        f.write(json.dumps(formats_list, indent='\t', ensure_ascii=False))
+        f.write('\n')
+
+
 PATCHES = [
     ("formChange missing alternativeFormId", patch_formchange_missing_alternative_form_id),
+    ("mimikyu unreleased (Competitors Cup)", patch_mimikyu_unreleased),
 ]
 
 MOVES_PATCHES = [
@@ -200,6 +273,27 @@ def main():
 
         if file_patched > 0:
             save_moves(filepath, moves_list, wrapper)
+            total_patched += file_patched
+
+    for filepath in FORMATS_FILES:
+        if not os.path.exists(filepath):
+            continue
+
+        print(f"Checking {os.path.relpath(filepath, DATA_DIR)} (formats)...")
+        with open(filepath) as f:
+            data = json.load(f)
+        is_wrapper = not isinstance(data, list)
+        formats_list = data['formats'] if is_wrapper else data
+
+        file_patched = ensure_competitors_format(formats_list)
+        if is_wrapper and 'cups' in data:
+            file_patched += ensure_competitors_cup(data['cups'])
+
+        if file_patched > 0:
+            if is_wrapper:
+                write_gamemaster_json(filepath, data)
+            else:
+                write_formats_json(filepath, formats_list)
             total_patched += file_patched
 
     if total_patched > 0:
