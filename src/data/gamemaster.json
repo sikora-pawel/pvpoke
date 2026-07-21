@@ -1,5 +1,5 @@
 {
-    "timestamp": "2026-07-16 00:02:57",
+    "timestamp": "2026-07-21 01:32:55",
     "id": "gamemaster",
     "title": "Default",
     "settings": {
@@ -248,7 +248,7 @@
         },
         {
             "name": "copadiluvio",
-            "title": "Battle Frontier (Copa Dil\u00favio)",
+            "title": "Battle Frontier (Copa Dilúvio)",
             "include": [
                 {
                     "filterType": "type",
@@ -610,53 +610,18 @@
                     "values": ["abomasnow", "amaura", "annihilape", "aurorus", "azumarill", "bewear", "carbink", "cetoddle", "chansey", "clefable", "corsola_galarian", "cradily", "crustle", "dolliv", "drampa", "dubwool", "dudunsparce", "dunsparce", "dusknoir", "frillish", "furfrou", "furret", "girafarig", "greedent", "jellicent", "kangaskhan", "kecleon", "lapras", "lickilicky", "lickitung", "lileep", "linoone", "miltank", "mimikyu", "naclstack", "ninetales_alolan", "oinkologne", "oinkologne_female", "oranguru", "relicanth", "spinda", "ursaring", "vigoroth", "weezing_galarian", "wigglytuff", "wyrdeer", "zangoose"]
                 }
             ]
-        },
-        {
-            "name": "competitors",
-            "title": "Competitors Cup",
-            "include": [],
-            "exclude": [
-                {
-                    "filterType": "tag",
-                    "values": ["mega"]
-                },
-                {
-                    "filterType": "id",
-                    "values": ["mimikyu"]
-                }
-            ]
         }
     ],
     "formats": [
         {
-            "title": "Competitors Cup",
-            "cup": "competitors",
+            "title": "P!P Championship Series",
+            "cup": "championshipseries",
             "cp": 1500,
             "meta": "championshipseries",
             "showCup": true,
             "showFormat": true,
-            "showMeta": true
-        },
-        {
-            "title": "Master Premier Cup",
-            "cup": "premier",
-            "cp": 10000,
-            "meta": "premiermaster",
-            "showCup": true,
-            "showFormat": false,
             "showMeta": true,
-            "hideRankings": true,
-            "rules": ["No CP limit.", "Legendary Pok\u00e9mon, Mythical Pok\u00e9mon, and Ultra Beasts are not eligible."]
-        },
-        {
-            "title": "Fantasy Cup (Ultra League)",
-            "cup": "fantasy",
-            "cp": 2500,
-            "meta": "fantasyultra",
-            "showCup": true,
-            "showFormat": true,
-            "showMeta": true,
-            "rules": ["Pok\u00e9mon must be at or below 2, 500 CP to enter.", "Only Dragon-, Steel-, and Fairy-type Pok\u00e9mon are eligible."]
+            "hideRankings": true
         },
         {
             "title": "Retro Cup",
@@ -666,10 +631,20 @@
             "showCup": true,
             "showFormat": true,
             "showMeta": true,
-            "rules": ["Pok\u00e9mon must be at or below 2, 500 CP to enter.", "Dark-, Steel-, and Fairy-type Pok\u00e9mon are not eligible."]
+            "rules": ["Pokémon must be at or below 2, 500 CP to enter.", "Dark-,  Steel-,  and Fairy-type Pokémon are not eligible."]
         },
         {
-            "title": "Battle Frontier (Copa Dil\u00favio)",
+            "title": "Master Premier Cup",
+            "cup": "premier",
+            "cp": 10000,
+            "meta": "premiermaster",
+            "showCup": true,
+            "showFormat": true,
+            "showMeta": true,
+            "rules": ["No CP limit.", "Legendary Pokémon,  Mythical Pokémon,  and Ultra Beasts are not eligible."]
+        },
+        {
+            "title": "Battle Frontier (Copa Dilúvio)",
             "cup": "copadiluvio",
             "cp": 1500,
             "meta": "copadiluvio",
@@ -39107,8 +39082,7 @@
             "formChange": {
                 "type": "set",
                 "trigger": "none",
-                "resetOnSwitch": false,
-                "alternativeFormId": "mimikyu"
+                "resetOnSwitch": false
             },
             "buddyDistance": 5,
             "thirdMoveCost": 50000,
