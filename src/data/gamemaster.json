@@ -1,5 +1,5 @@
 {
-    "timestamp": "2026-07-16 00:02:57",
+    "timestamp": "2026-07-21 01:32:55",
     "id": "gamemaster",
     "title": "Default",
     "settings": {
@@ -638,27 +638,6 @@
             "showMeta": true
         },
         {
-            "title": "Master Premier Cup",
-            "cup": "premier",
-            "cp": 10000,
-            "meta": "premiermaster",
-            "showCup": true,
-            "showFormat": false,
-            "showMeta": true,
-            "hideRankings": true,
-            "rules": ["No CP limit.", "Legendary Pok\u00e9mon, Mythical Pok\u00e9mon, and Ultra Beasts are not eligible."]
-        },
-        {
-            "title": "Fantasy Cup (Ultra League)",
-            "cup": "fantasy",
-            "cp": 2500,
-            "meta": "fantasyultra",
-            "showCup": true,
-            "showFormat": true,
-            "showMeta": true,
-            "rules": ["Pok\u00e9mon must be at or below 2, 500 CP to enter.", "Only Dragon-, Steel-, and Fairy-type Pok\u00e9mon are eligible."]
-        },
-        {
             "title": "Retro Cup",
             "cup": "retro",
             "cp": 1500,
@@ -667,6 +646,16 @@
             "showFormat": true,
             "showMeta": true,
             "rules": ["Pok\u00e9mon must be at or below 2, 500 CP to enter.", "Dark-, Steel-, and Fairy-type Pok\u00e9mon are not eligible."]
+        },
+        {
+            "title": "Master Premier Cup",
+            "cup": "premier",
+            "cp": 10000,
+            "meta": "premiermaster",
+            "showCup": true,
+            "showFormat": true,
+            "showMeta": true,
+            "rules": ["No CP limit.", "Legendary Pok\u00e9mon, Mythical Pok\u00e9mon, and Ultra Beasts are not eligible."]
         },
         {
             "title": "Battle Frontier (Copa Dil\u00favio)",
