@@ -248,7 +248,7 @@
         },
         {
             "name": "copadiluvio",
-            "title": "Battle Frontier (Copa Dilúvio)",
+            "title": "Battle Frontier (Copa Dil\u00favio)",
             "include": [
                 {
                     "filterType": "type",
@@ -610,18 +610,32 @@
                     "values": ["abomasnow", "amaura", "annihilape", "aurorus", "azumarill", "bewear", "carbink", "cetoddle", "chansey", "clefable", "corsola_galarian", "cradily", "crustle", "dolliv", "drampa", "dubwool", "dudunsparce", "dunsparce", "dusknoir", "frillish", "furfrou", "furret", "girafarig", "greedent", "jellicent", "kangaskhan", "kecleon", "lapras", "lickilicky", "lickitung", "lileep", "linoone", "miltank", "mimikyu", "naclstack", "ninetales_alolan", "oinkologne", "oinkologne_female", "oranguru", "relicanth", "spinda", "ursaring", "vigoroth", "weezing_galarian", "wigglytuff", "wyrdeer", "zangoose"]
                 }
             ]
+        },
+        {
+            "name": "competitors",
+            "title": "Competitors Cup",
+            "include": [],
+            "exclude": [
+                {
+                    "filterType": "tag",
+                    "values": ["mega"]
+                },
+                {
+                    "filterType": "id",
+                    "values": ["mimikyu"]
+                }
+            ]
         }
     ],
     "formats": [
         {
-            "title": "P!P Championship Series",
-            "cup": "championshipseries",
+            "title": "Competitors Cup",
+            "cup": "competitors",
             "cp": 1500,
             "meta": "championshipseries",
             "showCup": true,
             "showFormat": true,
-            "showMeta": true,
-            "hideRankings": true
+            "showMeta": true
         },
         {
             "title": "Retro Cup",
@@ -631,7 +645,7 @@
             "showCup": true,
             "showFormat": true,
             "showMeta": true,
-            "rules": ["Pokémon must be at or below 2, 500 CP to enter.", "Dark-,  Steel-,  and Fairy-type Pokémon are not eligible."]
+            "rules": ["Pok\u00e9mon must be at or below 2, 500 CP to enter.", "Dark-, Steel-, and Fairy-type Pok\u00e9mon are not eligible."]
         },
         {
             "title": "Master Premier Cup",
@@ -641,10 +655,10 @@
             "showCup": true,
             "showFormat": true,
             "showMeta": true,
-            "rules": ["No CP limit.", "Legendary Pokémon,  Mythical Pokémon,  and Ultra Beasts are not eligible."]
+            "rules": ["No CP limit.", "Legendary Pok\u00e9mon, Mythical Pok\u00e9mon, and Ultra Beasts are not eligible."]
         },
         {
-            "title": "Battle Frontier (Copa Dilúvio)",
+            "title": "Battle Frontier (Copa Dil\u00favio)",
             "cup": "copadiluvio",
             "cp": 1500,
             "meta": "copadiluvio",
@@ -39082,7 +39096,8 @@
             "formChange": {
                 "type": "set",
                 "trigger": "none",
-                "resetOnSwitch": false
+                "resetOnSwitch": false,
+                "alternativeFormId": "mimikyu"
             },
             "buddyDistance": 5,
             "thirdMoveCost": 50000,
