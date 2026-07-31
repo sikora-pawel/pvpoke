@@ -1,5 +1,5 @@
 {
-    "timestamp": "2026-07-27 01:52:24",
+    "timestamp": "2026-07-30 21:39:36",
     "id": "gamemaster",
     "title": "Default",
     "settings": {
@@ -612,17 +612,18 @@
             ]
         },
         {
-            "name": "competitors",
-            "title": "Competitors Cup",
-            "include": [],
+            "name": "weather",
+            "title": "Weather Cup",
+            "include": [
+                {
+                    "filterType": "type",
+                    "values": ["fire", "water", "ice", "rock"]
+                }
+            ],
             "exclude": [
                 {
                     "filterType": "tag",
                     "values": ["mega"]
-                },
-                {
-                    "filterType": "id",
-                    "values": ["mimikyu"]
                 }
             ]
         }
@@ -638,16 +639,6 @@
             "showMeta": true
         },
         {
-            "title": "Retro Cup",
-            "cup": "retro",
-            "cp": 1500,
-            "meta": "retro",
-            "showCup": true,
-            "showFormat": true,
-            "showMeta": true,
-            "rules": ["Pok\u00e9mon must be at or below 2, 500 CP to enter.", "Dark-, Steel-, and Fairy-type Pok\u00e9mon are not eligible."]
-        },
-        {
             "title": "Master Premier Cup",
             "cup": "premier",
             "cp": 10000,
@@ -656,6 +647,16 @@
             "showFormat": true,
             "showMeta": true,
             "rules": ["No CP limit.", "Legendary Pok\u00e9mon, Mythical Pok\u00e9mon, and Ultra Beasts are not eligible."]
+        },
+        {
+            "title": "Weather Cup",
+            "cup": "weather",
+            "cp": 1500,
+            "meta": "weather",
+            "showCup": true,
+            "showFormat": true,
+            "showMeta": true,
+            "rules": ["Pokémon must be at or below 1, 500 CP to enter.", "Only Fire-,  Water-,  Ice-,  and Rock-type Pokémon are eligible."]
         },
         {
             "title": "Mega Master League",
