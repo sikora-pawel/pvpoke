@@ -626,6 +626,21 @@
                     "values": ["mega"]
                 }
             ]
+        },
+        {
+            "name": "competitors",
+            "title": "Competitors Cup",
+            "include": [],
+            "exclude": [
+                {
+                    "filterType": "tag",
+                    "values": ["mega"]
+                },
+                {
+                    "filterType": "id",
+                    "values": ["mimikyu"]
+                }
+            ]
         }
     ],
     "formats": [
@@ -656,7 +671,7 @@
             "showCup": true,
             "showFormat": true,
             "showMeta": true,
-            "rules": ["Pokémon must be at or below 1, 500 CP to enter.", "Only Fire-,  Water-,  Ice-,  and Rock-type Pokémon are eligible."]
+            "rules": ["Pok\u00e9mon must be at or below 1, 500 CP to enter.", "Only Fire-, Water-, Ice-, and Rock-type Pok\u00e9mon are eligible."]
         },
         {
             "title": "Mega Master League",
@@ -667,10 +682,10 @@
             "showFormat": false,
             "showMeta": true,
             "hideRankings": true,
-            "rules": ["No CP limit.", "Legendary Pokémon,  Mythical Pokémon,  and Ultra Beasts are not eligible."]
+            "rules": ["No CP limit.", "Legendary Pok\u00e9mon, Mythical Pok\u00e9mon, and Ultra Beasts are not eligible."]
         },
         {
-            "title": "Battle Frontier (Copa Dilúvio)",
+            "title": "Battle Frontier (Copa Dil\u00favio)",
             "cup": "copadiluvio",
             "cp": 1500,
             "meta": "copadiluvio",
