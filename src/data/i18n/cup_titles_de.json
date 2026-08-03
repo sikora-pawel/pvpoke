@@ -17,10 +17,12 @@
   "ligaultra_2500": "Battle Frontier (Liga Ultra)",
   "little": "Mini-Cup",
   "little_500": "Mini-Cup",
+  "mega": "Mega-Edition: Meisterliga",
+  "mega_10000": "Mega-Edition: Meisterliga",
   "premier": "Meister-Premier",
   "premier_10000": "Meister-Premier",
-  "retro": "Retro-Cup (Superliga)",
-  "retro_1500": "Retro-Cup (Superliga)",
   "tsuki": "Battle Frontier (Tsuki Cup)",
-  "tsuki_1500": "Battle Frontier (Tsuki Cup)"
+  "tsuki_1500": "Battle Frontier (Tsuki Cup)",
+  "weather": "Wetter-Cup (Superliga)",
+  "weather_1500": "Wetter-Cup (Superliga)"
 }

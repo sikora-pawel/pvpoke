@@ -17,10 +17,12 @@
   "ligaultra_2500": "Battle Frontier (Liga Ultra)",
   "little": "Coppa Piccoli",
   "little_500": "Coppa Piccoli",
+  "mega": "Lega Master (Mega)",
+  "mega_10000": "Lega Master (Mega)",
   "premier": "Premier Master",
   "premier_10000": "Premier Master",
-  "retro": "Coppa Retro (Lega Mega)",
-  "retro_1500": "Coppa Retro (Lega Mega)",
   "tsuki": "Battle Frontier (Tsuki Cup)",
-  "tsuki_1500": "Battle Frontier (Tsuki Cup)"
+  "tsuki_1500": "Battle Frontier (Tsuki Cup)",
+  "weather": "Coppa Meteo (Lega Mega)",
+  "weather_1500": "Coppa Meteo (Lega Mega)"
 }

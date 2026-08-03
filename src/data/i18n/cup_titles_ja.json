@@ -17,10 +17,12 @@
   "ligaultra_2500": "Battle Frontier (Liga Ultra)",
   "little": "リトルカップ",
   "little_500": "リトルカップ",
+  "mega": "マスターリーグ (メガ)",
+  "mega_10000": "マスターリーグ (メガ)",
   "premier": "マスタープレミア",
   "premier_10000": "マスタープレミア",
-  "retro": "レトロカップ (スーパーリーグ)",
-  "retro_1500": "レトロカップ (スーパーリーグ)",
   "tsuki": "Battle Frontier (Tsuki Cup)",
-  "tsuki_1500": "Battle Frontier (Tsuki Cup)"
+  "tsuki_1500": "Battle Frontier (Tsuki Cup)",
+  "weather": "自然界カップ (スーパーリーグ)",
+  "weather_1500": "自然界カップ (スーパーリーグ)"
 }
