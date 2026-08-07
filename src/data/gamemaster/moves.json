@@ -2696,17 +2696,6 @@
         "turns": 1
     },
     {
-        "moveId": "PLAY_ROUGH",
-        "name": "Play Rough",
-        "type": "fairy",
-        "power": 90,
-        "energy": 60,
-        "energyGain": 0,
-        "cooldown": 500,
-        "archetype": "High Energy",
-        "turns": 1
-    },
-    {
         "moveId": "POISON_FANG",
         "name": "Poison Fang",
         "type": "poison",
