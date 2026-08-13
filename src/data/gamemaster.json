@@ -1,5 +1,5 @@
 {
-    "timestamp": "2026-08-10 00:03:32",
+    "timestamp": "2026-08-13 20:39:22",
     "id": "gamemaster",
     "title": "Default",
     "settings": {
@@ -248,7 +248,7 @@
         },
         {
             "name": "copadiluvio",
-            "title": "Battle Frontier (Copa Dil\u00favio)",
+            "title": "Battle Frontier (Copa Dilúvio)",
             "include": [
                 {
                     "filterType": "type",
@@ -663,32 +663,18 @@
                     "values": ["mega"]
                 }
             ]
-        },
-        {
-            "name": "competitors",
-            "title": "Competitors Cup",
-            "include": [],
-            "exclude": [
-                {
-                    "filterType": "tag",
-                    "values": ["mega"]
-                },
-                {
-                    "filterType": "id",
-                    "values": ["mimikyu"]
-                }
-            ]
         }
     ],
     "formats": [
         {
-            "title": "Competitors Cup",
-            "cup": "competitors",
+            "title": "P!P Championship Series",
+            "cup": "championshipseries",
             "cp": 1500,
             "meta": "championshipseries",
             "showCup": true,
             "showFormat": true,
-            "showMeta": true
+            "showMeta": true,
+            "hideRankings": true
         },
         {
             "title": "Weather Cup",
@@ -698,7 +684,7 @@
             "showCup": true,
             "showFormat": true,
             "showMeta": true,
-            "rules": ["Pok\u00e9mon must be at or below 1, 500 CP to enter.", "Only Fire-, Water-, Ice-, and Rock-type Pok\u00e9mon are eligible."]
+            "rules": ["Pokémon must be at or below 1, 500 CP to enter.", "Only Fire-,  Water-,  Ice-,  and Rock-type Pokémon are eligible."]
         },
         {
             "title": "Evolution Cup",
@@ -708,7 +694,7 @@
             "showCup": true,
             "showFormat": true,
             "showMeta": true,
-            "rules": ["Pok\u00e9mon must be at or below 1, 500 CP to enter.", "Only Pok\u00e9mon that have evolved at least once and can evolve again will be eligible."]
+            "rules": ["Pokémon must be at or below 1, 500 CP to enter.", "Only Pokémon that have evolved at least once and can evolve again will be eligible."]
         },
         {
             "title": "Scroll Cup",
@@ -718,7 +704,7 @@
             "showCup": true,
             "showFormat": true,
             "showMeta": true,
-            "rules": ["Pok\u00e9mon must be at or below 1, 500 CP to enter.", "Only Water-, Fighting-, and Dark-type Pok\u00e9mon are eligible."]
+            "rules": ["Pokémon must be at or below 1, 500 CP to enter.", "Only Water-,  Fighting-,  and Dark-type Pokémon are eligible."]
         },
         {
             "title": "Mega Master League",
@@ -729,7 +715,7 @@
             "showFormat": false,
             "showMeta": true,
             "hideRankings": true,
-            "rules": ["No CP limit.", "Legendary Pok\u00e9mon, Mythical Pok\u00e9mon, and Ultra Beasts are not eligible."]
+            "rules": ["No CP limit.", "Legendary Pokémon,  Mythical Pokémon,  and Ultra Beasts are not eligible."]
         },
         {
             "title": "Master Premier Cup",
@@ -740,10 +726,10 @@
             "showFormat": false,
             "showMeta": true,
             "hideRankings": true,
-            "rules": ["No CP limit.", "Legendary Pok\u00e9mon, Mythical Pok\u00e9mon, and Ultra Beasts are not eligible."]
+            "rules": ["No CP limit.", "Legendary Pokémon,  Mythical Pokémon,  and Ultra Beasts are not eligible."]
         },
         {
-            "title": "Battle Frontier (Copa Dil\u00favio)",
+            "title": "Battle Frontier (Copa Dilúvio)",
             "cup": "copadiluvio",
             "cp": 1500,
             "meta": "copadiluvio",
@@ -34018,6 +34004,35 @@
         },
         {
             "dex": 652,
+            "speciesName": "Chesnaught (Mega)",
+            "speciesId": "chesnaught_mega",
+            "baseStats": {
+                "atk": 242,
+                "def": 282,
+                "hp": 204
+            },
+            "types": ["grass", "fighting"],
+            "fastMoves": ["LOW_KICK", "SMACK_DOWN", "VINE_WHIP"],
+            "chargedMoves": ["GYRO_BALL", "ENERGY_BALL", "SUPER_POWER", "SOLAR_BEAM", "FRENZY_PLANT", "THUNDER_PUNCH"],
+            "eliteMoves": ["FRENZY_PLANT"],
+            "tags": ["starter", "shadoweligible", "mega"],
+            "defaultIVs": {
+                "cp500": [4.5, 15, 15, 14],
+                "cp1500": [13.5, 4, 14, 12],
+                "cp2500": [22.5, 4, 11, 14]
+            },
+            "searchPriority": null,
+            "buddyDistance": 3,
+            "thirdMoveCost": 10000,
+            "released": false,
+            "family": {
+                "id": "FAMILY_CHESPIN",
+                "parent": "quilladin"
+            },
+            "level25CP": 1829
+        },
+        {
+            "dex": 652,
             "speciesName": "Chesnaught (Shadow)",
             "speciesId": "chesnaught_shadow",
             "baseStats": {
@@ -34182,6 +34197,34 @@
         },
         {
             "dex": 655,
+            "speciesName": "Delphox (Mega)",
+            "speciesId": "delphox_mega",
+            "baseStats": {
+                "atk": 331,
+                "def": 235,
+                "hp": 181
+            },
+            "types": ["fire", "psychic"],
+            "fastMoves": ["SCRATCH", "FIRE_SPIN", "ZEN_HEADBUTT"],
+            "chargedMoves": ["PSYCHIC", "FLAMETHROWER", "FLAME_CHARGE", "FIRE_BLAST", "BLAST_BURN", "MYSTICAL_FIRE", "PSYSHOCK"],
+            "eliteMoves": ["BLAST_BURN"],
+            "tags": ["starter", "shadoweligible", "mega"],
+            "defaultIVs": {
+                "cp500": [4, 14, 15, 15],
+                "cp1500": [11.5, 5, 14, 9],
+                "cp2500": [19, 4, 11, 15]
+            },
+            "buddyDistance": 3,
+            "thirdMoveCost": 10000,
+            "released": false,
+            "family": {
+                "id": "FAMILY_FENNEKIN",
+                "parent": "braixen"
+            },
+            "level25CP": 1897
+        },
+        {
+            "dex": 655,
             "speciesName": "Delphox (Shadow)",
             "speciesId": "delphox_shadow",
             "baseStats": {
@@ -34338,6 +34381,35 @@
             "buddyDistance": 3,
             "thirdMoveCost": 10000,
             "released": true,
+            "family": {
+                "id": "FAMILY_FROAKIE",
+                "parent": "frogadier"
+            },
+            "level25CP": 1627
+        },
+        {
+            "dex": 658,
+            "speciesName": "Greninja (Mega)",
+            "speciesId": "greninja_mega",
+            "baseStats": {
+                "atk": 299,
+                "def": 180,
+                "hp": 176
+            },
+            "types": ["water", "dark"],
+            "fastMoves": ["FEINT_ATTACK", "BUBBLE", "WATER_SHURIKEN"],
+            "tags": ["starter", "shadoweligible", "mega"],
+            "chargedMoves": ["NIGHT_SLASH", "AERIAL_ACE", "SURF", "HYDRO_PUMP", "HYDRO_CANNON"],
+            "eliteMoves": ["HYDRO_CANNON"],
+            "defaultIVs": {
+                "cp500": [5, 9, 15, 14],
+                "cp1500": [14.5, 4, 11, 15],
+                "cp2500": [24, 5, 14, 14]
+            },
+            "searchPriority": null,
+            "buddyDistance": 3,
+            "thirdMoveCost": 10000,
+            "released": false,
             "family": {
                 "id": "FAMILY_FROAKIE",
                 "parent": "frogadier"
@@ -39211,8 +39283,7 @@
             "formChange": {
                 "type": "set",
                 "trigger": "none",
-                "resetOnSwitch": false,
-                "alternativeFormId": "mimikyu"
+                "resetOnSwitch": false
             },
             "buddyDistance": 5,
             "thirdMoveCost": 50000,
