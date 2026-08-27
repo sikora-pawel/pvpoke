@@ -1,5 +1,5 @@
 {
-    "timestamp": "2026-08-26 22:53:35",
+    "timestamp": "2026-08-27 18:30:11",
     "id": "gamemaster",
     "title": "Default",
     "settings": {
@@ -478,7 +478,13 @@
             "name": "mega",
             "title": "All Pokemon",
             "include": [],
-            "exclude": []
+            "exclude": [
+                {
+                    "filterType": "id",
+                    "values": ["mewtwo_mega_x", "mewtwo_mega_y", "kyogre_primal", "groudon_primal", "rayquaza_mega"],
+                    "leagues": [1500]
+                }
+            ]
         },
         {
             "name": "naic2026",
@@ -691,14 +697,24 @@
             "showMeta": true
         },
         {
-            "title": "Scroll Cup",
-            "cup": "scroll",
+            "title": "Mega Great League",
+            "cup": "mega",
             "cp": 1500,
-            "meta": "scroll",
+            "meta": "megagreat",
             "showCup": true,
             "showFormat": true,
             "showMeta": true,
-            "rules": ["Pok\u00e9mon must be at or below 1, 500 CP to enter.", "Only Water-, Fighting-, and Dark-type Pok\u00e9mon are eligible."]
+            "rules": ["Pokémon must be at or below 1, 500 CP to enter.", "Mega Evolutions are eligible."]
+        },
+        {
+            "title": "Mega Ultra League",
+            "cup": "mega",
+            "cp": 2500,
+            "meta": "megaultra",
+            "showCup": true,
+            "showFormat": true,
+            "showMeta": true,
+            "rules": ["Pokémon must be at or below 2, 500 CP to enter.", "Mega Evolutions are eligible."]
         },
         {
             "title": "Mega Master League",
@@ -706,10 +722,9 @@
             "cp": 10000,
             "meta": "mega",
             "showCup": true,
-            "showFormat": false,
+            "showFormat": true,
             "showMeta": true,
-            "hideRankings": true,
-            "rules": ["No CP limit.", "Legendary Pok\u00e9mon, Mythical Pok\u00e9mon, and Ultra Beasts are not eligible."]
+            "rules": ["No CP limit.", "Mega Evolutions are eligible."]
         },
         {
             "title": "Master Premier Cup",
