@@ -248,7 +248,7 @@
         },
         {
             "name": "copadiluvio",
-            "title": "Battle Frontier (Copa Dilúvio)",
+            "title": "Battle Frontier (Copa Dil\u00favio)",
             "include": [
                 {
                     "filterType": "type",
@@ -669,18 +669,32 @@
                     "values": ["mega"]
                 }
             ]
+        },
+        {
+            "name": "competitors",
+            "title": "Competitors Cup",
+            "include": [],
+            "exclude": [
+                {
+                    "filterType": "tag",
+                    "values": ["mega"]
+                },
+                {
+                    "filterType": "id",
+                    "values": ["mimikyu"]
+                }
+            ]
         }
     ],
     "formats": [
         {
-            "title": "P!P Championship Series",
-            "cup": "championshipseries",
+            "title": "Competitors Cup",
+            "cup": "competitors",
             "cp": 1500,
             "meta": "championshipseries",
             "showCup": true,
             "showFormat": true,
-            "showMeta": true,
-            "hideRankings": true
+            "showMeta": true
         },
         {
             "title": "Mega Great League",
@@ -690,7 +704,7 @@
             "showCup": true,
             "showFormat": true,
             "showMeta": true,
-            "rules": ["Pokémon must be at or below 1, 500 CP to enter.", "Mega Evolutions are eligible."]
+            "rules": ["Pok\u00e9mon must be at or below 1, 500 CP to enter.", "Mega Evolutions are eligible."]
         },
         {
             "title": "Mega Ultra League",
@@ -700,7 +714,7 @@
             "showCup": true,
             "showFormat": true,
             "showMeta": true,
-            "rules": ["Pokémon must be at or below 2, 500 CP to enter.", "Mega Evolutions are eligible."]
+            "rules": ["Pok\u00e9mon must be at or below 2, 500 CP to enter.", "Mega Evolutions are eligible."]
         },
         {
             "title": "Mega Master League",
@@ -721,10 +735,10 @@
             "showFormat": false,
             "showMeta": true,
             "hideRankings": true,
-            "rules": ["No CP limit.", "Legendary Pokémon,  Mythical Pokémon,  and Ultra Beasts are not eligible."]
+            "rules": ["No CP limit.", "Legendary Pok\u00e9mon, Mythical Pok\u00e9mon, and Ultra Beasts are not eligible."]
         },
         {
-            "title": "Battle Frontier (Copa Dilúvio)",
+            "title": "Battle Frontier (Copa Dil\u00favio)",
             "cup": "copadiluvio",
             "cp": 1500,
             "meta": "copadiluvio",
@@ -39290,7 +39304,8 @@
             "formChange": {
                 "type": "set",
                 "trigger": "none",
-                "resetOnSwitch": false
+                "resetOnSwitch": false,
+                "alternativeFormId": "mimikyu"
             },
             "buddyDistance": 5,
             "thirdMoveCost": 50000,
