@@ -983,6 +983,15 @@ class ActionLogic {
 		}
 	}
 
+		// When shields are down, don't use self debuffing moves that are significantly less efficient
+		if (opponent.shields == 0 && poke.activeChargedMoves.length > 1 && finalState.moves[0].selfDebuffing) {
+			for(var i = 1; i < poke.activeChargedMoves.length; i++){
+				if (poke.activeChargedMoves[i].dpe > finalState.moves[0].dpe && (! poke.activeChargedMoves[i].selfDebuffing)) {
+					finalState.moves[0] = poke.activeChargedMoves[i];
+				}
+			}
+		}
+
 		// While shields are up, prefer close non debuffing moves in scenarios where debuffing move won't KO
 
 		if (opponent.shields > 0 && poke.activeChargedMoves.length > 1) {
@@ -1035,8 +1044,6 @@ class ActionLogic {
 		}
 	}
 
-
-
 		// Use the final move, or a Fast Move if not enough energy
 		// Use selectedMove (which may have been changed by optimizations) or finalState.moves[0]
 		var finalMove = selectedMove || finalState.moves[0];
@@ -1058,7 +1065,7 @@ class ActionLogic {
 			battle.logDecision(poke, " uses a fast move because it has no energy for " + finalMove.name);
 			return;
 		}
-
+		
 		// Build energy for Aegislash Shield to reduce time spent in Blade form
 		if(poke.activeFormId == "aegislash_shield" && poke.energy < 100 - (poke.fastMove.energyGain / 2)){
 			if(battle.getMode() == "simulate" && poke.bestChargedMove.damage < opponent.hp){
