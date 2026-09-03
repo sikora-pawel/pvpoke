@@ -148,6 +148,9 @@ jobs:
         id: generate
         if: steps.sync.outputs.has_changes == 'true'
         run: |
+          # Without pipefail the `| tee` below swallows a non-zero exit from the
+          # generators, so a broken script looks like a successful sync.
+          set -o pipefail
           cd scripts/cli
           echo "Generating rankings..."
 

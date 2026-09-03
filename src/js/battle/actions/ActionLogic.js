@@ -981,7 +981,6 @@ class ActionLogic {
 				}
 			}
 		}
-	}
 
 		// When shields are down, don't use self debuffing moves that are significantly less efficient
 		if (opponent.shields == 0 && poke.activeChargedMoves.length > 1 && finalState.moves[0].selfDebuffing) {
@@ -1009,17 +1008,11 @@ class ActionLogic {
 			}
 
 		}
-	}
 
-	// If move is self debuffing and doesn't KO, try to stack as much as you can
-	if (finalState.moves[0].selfDebuffing) {
-		//var targetEnergy = poke.energy + (Math.round( (100 - poke.energy) / poke.fastMove.energyGain) * poke.fastMove.energyGain);
-		let targetEnergy = Math.floor(100 / finalState.moves[0].energy) * finalState.moves[0].energy;
-
-		if (poke.energy < targetEnergy) {
-			var moveDamage = DamageCalculator.damage(poke, opponent, finalState.moves[0]);
-			if ((opponent.hp > moveDamage || opponent.shields != 0) && (poke.hp > opponent.fastMove.damage * 2 || opponent.fastMove.cooldown - poke.fastMove.cooldown > 500)){
-				battle.logDecision(poke, " doesn't use " + finalState.moves[0].name + " because it wants to minimize time debuffed and it can stack the move " + Math.floor(100 / finalState.moves[0].energy) + " times");
+		// Defer self debuffing moves until after survivable Charged Moves
+		if(finalState.moves[0].selfDebuffing && poke.shields == 0 && poke.energy < 100 && opponent.bestChargedMove){
+			if((opponent.energy >= opponent.bestChargedMove.energy)&&(! ActionLogic.wouldShield(battle, opponent, poke, opponent.bestChargedMove).value)&&(! poke.activeChargedMoves[0].selfBuffing)){
+				battle.logDecision(poke, " is deferring its self debuffing move until after the opponent fires its move");
 				return;
 			}
 		}
@@ -1042,7 +1035,6 @@ class ActionLogic {
 				}
 			}
 		}
-	}
 
 		// Use the final move, or a Fast Move if not enough energy
 		// Use selectedMove (which may have been changed by optimizations) or finalState.moves[0]
