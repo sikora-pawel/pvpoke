@@ -1,14 +1,5 @@
 [
 	{
-		"title": "Competitors Cup",
-		"cup": "competitors",
-		"cp": 1500,
-		"meta": "championshipseries",
-		"showCup": true,
-		"showFormat": true,
-		"showMeta": true
-	},
-	{
 		"title": "Mega Great League",
 		"cup": "mega",
 		"cp": 1500,
