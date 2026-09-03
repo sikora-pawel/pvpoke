@@ -1370,25 +1370,27 @@ var GameMaster = (function () {
 								if(pokemon.speciesId == rankingData[n].speciesId){
 									foundInRankings = true;
 
-							if(r){
-								// Sort by uses
-								var fastMoves = r.moves.fastMoves;
-								var chargedMoves = r.moves.chargedMoves;
-								var extraChargedMoves = r.moves?.extraChargedMoves ? r.moves?.extraChargedMoves : [];
+									// Use the moveset field directly - it reflects the optimal moveset
+									// chosen by the standard Ranker for this specific variant
+									var moveset = rankingData[n].moveset;
+									if(moveset && moveset.length >= 2){
+										pokemon.selectMove("fast", moveset[0]);
+										pokemon.selectMove("charged", moveset[1], 0);
 
-								pokemon.selectMove("fast", fastMoves[0].moveId);
-								pokemon.selectMove("charged", chargedMoves[0].moveId, 0);
+										if(moveset.length > 2){
+											pokemon.selectMove("charged", moveset[2], 1);
+										}
 
-								if(chargedMoves.length > 1){
-									pokemon.selectMove("charged", chargedMoves[1].moveId, 1);
+										// Third (mega) Charged Move lives in its own slot
+										if(moveset.length > 3 && pokemon.hasThirdChargedMove()){
+											pokemon.selectMove("extra-charged", moveset[3], 2);
+										}
+									} else{
+										pokemon.autoSelectMoves();
+									}
+
+									break;
 								}
-
-								if(extraChargedMoves.length > 0 && pokemon.hasThirdChargedMove()){
-									pokemon.selectMove("extra-charged", extraChargedMoves[0].moveId, 2);
-								}
-							} else{
-								pokemon.autoSelectMoves();
-							}
 							}
 
 							// Apply overrides even if Pokemon is not in existing rankings
