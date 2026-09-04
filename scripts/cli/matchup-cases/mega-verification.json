@@ -1,0 +1,263 @@
+[
+  {
+    "id": "mgl_malamar_mega_vs_lickilicky_0_0",
+    "cup": "mega",
+    "cp": 1500,
+    "pokemon1": "malamar_mega",
+    "pokemon2": "lickilicky",
+    "shields1": 0,
+    "shields2": 0
+  },
+  {
+    "id": "mgl_malamar_mega_vs_lickilicky_1_1",
+    "cup": "mega",
+    "cp": 1500,
+    "pokemon1": "malamar_mega",
+    "pokemon2": "lickilicky",
+    "shields1": 1,
+    "shields2": 1
+  },
+  {
+    "id": "mgl_malamar_mega_vs_lickilicky_2_2",
+    "cup": "mega",
+    "cp": 1500,
+    "pokemon1": "malamar_mega",
+    "pokemon2": "lickilicky",
+    "shields1": 2,
+    "shields2": 2
+  },
+  {
+    "id": "mgl_dragonite_mega_vs_altaria_0_0",
+    "cup": "mega",
+    "cp": 1500,
+    "pokemon1": "dragonite_mega",
+    "pokemon2": "altaria",
+    "shields1": 0,
+    "shields2": 0
+  },
+  {
+    "id": "mgl_dragonite_mega_vs_altaria_1_1",
+    "cup": "mega",
+    "cp": 1500,
+    "pokemon1": "dragonite_mega",
+    "pokemon2": "altaria",
+    "shields1": 1,
+    "shields2": 1
+  },
+  {
+    "id": "mgl_dragonite_mega_vs_altaria_2_2",
+    "cup": "mega",
+    "cp": 1500,
+    "pokemon1": "dragonite_mega",
+    "pokemon2": "altaria",
+    "shields1": 2,
+    "shields2": 2
+  },
+  {
+    "id": "mgl_greninja_mega_vs_tinkaton_0_0",
+    "cup": "mega",
+    "cp": 1500,
+    "pokemon1": "greninja_mega",
+    "pokemon2": "tinkaton",
+    "shields1": 0,
+    "shields2": 0
+  },
+  {
+    "id": "mgl_greninja_mega_vs_tinkaton_1_1",
+    "cup": "mega",
+    "cp": 1500,
+    "pokemon1": "greninja_mega",
+    "pokemon2": "tinkaton",
+    "shields1": 1,
+    "shields2": 1
+  },
+  {
+    "id": "mgl_greninja_mega_vs_tinkaton_2_2",
+    "cup": "mega",
+    "cp": 1500,
+    "pokemon1": "greninja_mega",
+    "pokemon2": "tinkaton",
+    "shields1": 2,
+    "shields2": 2
+  },
+  {
+    "id": "mgl_sableye_mega_vs_lickilicky_0_0",
+    "cup": "mega",
+    "cp": 1500,
+    "pokemon1": "sableye_mega",
+    "pokemon2": "lickilicky",
+    "shields1": 0,
+    "shields2": 0
+  },
+  {
+    "id": "mgl_sableye_mega_vs_lickilicky_1_1",
+    "cup": "mega",
+    "cp": 1500,
+    "pokemon1": "sableye_mega",
+    "pokemon2": "lickilicky",
+    "shields1": 1,
+    "shields2": 1
+  },
+  {
+    "id": "mgl_sableye_mega_vs_lickilicky_2_2",
+    "cup": "mega",
+    "cp": 1500,
+    "pokemon1": "sableye_mega",
+    "pokemon2": "lickilicky",
+    "shields1": 2,
+    "shields2": 2
+  },
+  {
+    "id": "mgl_altaria_vs_empoleon_0_0",
+    "cup": "mega",
+    "cp": 1500,
+    "pokemon1": "altaria",
+    "pokemon2": "empoleon",
+    "shields1": 0,
+    "shields2": 0
+  },
+  {
+    "id": "mgl_altaria_vs_empoleon_1_1",
+    "cup": "mega",
+    "cp": 1500,
+    "pokemon1": "altaria",
+    "pokemon2": "empoleon",
+    "shields1": 1,
+    "shields2": 1
+  },
+  {
+    "id": "mgl_altaria_vs_empoleon_2_2",
+    "cup": "mega",
+    "cp": 1500,
+    "pokemon1": "altaria",
+    "pokemon2": "empoleon",
+    "shields1": 2,
+    "shields2": 2
+  },
+  {
+    "id": "mgl_mimikyu_vs_quagsire_0_0",
+    "cup": "mega",
+    "cp": 1500,
+    "pokemon1": "mimikyu",
+    "pokemon2": "quagsire",
+    "shields1": 0,
+    "shields2": 0
+  },
+  {
+    "id": "mgl_mimikyu_vs_quagsire_1_1",
+    "cup": "mega",
+    "cp": 1500,
+    "pokemon1": "mimikyu",
+    "pokemon2": "quagsire",
+    "shields1": 1,
+    "shields2": 1
+  },
+  {
+    "id": "mgl_mimikyu_vs_quagsire_2_2",
+    "cup": "mega",
+    "cp": 1500,
+    "pokemon1": "mimikyu",
+    "pokemon2": "quagsire",
+    "shields1": 2,
+    "shields2": 2
+  },
+  {
+    "id": "mul_malamar_mega_vs_mimikyu_1_1",
+    "cup": "mega",
+    "cp": 2500,
+    "pokemon1": "malamar_mega",
+    "pokemon2": "mimikyu",
+    "shields1": 1,
+    "shields2": 1
+  },
+  {
+    "id": "mul_raichu_mega_x_vs_lickilicky_1_1",
+    "cup": "mega",
+    "cp": 2500,
+    "pokemon1": "raichu_mega_x",
+    "pokemon2": "lickilicky",
+    "shields1": 1,
+    "shields2": 1
+  },
+  {
+    "id": "mul_starmie_mega_vs_corviknight_1_1",
+    "cup": "mega",
+    "cp": 2500,
+    "pokemon1": "starmie_mega",
+    "pokemon2": "corviknight",
+    "shields1": 1,
+    "shields2": 1
+  },
+  {
+    "id": "mul_corviknight_vs_florges_1_1",
+    "cup": "mega",
+    "cp": 2500,
+    "pokemon1": "corviknight",
+    "pokemon2": "florges",
+    "shields1": 1,
+    "shields2": 1
+  },
+  {
+    "id": "mul_mimikyu_vs_lickilicky_0_0",
+    "cup": "mega",
+    "cp": 2500,
+    "pokemon1": "mimikyu",
+    "pokemon2": "lickilicky",
+    "shields1": 0,
+    "shields2": 0
+  },
+  {
+    "id": "mml_mewtwo_mega_y_vs_kyogre_primal_1_1",
+    "cup": "mega",
+    "cp": 10000,
+    "pokemon1": "mewtwo_mega_y",
+    "pokemon2": "kyogre_primal",
+    "shields1": 1,
+    "shields2": 1
+  },
+  {
+    "id": "mml_mewtwo_mega_x_vs_dragonite_mega_1_1",
+    "cup": "mega",
+    "cp": 10000,
+    "pokemon1": "mewtwo_mega_x",
+    "pokemon2": "dragonite_mega",
+    "shields1": 1,
+    "shields2": 1
+  },
+  {
+    "id": "mml_dragonite_mega_vs_gyarados_mega_1_1",
+    "cup": "mega",
+    "cp": 10000,
+    "pokemon1": "dragonite_mega",
+    "pokemon2": "gyarados_mega",
+    "shields1": 1,
+    "shields2": 1
+  },
+  {
+    "id": "mml_chesnaught_mega_vs_groudon_primal_0_0",
+    "cup": "mega",
+    "cp": 10000,
+    "pokemon1": "chesnaught_mega",
+    "pokemon2": "groudon_primal",
+    "shields1": 0,
+    "shields2": 0
+  },
+  {
+    "id": "mml_kyogre_primal_vs_groudon_primal_1_1",
+    "cup": "mega",
+    "cp": 10000,
+    "pokemon1": "kyogre_primal",
+    "pokemon2": "groudon_primal",
+    "shields1": 1,
+    "shields2": 1
+  },
+  {
+    "id": "mml_mewtwo_mega_x_vs_rayquaza_mega_2_2",
+    "cup": "mega",
+    "cp": 10000,
+    "pokemon1": "mewtwo_mega_x",
+    "pokemon2": "rayquaza_mega",
+    "shields1": 2,
+    "shields2": 2
+  }
+]
