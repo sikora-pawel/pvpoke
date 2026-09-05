@@ -42,9 +42,9 @@ GAMEMASTER_FILES = [
 
 # Competitors Cup (Worlds 2026 format): GL 1500 without Mimikyu. Open leagues track
 # upstream as-is (new battle system, Mimikyu released); the cup has its own dedicated
-# rankings and overrides, both re-derived after every upstream merge. Flip to False
-# once the cup ends (2026-08-30).
-COMPETITORS_CUP_ACTIVE = True
+# rankings and overrides. The cup ended on 2026-08-30; retain its metadata for
+# saved teams, but no longer feature it or regenerate its rankings.
+COMPETITORS_CUP_ACTIVE = False
 
 COMPETITORS_FORMAT = {
     "title": "Competitors Cup",
@@ -205,9 +205,18 @@ def sync_competitors_overrides():
 
 
 def ensure_competitors_format(formats_list):
-    """Re-insert the Competitors Cup format entry if an upstream merge dropped it."""
+    """Feature the cup only while active; keep retired metadata for saved teams."""
     if not COMPETITORS_CUP_ACTIVE:
-        return 0
+        changed = 0
+        for cup_format in formats_list:
+            if cup_format.get('cup') == 'competitors':
+                for flag in ('showCup', 'showFormat', 'showMeta'):
+                    if cup_format.get(flag) is not False:
+                        cup_format[flag] = False
+                        changed += 1
+        if changed:
+            print("  Retired Competitors Cup from active formats")
+        return changed
     if any(f.get('cup') == 'competitors' for f in formats_list):
         return 0
     formats_list.insert(0, dict(COMPETITORS_FORMAT))

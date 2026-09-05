@@ -7,9 +7,9 @@ $formats = array (
     'cup' => 'competitors',
     'cp' => 1500,
     'meta' => 'championshipseries',
-    'showCup' => true,
-    'showFormat' => true,
-    'showMeta' => true,
+    'showCup' => false,
+    'showFormat' => false,
+    'showMeta' => false,
   ),
   1 => 
   array (
