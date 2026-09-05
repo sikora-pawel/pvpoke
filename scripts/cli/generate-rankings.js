@@ -10,6 +10,8 @@
  *   node generate-rankings.js --cups all,aurora # Generate multiple cups
  */
 
+require('./verify-simulator-source')();
+
 const fs = require('fs');
 const path = require('path');
 const { execSync } = require('child_process');

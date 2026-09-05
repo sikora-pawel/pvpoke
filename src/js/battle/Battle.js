@@ -1239,7 +1239,6 @@ function Battle(){
 					} else{
 						useShield = false;
 					}
-					self.logDecision(defender, " SHIELD_LOGIC: Random decision: option=" + option.name + ", useShield=" + useShield);
 				}
 
 				if(mode == "emulate" && players[defender.index].getShields() == 0){

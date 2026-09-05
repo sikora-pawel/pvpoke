@@ -12,6 +12,8 @@
  *   node generate-scenario-rankings.js --cups=all,love     # Specific cups
  */
 
+require('./verify-simulator-source')();
+
 const fs = require('fs');
 const path = require('path');
 const { setupGlobals, DATA_PATH } = require('./mocks');

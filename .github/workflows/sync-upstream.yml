@@ -144,6 +144,10 @@ jobs:
           extensions: sqlite3, pdo_sqlite
           ini-values: memory_limit=2G
 
+      - name: Verify official battle engine
+        if: steps.sync.outputs.has_changes == 'true'
+        run: node scripts/cli/verify-simulator-source.js
+
       - name: Generate Rankings
         id: generate
         if: steps.sync.outputs.has_changes == 'true'
