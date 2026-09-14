@@ -1,20 +1,10 @@
 {
-  "bastille": "Devon Bastille Cup",
-  "bastille_1500": "Devon Bastille Cup",
   "catch": "Copa Captura (Liga Super)",
   "catch_1500": "Copa Captura (Liga Super)",
   "championshipseries": "Copa de la serie de campeonatos mundiales",
   "championshipseries_1500": "Copa de la serie de campeonatos mundiales",
-  "chrysalis": "Devon Chrysalis Cup",
-  "chrysalis_1500": "Devon Chrysalis Cup",
-  "copadiluvio": "Battle Frontier (Copa Dilúvio)",
-  "copadiluvio_1500": "Battle Frontier (Copa Dilúvio)",
-  "coupedusillage": "Battle Frontier (Coupe du Sillage)",
-  "coupedusillage_10000": "Battle Frontier (Coupe du Sillage)",
-  "equinox": "Devon Equinox Cup",
-  "equinox_1500": "Devon Equinox Cup",
-  "ligaultra": "Battle Frontier (Liga Ultra)",
-  "ligaultra_2500": "Battle Frontier (Liga Ultra)",
+  "laic2027": "LAIC 2027 Championship Series Cup",
+  "laic2027_1500": "LAIC 2027 Championship Series Cup",
   "little": "Copa Chica",
   "little_500": "Copa Chica",
   "mega": "Liga Master Ball (Mega)",
@@ -23,6 +13,6 @@
   "mega_2500": "Liga Ultra Ball (Mega)",
   "premier": "Master Premier",
   "premier_10000": "Master Premier",
-  "tsuki": "Battle Frontier (Tsuki Cup)",
-  "tsuki_1500": "Battle Frontier (Tsuki Cup)"
+  "willpower": "Copa Tesón (Liga Super)",
+  "willpower_1500": "Copa Tesón (Liga Super)"
 }
