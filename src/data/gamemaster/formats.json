@@ -48,6 +48,20 @@
 		]
 	},
 	{
+		"title": "Mega Color Cup",
+		"cup": "colormega",
+		"cp": 1500,
+		"meta": "colormega",
+		"showCup": true,
+		"showFormat": true,
+		"showMeta": true,
+		"rules": [
+			"Pokemon must be at or below 1,500 CP to enter.",
+			"Mega-Evolved Pokémon are eligible.",
+			"Only Grass-, Fire-, Water-, Electric-type Pokémon are eligible."
+		]
+	},
+	{
 		"title": "Retro Cup",
 		"cup": "retro",
 		"cp": 1500,
