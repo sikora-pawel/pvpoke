@@ -1,8 +1,16 @@
 {
+  "battlefrontiermaster": "Battle Frontier (Master)",
+  "battlefrontiermaster_10000": "Battle Frontier (Master)",
   "catch": "Copa Captura (Liga Super)",
   "catch_1500": "Copa Captura (Liga Super)",
+  "cauldron": "Battle Frontier (Cauldron)",
+  "cauldron_2500": "Battle Frontier (Cauldron)",
   "championshipseries": "Copa de la serie de campeonatos mundiales",
   "championshipseries_1500": "Copa de la serie de campeonatos mundiales",
+  "colormega": "Megacopa Color (Liga Super)",
+  "colormega_1500": "Megacopa Color (Liga Super)",
+  "gymbreakers": "Gymbreakers Invitational Season 7",
+  "gymbreakers_1500": "Gymbreakers Invitational Season 7",
   "laic2027": "LAIC 2027 Championship Series Cup",
   "laic2027_1500": "LAIC 2027 Championship Series Cup",
   "little": "Copa Chica",
@@ -15,6 +23,6 @@
   "premier_10000": "Master Premier",
   "retro": "Copa Retro (Liga Super)",
   "retro_1500": "Copa Retro (Liga Super)",
-  "willpower": "Copa Tesón (Liga Super)",
-  "willpower_1500": "Copa Tesón (Liga Super)"
+  "spectral": "Battle Frontier (Spectral)",
+  "spectral_1500": "Battle Frontier (Spectral)"
 }

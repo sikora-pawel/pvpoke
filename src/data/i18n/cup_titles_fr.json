@@ -1,8 +1,16 @@
 {
+  "battlefrontiermaster": "Battle Frontier (Master)",
+  "battlefrontiermaster_10000": "Battle Frontier (Master)",
   "catch": "Coupe Attrape (Ligue Super)",
   "catch_1500": "Coupe Attrape (Ligue Super)",
+  "cauldron": "Battle Frontier (Cauldron)",
+  "cauldron_2500": "Battle Frontier (Cauldron)",
   "championshipseries": "Coupe Championnats",
   "championshipseries_1500": "Coupe Championnats",
+  "colormega": "Coupe Couleur Még (Ligue Super)",
+  "colormega_1500": "Coupe Couleur Még (Ligue Super)",
+  "gymbreakers": "Gymbreakers Invitational Season 7",
+  "gymbreakers_1500": "Gymbreakers Invitational Season 7",
   "laic2027": "LAIC 2027 Championship Series Cup",
   "laic2027_1500": "LAIC 2027 Championship Series Cup",
   "little": "Coupe des Jeunes",
@@ -15,6 +23,6 @@
   "premier_10000": "Majeure Master",
   "retro": "Coupe Rétro (Ligue Super)",
   "retro_1500": "Coupe Rétro (Ligue Super)",
-  "willpower": "Coupe Volonté (Ligue Super)",
-  "willpower_1500": "Coupe Volonté (Ligue Super)"
+  "spectral": "Battle Frontier (Spectral)",
+  "spectral_1500": "Battle Frontier (Spectral)"
 }

@@ -1,8 +1,16 @@
 {
+  "battlefrontiermaster": "Battle Frontier (Master)",
+  "battlefrontiermaster_10000": "Battle Frontier (Master)",
   "catch": "速成カップ (スーパーリーグ)",
   "catch_1500": "速成カップ (スーパーリーグ)",
+  "cauldron": "Battle Frontier (Cauldron)",
+  "cauldron_2500": "Battle Frontier (Cauldron)",
   "championshipseries": "チャンピオンシップシリーズカップ",
   "championshipseries_1500": "チャンピオンシップシリーズカップ",
+  "colormega": "メガ4色カップ (スーパーリーグ)",
+  "colormega_1500": "メガ4色カップ (スーパーリーグ)",
+  "gymbreakers": "Gymbreakers Invitational Season 7",
+  "gymbreakers_1500": "Gymbreakers Invitational Season 7",
   "laic2027": "LAIC 2027 Championship Series Cup",
   "laic2027_1500": "LAIC 2027 Championship Series Cup",
   "little": "リトルカップ",
@@ -15,6 +23,6 @@
   "premier_10000": "マスタープレミア",
   "retro": "レトロカップ (スーパーリーグ)",
   "retro_1500": "レトロカップ (スーパーリーグ)",
-  "willpower": "闘争心カップ (スーパーリーグ)",
-  "willpower_1500": "闘争心カップ (スーパーリーグ)"
+  "spectral": "Battle Frontier (Spectral)",
+  "spectral_1500": "Battle Frontier (Spectral)"
 }
