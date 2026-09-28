@@ -149,6 +149,16 @@ $formats = array (
   ),
   10 => 
   array (
+    'title' => 'Devon Trail Cup',
+    'cup' => 'trail',
+    'cp' => 1500,
+    'meta' => 'trail',
+    'showCup' => true,
+    'showFormat' => true,
+    'showMeta' => true,
+  ),
+  11 => 
+  array (
     'title' => 'Gymbreakers Invitational Season 7',
     'cup' => 'gymbreakers',
     'cp' => 1500,
@@ -157,7 +167,7 @@ $formats = array (
     'showFormat' => true,
     'showMeta' => true,
   ),
-  11 => 
+  12 => 
   array (
     'title' => 'Master Premier Cup',
     'cup' => 'premier',
@@ -173,7 +183,7 @@ $formats = array (
       1 => 'Legendary Pokémon, Mythical Pokémon, and Ultra Beasts are not eligible.',
     ),
   ),
-  12 => 
+  13 => 
   array (
     'title' => 'Little Cup',
     'cup' => 'little',
@@ -183,7 +193,7 @@ $formats = array (
     'showFormat' => false,
     'showMeta' => false,
   ),
-  13 => 
+  14 => 
   array (
     'title' => 'Catch Cup',
     'cup' => 'catch',
@@ -193,7 +203,7 @@ $formats = array (
     'showFormat' => false,
     'showMeta' => false,
   ),
-  14 => 
+  15 => 
   array (
     'title' => 'Custom',
     'cup' => 'custom',
