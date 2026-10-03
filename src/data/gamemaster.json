@@ -184,7 +184,7 @@
         },
         {
             "name": "copadiluvio",
-            "title": "Battle Frontier (Copa Dilúvio)",
+            "title": "Battle Frontier (Copa Dil\u00favio)",
             "include": [
                 {
                     "filterType": "type",
@@ -553,7 +553,7 @@
             "showCup": true,
             "showFormat": true,
             "showMeta": true,
-            "rules": ["Pokemon must be at or below 1, 500 CP to enter.", "Mega-Evolved Pokémon are eligible.", "Only Grass-,  Fire-,  Water-,  Electric-type Pokémon are eligible."]
+            "rules": ["Pokemon must be at or below 1, 500 CP to enter.", "Mega-Evolved Pok\u00e9mon are eligible.", "Only Grass-, Fire-, Water-, Electric-type Pok\u00e9mon are eligible."]
         },
         {
             "title": "LAIC 2027 Championship Series Cup",
@@ -563,7 +563,7 @@
             "showCup": true,
             "showFormat": true,
             "showMeta": true,
-            "rules": ["Pokemon must be at or below 1, 500 CP to enter.", "Allowed Types: All besides those explicitly prohibited.", "Allowed Categories: Shadow Pokemon,  Mega Evolution and Primal Reversion Pokemon. All Mega Evolution Pokémon are eligible even if they would otherwise be prohibited by a species,  typing,  or category.", "Prohibited Types: Dark,  Fairy,  Fire,  Steel.", "Prohibited Categories: Legendary,  Mythical,  Ultra Beasts.", "Prohibited Pokemon: Altaria,  Annihilape,  Araquanid,  Chansey,  Clodsire,  Corsola (Galarian),  Dusclops,  Furret,  Jellicent,  Kingdra,  Medicham,  Oranguru,  Snorlax,  Wobbuffet,  Mega Sableye."]
+            "rules": ["Pokemon must be at or below 1, 500 CP to enter.", "Allowed Types: All besides those explicitly prohibited.", "Allowed Categories: Shadow Pokemon, Mega Evolution and Primal Reversion Pokemon. All Mega Evolution Pok\u00e9mon are eligible even if they would otherwise be prohibited by a species, typing, or category.", "Prohibited Types: Dark, Fairy, Fire, Steel.", "Prohibited Categories: Legendary, Mythical, Ultra Beasts.", "Prohibited Pokemon: Altaria, Annihilape, Araquanid, Chansey, Clodsire, Corsola (Galarian), Dusclops, Furret, Jellicent, Kingdra, Medicham, Oranguru, Snorlax, Wobbuffet, Mega Sableye."]
         },
         {
             "title": "Battle Frontier (Spectral)",
@@ -619,7 +619,7 @@
             "showFormat": false,
             "showMeta": true,
             "hideRankings": true,
-            "rules": ["No CP limit.", "Legendary Pokémon,  Mythical Pokémon,  and Ultra Beasts are not eligible."]
+            "rules": ["No CP limit.", "Legendary Pok\u00e9mon, Mythical Pok\u00e9mon, and Ultra Beasts are not eligible."]
         },
         {
             "title": "Little Cup",
@@ -39389,7 +39389,8 @@
             "formChange": {
                 "type": "set",
                 "trigger": "none",
-                "resetOnSwitch": false
+                "resetOnSwitch": false,
+                "alternativeFormId": "mimikyu"
             },
             "buddyDistance": 5,
             "thirdMoveCost": 50000,
