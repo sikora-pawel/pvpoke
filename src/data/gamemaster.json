@@ -1,5 +1,5 @@
 {
-    "timestamp": "2026-10-01 21:35:36",
+    "timestamp": "2026-10-03 03:11:52",
     "id": "gamemaster",
     "title": "Default",
     "settings": {
@@ -184,7 +184,7 @@
         },
         {
             "name": "copadiluvio",
-            "title": "Battle Frontier (Copa Dil\u00favio)",
+            "title": "Battle Frontier (Copa Dilúvio)",
             "include": [
                 {
                     "filterType": "type",
@@ -553,7 +553,7 @@
             "showCup": true,
             "showFormat": true,
             "showMeta": true,
-            "rules": ["Pokemon must be at or below 1, 500 CP to enter.", "Mega-Evolved Pok\u00e9mon are eligible.", "Only Grass-, Fire-, Water-, Electric-type Pok\u00e9mon are eligible."]
+            "rules": ["Pokemon must be at or below 1, 500 CP to enter.", "Mega-Evolved Pokémon are eligible.", "Only Grass-,  Fire-,  Water-,  Electric-type Pokémon are eligible."]
         },
         {
             "title": "LAIC 2027 Championship Series Cup",
@@ -563,7 +563,7 @@
             "showCup": true,
             "showFormat": true,
             "showMeta": true,
-            "rules": ["Pokemon must be at or below 1, 500 CP to enter.", "Allowed Types: All besides those explicitly prohibited.", "Allowed Categories: Shadow Pokemon, Mega Evolution and Primal Reversion Pokemon. All Mega Evolution Pok\u00e9mon are eligible even if they would otherwise be prohibited by a species, typing, or category.", "Prohibited Types: Dark, Fairy, Fire, Steel.", "Prohibited Categories: Legendary, Mythical, Ultra Beasts.", "Prohibited Pokemon: Altaria, Annihilape, Araquanid, Chansey, Clodsire, Corsola (Galarian), Dusclops, Furret, Jellicent, Kingdra, Medicham, Oranguru, Snorlax, Wobbuffet, Mega Sableye."]
+            "rules": ["Pokemon must be at or below 1, 500 CP to enter.", "Allowed Types: All besides those explicitly prohibited.", "Allowed Categories: Shadow Pokemon,  Mega Evolution and Primal Reversion Pokemon. All Mega Evolution Pokémon are eligible even if they would otherwise be prohibited by a species,  typing,  or category.", "Prohibited Types: Dark,  Fairy,  Fire,  Steel.", "Prohibited Categories: Legendary,  Mythical,  Ultra Beasts.", "Prohibited Pokemon: Altaria,  Annihilape,  Araquanid,  Chansey,  Clodsire,  Corsola (Galarian),  Dusclops,  Furret,  Jellicent,  Kingdra,  Medicham,  Oranguru,  Snorlax,  Wobbuffet,  Mega Sableye."]
         },
         {
             "title": "Battle Frontier (Spectral)",
@@ -619,7 +619,7 @@
             "showFormat": false,
             "showMeta": true,
             "hideRankings": true,
-            "rules": ["No CP limit.", "Legendary Pok\u00e9mon, Mythical Pok\u00e9mon, and Ultra Beasts are not eligible."]
+            "rules": ["No CP limit.", "Legendary Pokémon,  Mythical Pokémon,  and Ultra Beasts are not eligible."]
         },
         {
             "title": "Little Cup",
@@ -36010,6 +36010,34 @@
             "searchPriority": 4
         },
         {
+            "dex": 705,
+            "speciesName": "Sliggoo (Hisuian)",
+            "speciesId": "sliggoo_hisuian",
+            "baseStats": {
+                "atk": 153,
+                "def": 190,
+                "hp": 151
+            },
+            "types": ["dragon", "steel"],
+            "fastMoves": ["WATER_GUN", "TACKLE"],
+            "chargedMoves": ["DRAGON_PULSE", "SLUDGE_WAVE", "WATER_PULSE", "HEAVY_SLAM"],
+            "defaultIVs": {
+                "cp500": [10, 4, 8, 10],
+                "cp1500": [29, 4, 14, 15],
+                "cp2500": [50, 15, 15, 15]
+            },
+            "tags": ["hisuian"],
+            "buddyDistance": 5,
+            "thirdMoveCost": 75000,
+            "released": false,
+            "family": {
+                "id": "FAMILY_GOOMY",
+                "parent": "goomy",
+                "evolutions": ["goodra"]
+            },
+            "searchPriority": 4
+        },
+        {
             "dex": 706,
             "speciesName": "Goodra",
             "speciesId": "goodra",
@@ -36031,6 +36059,33 @@
             "buddyDistance": 5,
             "thirdMoveCost": 75000,
             "released": true,
+            "family": {
+                "id": "FAMILY_GOOMY",
+                "parent": "sliggoo"
+            }
+        },
+        {
+            "dex": 706,
+            "speciesName": "Goodra (Hisuian)",
+            "speciesId": "goodra_hisuian",
+            "baseStats": {
+                "atk": 211,
+                "def": 255,
+                "hp": 190
+            },
+            "types": ["dragon", "steel"],
+            "fastMoves": ["WATER_GUN", "DRAGON_TAIL", "IRON_TAIL"],
+            "chargedMoves": ["DRACO_METEOR", "SLUDGE_WAVE", "HYDRO_PUMP", "HEAVY_SLAM"],
+            "defaultIVs": {
+                "cp500": [6, 4, 8, 4],
+                "cp1500": [16.5, 5, 15, 15],
+                "cp2500": [28, 4, 10, 14]
+            },
+            "tags": ["hisuian"],
+            "searchPriority": 6,
+            "buddyDistance": 5,
+            "thirdMoveCost": 75000,
+            "released": false,
             "family": {
                 "id": "FAMILY_GOOMY",
                 "parent": "sliggoo"
@@ -39334,8 +39389,7 @@
             "formChange": {
                 "type": "set",
                 "trigger": "none",
-                "resetOnSwitch": false,
-                "alternativeFormId": "mimikyu"
+                "resetOnSwitch": false
             },
             "buddyDistance": 5,
             "thirdMoveCost": 50000,
