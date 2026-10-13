@@ -43595,7 +43595,7 @@
         },
         "buddyDistance": 5,
         "thirdMoveCost": 75000,
-        "released": false,
+        "released": true,
         "family": {
             "id": "FAMILY_BRAMBLIN",
             "evolutions": ["brambleghast"]
@@ -43621,7 +43621,7 @@
         },
         "buddyDistance": 5,
         "thirdMoveCost": 75000,
-        "released": false,
+        "released": true,
         "family": {
             "id": "FAMILY_BRAMBLIN",
             "parent": "bramblin"
