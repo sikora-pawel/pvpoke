@@ -69,21 +69,6 @@ $formats = array (
   ),
   4 => 
   array (
-    'title' => 'Little Cup',
-    'cup' => 'little',
-    'cp' => 500,
-    'meta' => 'little',
-    'showCup' => true,
-    'showFormat' => true,
-    'showMeta' => true,
-    'rules' => 
-    array (
-      0 => 'Pokémon must be at or below 500 CP to enter.',
-      1 => 'Only Pokémon that are able to evolve and have not evolved even once are eligible.',
-    ),
-  ),
-  5 => 
-  array (
     'title' => 'Fantasy Cup',
     'cup' => 'fantasy',
     'cp' => 1500,
@@ -95,6 +80,22 @@ $formats = array (
     array (
       0 => 'Pokémon must be at or below 1,500 CP to enter.',
       1 => 'Only Dragon-, Steel-, and Fairy-type Pokémon are eligible.',
+    ),
+  ),
+  5 => 
+  array (
+    'title' => 'Mega Halloween Cup',
+    'cup' => 'halloweenmega',
+    'cp' => 1500,
+    'meta' => 'halloweenmega',
+    'showCup' => true,
+    'showFormat' => true,
+    'showMeta' => true,
+    'rules' => 
+    array (
+      0 => 'Pokémon must be at or below 1,500 CP to enter.',
+      1 => 'Mega-Evolved Pokémon are eligible.',
+      2 => 'Only Bug-, Poison-, Ghost-, Dark-, and Fairy-type Pokémon are eligible.',
     ),
   ),
   6 => 
@@ -158,6 +159,16 @@ $formats = array (
   ),
   11 => 
   array (
+    'title' => 'Devon Fable Cup',
+    'cup' => 'fable',
+    'cp' => 1500,
+    'meta' => 'fable',
+    'showCup' => true,
+    'showFormat' => true,
+    'showMeta' => true,
+  ),
+  12 => 
+  array (
     'title' => 'Gymbreakers Invitational Season 7',
     'cup' => 'gymbreakers',
     'cp' => 1500,
@@ -166,7 +177,7 @@ $formats = array (
     'showFormat' => true,
     'showMeta' => true,
   ),
-  12 => 
+  13 => 
   array (
     'title' => 'Master Premier Cup',
     'cup' => 'premier',
@@ -182,7 +193,7 @@ $formats = array (
       1 => 'Legendary Pokémon, Mythical Pokémon, and Ultra Beasts are not eligible.',
     ),
   ),
-  13 => 
+  14 => 
   array (
     'title' => 'Little Cup',
     'cup' => 'little',
@@ -192,7 +203,7 @@ $formats = array (
     'showFormat' => false,
     'showMeta' => false,
   ),
-  14 => 
+  15 => 
   array (
     'title' => 'Catch Cup',
     'cup' => 'catch',
@@ -202,7 +213,7 @@ $formats = array (
     'showFormat' => false,
     'showMeta' => false,
   ),
-  15 => 
+  16 => 
   array (
     'title' => 'Custom',
     'cup' => 'custom',
