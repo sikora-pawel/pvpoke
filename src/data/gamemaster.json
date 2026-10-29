@@ -1,5 +1,5 @@
 {
-    "timestamp": "2026-10-26 22:08:07",
+    "timestamp": "2026-10-29 05:02:09",
     "id": "gamemaster",
     "title": "Default",
     "settings": {
@@ -184,7 +184,7 @@
         },
         {
             "name": "copadiluvio",
-            "title": "Battle Frontier (Copa Dil\u00favio)",
+            "title": "Battle Frontier (Copa Dilúvio)",
             "include": [
                 {
                     "filterType": "type",
@@ -604,7 +604,7 @@
             "showCup": true,
             "showFormat": true,
             "showMeta": true,
-            "rules": ["Pok\u00e9mon must be at or below 1, 500 CP to enter.", "Only Dragon-, Steel-, and Fairy-type Pok\u00e9mon are eligible."]
+            "rules": ["Pokémon must be at or below 1, 500 CP to enter.", "Only Dragon-,  Steel-,  and Fairy-type Pokémon are eligible."]
         },
         {
             "title": "Mega Halloween Cup",
@@ -614,7 +614,7 @@
             "showCup": true,
             "showFormat": true,
             "showMeta": true,
-            "rules": ["Pok\u00e9mon must be at or below 1, 500 CP to enter.", "Mega-Evolved Pok\u00e9mon are eligible.", "Only Bug-, Poison-, Ghost-, Dark-, and Fairy-type Pok\u00e9mon are eligible."]
+            "rules": ["Pokémon must be at or below 1, 500 CP to enter.", "Mega-Evolved Pokémon are eligible.", "Only Bug-,  Poison-,  Ghost-,  Dark-,  and Fairy-type Pokémon are eligible."]
         },
         {
             "title": "LAIC 2027 Championship Series Cup",
@@ -624,7 +624,7 @@
             "showCup": true,
             "showFormat": true,
             "showMeta": true,
-            "rules": ["Pokemon must be at or below 1, 500 CP to enter.", "Allowed Types: All besides those explicitly prohibited.", "Allowed Categories: Shadow Pokemon, Mega Evolution and Primal Reversion Pokemon. All Mega Evolution Pok\u00e9mon are eligible even if they would otherwise be prohibited by a species, typing, or category.", "Prohibited Types: Dark, Fairy, Fire, Steel.", "Prohibited Categories: Legendary, Mythical, Ultra Beasts.", "Prohibited Pokemon: Altaria, Annihilape, Araquanid, Chansey, Clodsire, Corsola (Galarian), Dusclops, Furret, Jellicent, Kingdra, Medicham, Oranguru, Snorlax, Wobbuffet, Mega Sableye."]
+            "rules": ["Pokemon must be at or below 1, 500 CP to enter.", "Allowed Types: All besides those explicitly prohibited.", "Allowed Categories: Shadow Pokemon,  Mega Evolution and Primal Reversion Pokemon. All Mega Evolution Pokémon are eligible even if they would otherwise be prohibited by a species,  typing,  or category.", "Prohibited Types: Dark,  Fairy,  Fire,  Steel.", "Prohibited Categories: Legendary,  Mythical,  Ultra Beasts.", "Prohibited Pokemon: Altaria,  Annihilape,  Araquanid,  Chansey,  Clodsire,  Corsola (Galarian),  Dusclops,  Furret,  Jellicent,  Kingdra,  Medicham,  Oranguru,  Snorlax,  Wobbuffet,  Mega Sableye."]
         },
         {
             "title": "Battle Frontier (Spectral)",
@@ -689,7 +689,7 @@
             "showFormat": false,
             "showMeta": true,
             "hideRankings": true,
-            "rules": ["No CP limit.", "Legendary Pok\u00e9mon, Mythical Pok\u00e9mon, and Ultra Beasts are not eligible."]
+            "rules": ["No CP limit.", "Legendary Pokémon,  Mythical Pokémon,  and Ultra Beasts are not eligible."]
         },
         {
             "title": "Little Cup",
@@ -32059,6 +32059,35 @@
         },
         {
             "dex": 609,
+            "speciesId": "chandelure_mega",
+            "speciesName": "Chandelure (Mega)",
+            "baseStats": {
+                "atk": 335,
+                "def": 182,
+                "hp": 155
+            },
+            "types": ["ghost", "fire"],
+            "fastMoves": ["HEX", "FIRE_SPIN", "INCINERATE", "ASTONISH"],
+            "chargedMoves": ["ENERGY_BALL", "SHADOW_BALL", "OVERHEAT", "FLAME_CHARGE", "POLTERGEIST"],
+            "eliteMoves": ["POLTERGEIST"],
+            "extraChargedMoves": ["OMINOUS_WIND_PLUS"],
+            "defaultIVs": {
+                "cp500": [5, 4, 11, 4],
+                "cp1500": [13.5, 6, 14, 15],
+                "cp2500": [22.5, 7, 14, 14]
+            },
+            "buddyDistance": 5,
+            "thirdMoveCost": 75000,
+            "released": false,
+            "family": {
+                "id": "FAMILY_LITWICK",
+                "parent": "lampent"
+            },
+            "level25CP": 2030,
+            "tags": ["shadoweligible", "mega", "supermega"]
+        },
+        {
+            "dex": 609,
             "speciesId": "chandelure_shadow",
             "speciesName": "Chandelure (Shadow)",
             "baseStats": {
@@ -39478,8 +39507,7 @@
             "formChange": {
                 "type": "set",
                 "trigger": "none",
-                "resetOnSwitch": false,
-                "alternativeFormId": "mimikyu"
+                "resetOnSwitch": false
             },
             "buddyDistance": 5,
             "thirdMoveCost": 50000,
@@ -48572,6 +48600,18 @@
             "turns": 2
         },
         {
+            "moveId": "KOWTOW_CLEAVE",
+            "name": "Kowtow Cleave",
+            "abbreviation": "KTC",
+            "type": "dark",
+            "power": 75,
+            "energy": 40,
+            "energyGain": 0,
+            "cooldown": 500,
+            "archetype": "Spam/Bait",
+            "turns": 1
+        },
+        {
             "moveId": "LAST_RESORT",
             "name": "Last Resort",
             "type": "normal",
@@ -49104,8 +49144,24 @@
             "buffs": [1, 1],
             "buffTarget": "self",
             "buffApplyChance": ".1",
-            "archetype": "Boost",
+            "archetype": "Boost Spam",
             "turns": 1
+        },
+        {
+            "moveId": "OMINOUS_WIND_PLUS",
+            "name": "Ominous Wind+",
+            "abbreviation": "OW+",
+            "type": "ghost",
+            "power": 50,
+            "energy": 40,
+            "energyGain": 0,
+            "cooldown": 500,
+            "buffs": [1, 1],
+            "buffTarget": "self",
+            "buffApplyChance": ".1",
+            "archetype": "Boost",
+            "turns": 1,
+            "isMegaMove": true
         },
         {
             "moveId": "ORIGIN_PULSE",
