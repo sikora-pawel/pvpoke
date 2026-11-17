@@ -1,5 +1,5 @@
 {
-    "timestamp": "2026-11-16 18:41:19",
+    "timestamp": "2026-11-17 14:44:05",
     "id": "gamemaster",
     "title": "Default",
     "settings": {
@@ -622,7 +622,7 @@
             "showCup": true,
             "showFormat": true,
             "showMeta": true,
-            "rules": ["Pokemon must be at or below 1, 500 CP to enter.", "Fire-,  Dark-,  Steel-,  and Fairy-type Pokémon are not eligible.", "Legendary Pokémon,  Mythical Pokémon,  and Ultra Beasts are not eligible.", "Mega-Evolved Pokémon are not eligible for the GO Battle League version of this Cup. However,  Mega-Evolved Pokémon will be eligible for the Pokémon Latin America International Championships 2026 in-person competition.", "Prohibited Pokemon: Altaria,  Annihilape,  Araquanid,  Chansey,  Clodsire,  Corsola (Galarian),  Dusclops,  Furret,  Jellicent,  Kingdra,  Medicham,  Oranguru,  Snorlax,  Wobbuffet,  Mega Sableye."]
+            "rules": ["Pokemon must be at or below 1, 500 CP to enter.", "Fire-, Dark-, Steel-, and Fairy-type Pok\u00e9mon are not eligible.", "Legendary Pok\u00e9mon, Mythical Pok\u00e9mon, and Ultra Beasts are not eligible.", "Mega-Evolved Pok\u00e9mon are not eligible for the GO Battle League version of this Cup. However, Mega-Evolved Pok\u00e9mon will be eligible for the Pok\u00e9mon Latin America International Championships 2026 in-person competition.", "Prohibited Pokemon: Altaria, Annihilape, Araquanid, Chansey, Clodsire, Corsola (Galarian), Dusclops, Furret, Jellicent, Kingdra, Medicham, Oranguru, Snorlax, Wobbuffet, Mega Sableye."]
         },
         {
             "title": "LAIC 2027 Championship Series Cup",
@@ -25238,7 +25238,8 @@
             },
             "types": ["electric", "steel"],
             "fastMoves": ["CHARGE_BEAM", "SPARK", "VOLT_SWITCH", "METAL_SOUND"],
-            "chargedMoves": ["FLASH_CANNON", "WILD_CHARGE", "ZAP_CANNON", "MIRROR_SHOT"],
+            "chargedMoves": ["FLASH_CANNON", "WILD_CHARGE", "ZAP_CANNON", "MIRROR_SHOT", "MAGNET_BOMB"],
+            "eliteMoves": ["MAGNET_BOMB"],
             "defaultIVs": {
                 "cp500": [6, 4, 10, 15],
                 "cp1500": [17, 6, 15, 14],
@@ -25267,7 +25268,8 @@
             },
             "types": ["electric", "steel"],
             "fastMoves": ["CHARGE_BEAM", "SPARK", "VOLT_SWITCH", "METAL_SOUND"],
-            "chargedMoves": ["FLASH_CANNON", "WILD_CHARGE", "ZAP_CANNON", "MIRROR_SHOT"],
+            "chargedMoves": ["FLASH_CANNON", "WILD_CHARGE", "ZAP_CANNON", "MIRROR_SHOT", "MAGNET_BOMB"],
+            "eliteMoves": ["MAGNET_BOMB"],
             "defaultIVs": {
                 "cp500": [6, 4, 10, 15],
                 "cp1500": [17, 6, 15, 14],
