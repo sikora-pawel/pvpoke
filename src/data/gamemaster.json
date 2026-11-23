@@ -1,5 +1,5 @@
 {
-    "timestamp": "2026-11-20 17:36:49",
+    "timestamp": "2026-11-23 20:46:52",
     "id": "gamemaster",
     "title": "Default",
     "settings": {
@@ -3302,7 +3302,7 @@
                 "def": 205,
                 "hp": 216
             },
-            "types": ["fairy", "none"],
+            "types": ["fairy", "flying"],
             "fastMoves": ["CHARGE_BEAM", "POUND", "ZEN_HEADBUTT", "CHARM", "FAIRY_WIND"],
             "chargedMoves": ["DAZZLING_GLEAM", "METEOR_MASH", "MOONBLAST", "PSYCHIC", "SWIFT", "DRAINING_KISS"],
             "extraChargedMoves": ["MOONBLAST_PLUS"],
